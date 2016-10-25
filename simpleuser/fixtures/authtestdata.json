@@ -1,0 +1,104 @@
+[
+    {
+        "pk": "1",
+        "model": "simpleuser.user",
+        "fields": {
+            "email": "testclient@example.com",
+            "first_name": "Test Client",
+            "short_name": "Test",
+            "is_active": true,
+            "is_superuser": false,
+            "is_staff": false,
+            "last_login": "2006-12-17 07:03:31",
+            "groups": [],
+            "user_permissions": [],
+            "password": "sha1$6efc0$f93efe9fd7542f25a7be94871ea45aa95de57161",
+            "date_joined": "2006-12-17 07:03:31"
+        }
+    },
+    {
+        "pk": "2",
+        "model": "simpleuser.user",
+        "fields": {
+            "email": "inactive@example.com",
+            "first_name": "Inactive User",
+            "short_name": "Inactive",
+            "is_active": false,
+            "is_superuser": false,
+            "is_staff": false,
+            "last_login": "2006-12-17 07:03:31",
+            "groups": [],
+            "user_permissions": [],
+            "password": "sha1$6efc0$f93efe9fd7542f25a7be94871ea45aa95de57161",
+            "date_joined": "2006-12-17 07:03:31"
+        }
+    },
+    {
+        "pk": "3",
+        "model": "simpleuser.user",
+        "fields": {
+            "email": "staff@example.com",
+            "first_name": "Staff Member",
+            "short_name": "Staff",
+            "is_active": true,
+            "is_superuser": false,
+            "is_staff": true,
+            "last_login": "2006-12-17 07:03:31",
+            "groups": [],
+            "user_permissions": [],
+            "password": "sha1$6efc0$f93efe9fd7542f25a7be94871ea45aa95de57161",
+            "date_joined": "2006-12-17 07:03:31"
+        }
+    },
+    {
+        "pk": "4",
+        "model": "simpleuser.user",
+        "fields": {
+            "email": "empty_password@example.com",
+            "first_name": "Empty Password",
+            "short_name": "Empty",
+            "is_active": true,
+            "is_superuser": false,
+            "is_staff": false,
+            "last_login": "2006-12-17 07:03:31",
+            "groups": [],
+            "user_permissions": [],
+            "password": "",
+            "date_joined": "2006-12-17 07:03:31"
+        }
+    },
+    {
+        "pk": "5",
+        "model": "simpleuser.user",
+        "fields": {
+            "email": "unmanageable_password@example.com",
+            "first_name": "Unmanageable Password",
+            "short_name": "Unmanageable",
+            "is_active": true,
+            "is_superuser": false,
+            "is_staff": false,
+            "last_login": "2006-12-17 07:03:31",
+            "groups": [],
+            "user_permissions": [],
+            "password": "$",
+            "date_joined": "2006-12-17 07:03:31"
+        }
+    },
+    {
+        "pk": "6",
+        "model": "simpleuser.user",
+        "fields": {
+            "email": "unknown_password@example.com",
+            "first_name": "Unknown Password",
+            "short_name": "Unknown",
+            "is_active": true,
+            "is_superuser": false,
+            "is_staff": false,
+            "last_login": "2006-12-17 07:03:31",
+            "groups": [],
+            "user_permissions": [],
+            "password": "foo$bar",
+            "date_joined": "2006-12-17 07:03:31"
+        }
+    }
+]
