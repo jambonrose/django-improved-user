@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+import django
 from django.contrib.auth import authenticate
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.hashers import MD5PasswordHasher
@@ -130,7 +131,11 @@ class BaseModelBackendTest(object):
         self.assertEqual(backend.get_user_permissions(user), {'auth.test_user', 'auth.test_group'})
         self.assertEqual(backend.get_group_permissions(user), {'auth.test_group'})
 
-        user.is_anonymous = lambda: True
+        # In Django 1.10, is_anonymous became a property.
+        if django.VERSION >= (1, 10):
+            user.is_anonymous = True
+        else:
+            user.is_anonymous = lambda: True
 
         self.assertEqual(backend.get_all_permissions(user), set())
         self.assertEqual(backend.get_user_permissions(user), set())
