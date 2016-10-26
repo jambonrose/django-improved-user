@@ -4,7 +4,7 @@
         "model": "simpleuser.user",
         "fields": {
             "email": "testclient@example.com",
-            "first_name": "Test Client",
+            "full_name": "Test Client",
             "short_name": "Test",
             "is_active": true,
             "is_superuser": false,
@@ -21,7 +21,7 @@
         "model": "simpleuser.user",
         "fields": {
             "email": "inactive@example.com",
-            "first_name": "Inactive User",
+            "full_name": "Inactive User",
             "short_name": "Inactive",
             "is_active": false,
             "is_superuser": false,
@@ -38,7 +38,7 @@
         "model": "simpleuser.user",
         "fields": {
             "email": "staff@example.com",
-            "first_name": "Staff Member",
+            "full_name": "Staff Member",
             "short_name": "Staff",
             "is_active": true,
             "is_superuser": false,
@@ -55,7 +55,7 @@
         "model": "simpleuser.user",
         "fields": {
             "email": "empty_password@example.com",
-            "first_name": "Empty Password",
+            "full_name": "Empty Password",
             "short_name": "Empty",
             "is_active": true,
             "is_superuser": false,
@@ -72,7 +72,7 @@
         "model": "simpleuser.user",
         "fields": {
             "email": "unmanageable_password@example.com",
-            "first_name": "Unmanageable Password",
+            "full_name": "Unmanageable Password",
             "short_name": "Unmanageable",
             "is_active": true,
             "is_superuser": false,
@@ -89,7 +89,7 @@
         "model": "simpleuser.user",
         "fields": {
             "email": "unknown_password@example.com",
-            "first_name": "Unknown Password",
+            "full_name": "Unknown Password",
             "short_name": "Unknown",
             "is_active": true,
             "is_superuser": false,

@@ -1,0 +1,19 @@
+matrix:
+  include:
+    - language: python
+      python: "3.4"
+      env:
+        - DJANGO_VERSION=">=1.9,<1.10"
+    - language: python
+      python: "3.5"
+      env:
+        - DJANGO_VERSION=">=1.9,<1.10"
+    - language: python
+      python: "3.4"
+    - language: python
+      python: "3.5"
+install:
+  - "pip install django$DJANGO_VERSION"
+  - "pip install ."
+script:
+  - "python runtests.py"
