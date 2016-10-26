@@ -132,8 +132,9 @@ class BaseModelBackendTest(object):
         self.assertEqual(backend.get_group_permissions(user), {'auth.test_group'})
 
         # In Django 1.10, is_anonymous became a property.
+        is_anon = self.UserModel.is_anonymous
         if django.VERSION >= (1, 10):
-            user.is_anonymous = True
+            self.UserModel.is_anonymous = True
         else:
             user.is_anonymous = lambda: True
 
@@ -141,6 +142,7 @@ class BaseModelBackendTest(object):
         self.assertEqual(backend.get_user_permissions(user), set())
         self.assertEqual(backend.get_group_permissions(user), set())
 
+        self.UserModel.is_anonymous = is_anon
 
     def test_inactive_has_no_permissions(self):
         """
