@@ -13,3 +13,10 @@ Usage:
 
 * Add `simpleuser` to `INSTALLED_APPS`
 * Add `AUTH_USER_MODEL="simpleuser.User"` to your `settings.py` file.
+
+To run tests:
+-------------
+
+Run:
+
+    > python runtests.py
