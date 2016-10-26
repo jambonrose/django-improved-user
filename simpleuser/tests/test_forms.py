@@ -70,6 +70,8 @@ class UserCreationFormTest(TestCase):
         # The success case.
         data = {
             'email': 'jsmith@example.com',
+            'full_name': 'John Smith',
+            'short_name': 'John',
             'password1': 'test123',
             'password2': 'test123',
         }
