@@ -1,4 +1,18 @@
 from django import forms
+try:
+    from django.contrib.auth import password_validation
+except ImportError:
+    # Django 1.8 doesn't have password strength validation
+    # Insert a dummy object into the namespace.
+    class EmptyValidator:
+        def validate_password(self, password, instance):
+            pass
+
+        def password_validators_help_text_html(self):
+            return None
+
+    password_validation = EmptyValidator()
+
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.utils.translation import ugettext as _
 
@@ -16,7 +30,8 @@ class AbstractUserCreationForm(forms.ModelForm):
     }
 
     password1 = forms.CharField(label=_("Password"),
-        widget=forms.PasswordInput)
+        widget=forms.PasswordInput,
+        help_text=password_validation.password_validators_help_text_html())
     password2 = forms.CharField(label=_("Password confirmation"),
         widget=forms.PasswordInput,
         help_text=_("Enter the same password as above, for verification."))
@@ -29,6 +44,8 @@ class AbstractUserCreationForm(forms.ModelForm):
                 self.error_messages['password_mismatch'],
                 code='password_mismatch',
             )
+        self.instance.username = self.cleaned_data.get('username')
+        password_validation.validate_password(self.cleaned_data.get('password2'), self.instance)
         return password2
 
     def save(self, commit=True):
