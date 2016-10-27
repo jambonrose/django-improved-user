@@ -1,5 +1,8 @@
 from __future__ import unicode_literals
 
+from unittest import skipUnless
+
+import django
 from django.forms import Field
 from django.test import TestCase, override_settings
 from django.utils.encoding import force_text
@@ -12,7 +15,7 @@ from simpleuser.forms import UserCreationForm, UserChangeForm
 @override_settings(
     AUTH_USER_MODEL='simpleuser.User',
     USE_TZ=False,
-    PASSWORD_HASHERS=('django.contrib.auth.hashers.SHA1PasswordHasher',)
+    PASSWORD_HASHERS=('django.contrib.auth.hashers.SHA1PasswordHasher',),
 )
 class UserCreationFormTest(TestCase):
 
@@ -79,6 +82,22 @@ class UserCreationFormTest(TestCase):
         self.assertTrue(form.is_valid())
         u = form.save()
         self.assertEqual(repr(u), '<User: jsmith@example.com>')
+
+    @skipUnless(django.VERSION >= (1, 9), "Password strength checks not available on Django 1.8")
+    @override_settings(
+        AUTH_PASSWORD_VALIDATORS = [
+            {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+        ]
+    )
+    def test_simple_password(self):
+        data = {
+            'email': 'jsmith@example.com',
+            'password1': 'password',
+            'password2': 'password',
+        }
+        form = UserCreationForm(data)
+        self.assertFalse(form.is_valid())
+        self.assertEqual(form["password2"].errors, ['This password is too common.'])
 
 
 @override_settings(
