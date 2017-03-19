@@ -1,12 +1,10 @@
-# from argparse import ArgumentParser
-import os
-import sys
+from os.path import abspath, dirname, join
 
 import django
 from django.conf import settings
 from django.core.management import execute_from_command_line
 
-TESTS_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+TESTS_ROOT = abspath(dirname(dirname(__file__)))
 
 
 def run_test_suite():
@@ -14,7 +12,7 @@ def run_test_suite():
         DATABASES={
             "default": {
                 'ENGINE': 'django.db.backends.sqlite3',
-                'NAME': os.path.join(TESTS_ROOT, 'db.sqlite3'),
+                'NAME': join(TESTS_ROOT, 'db.sqlite3'),
                 "USER": "",
                 "PASSWORD": "",
                 "HOST": "",
@@ -33,6 +31,7 @@ def run_test_suite():
     django.setup()
 
     execute_from_command_line(['manage.py', 'test'])
+
 
 if __name__ == "__main__":
     run_test_suite()
