@@ -194,8 +194,6 @@ class BaseModelBackendTest(object):
         self.assertEqual(CountingMD5PasswordHasher.calls, 1)
 
 
-@modify_settings(INSTALLED_APPS={'append': 'simpleuser'})
-@override_settings(AUTH_USER_MODEL='simpleuser.User')
 class ModelBackendTest(BaseModelBackendTest, TestCase):
     """
     Tests for the ModelBackend using the simpleuser User model.

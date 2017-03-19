@@ -4,8 +4,6 @@ from django.test import TestCase, override_settings, modify_settings
 from simpleuser.models import AbstractUser, User, UserManager
 
 
-@modify_settings(INSTALLED_APPS={'append': 'simpleuser'})
-@override_settings(AUTH_USER_MODEL='simpleuser.User')
 class UserManagerTestCase(TestCase):
 
     def test_create_user(self):
@@ -36,7 +34,6 @@ class UserManagerTestCase(TestCase):
         )
 
 
-@override_settings(AUTH_USER_MODEL='simpleuser.User')
 class AbstractUserTestCase(TestCase):
     def test_email_user(self):
         # valid send_mail parameters
