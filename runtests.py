@@ -26,6 +26,7 @@ def run_test_suite():
             "django.contrib.sites",
             "simpleuser",
         ],
+        AUTH_USER_MODEL='simpleuser.User',
     )
 
     django.setup()

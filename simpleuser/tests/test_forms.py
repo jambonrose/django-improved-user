@@ -13,7 +13,6 @@ from simpleuser.forms import UserCreationForm, UserChangeForm
 
 
 @override_settings(
-    AUTH_USER_MODEL='simpleuser.User',
     USE_TZ=False,
     PASSWORD_HASHERS=('django.contrib.auth.hashers.SHA1PasswordHasher',),
 )
@@ -136,7 +135,6 @@ class UserCreationFormTest(TestCase):
 
 
 @override_settings(
-    AUTH_USER_MODEL='simpleuser.User',
     USE_TZ=False,
     PASSWORD_HASHERS=('django.contrib.auth.hashers.SHA1PasswordHasher',)
 )
