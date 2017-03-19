@@ -1,25 +1,23 @@
+language: python
+python:
+- '3.4'
+- '3.5'
+env:
+- DJANGO_VERSION=">=1.8,<1.9"
+- DJANGO_VERSION=">=1.9,<1.10"
+- DJANGO_VERSION=">=1.10,<1.11"
+- DJANGO_VERSION=">=1.11a,<1.12"
 matrix:
   include:
-    - language: python
-      python: "3.4"
-      env:
-        - DJANGO_VERSION=">=1.8,<1.9"
-    - language: python
-      python: "3.5"
-      env:
-        - DJANGO_VERSION=">=1.8,<1.9"
-    - language: python
-      python: "3.4"
-      env:
-        - DJANGO_VERSION=">=1.9,<1.10"
-    - language: python
-      python: "3.5"
-      env:
-        - DJANGO_VERSION=">=1.9,<1.10"
-    - language: python
-      python: "3.4"
-    - language: python
-      python: "3.5"
+    - python: 3.6
+      env: DJANGO_VERSION=">=1.11a,<1.12"
+    - python: '3.7-dev'
+      env: DJANGO_VERSION=">=1.11a,<1.12"
+  allow_failures:
+    - python: 3.6
+      env: DJANGO_VERSION=">=1.11a,<1.12"
+    - python: '3.7-dev'
+      env: DJANGO_VERSION=">=1.11a,<1.12"
 install:
   - "pip install django$DJANGO_VERSION"
   - "pip install ."
