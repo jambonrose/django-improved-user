@@ -97,7 +97,42 @@ class UserCreationFormTest(TestCase):
         }
         form = UserCreationForm(data)
         self.assertFalse(form.is_valid())
-        self.assertEqual(form["password2"].errors, ['This password is too common.'])
+        self.assertEqual(form["password1"].errors, ['This password is too common.'])
+
+    @skipUnless(django.VERSION >= (1, 9), "Password strength checks not available on Django 1.8")
+    @override_settings(
+        AUTH_PASSWORD_VALIDATORS = [{
+            'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+            'OPTIONS': { 'user_attributes': ('email', 'full_name', 'short_name') },
+        }]
+    )
+    def test_password_help_text(self):
+        form = UserCreationForm()
+        self.assertEqual(
+            form.fields['password1'].help_text,
+            '<ul><li>Your password can&#39;t be too similar to'
+            ' your other personal information.</li></ul>')
+
+    @skipUnless(django.VERSION >= (1, 9), "Password strength checks not available on Django 1.8")
+    @override_settings(
+        AUTH_PASSWORD_VALIDATORS = [{
+            'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+            'OPTIONS': { 'user_attributes': ('email', 'full_name', 'short_name') },
+        }]
+    )
+    def test_similar_attribute(self):
+        data = {
+            'email': 'jsmith@example.com',
+            'password1': 'johndoesmith',
+            'password2': 'johndoesmith',
+            'full_name': 'John Doe Smith',
+            'short_name': 'John',
+        }
+        form = UserCreationForm(data)
+        self.assertFalse(form.is_valid())
+        self.assertEqual(
+            form["password1"].errors,
+            ['The password is too similar to the full name.'])
 
 
 @override_settings(
