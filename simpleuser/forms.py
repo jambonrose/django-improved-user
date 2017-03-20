@@ -70,9 +70,17 @@ class UserCreationForm(AbstractUserCreationForm):
     A concrete implementation of AbstractUserCreationForm that uses an
     e-mail address as a user's identifier.
     """
+    # TODO: when Py3.4 dropped, replace comprehension below with:
+    # error_messages = {
+    #     **AbstractUserCreationForm.error_messages,
+    #     "duplicate_email": _("A user with that email already exists."),
+    # }
     error_messages = {
-        **AbstractUserCreationForm.error_messages,
-        "duplicate_email": _("A user with that email already exists."),
+        k: v
+        for d in [
+            AbstractUserCreationForm.error_messages,
+            { "duplicate_email": _("A user with that email already exists.")}]
+        for k, v in d.items()
     }
 
     class Meta:
