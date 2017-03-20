@@ -14,8 +14,6 @@ matrix:
     - python: '3.7-dev'
       env: DJANGO_VERSION=">=1.11a,<1.12"
   allow_failures:
-    - python: 3.6
-      env: DJANGO_VERSION=">=1.11a,<1.12"
     - python: '3.7-dev'
       env: DJANGO_VERSION=">=1.11a,<1.12"
 install:
