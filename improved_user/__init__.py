@@ -1,1 +1,1 @@
-default_app_config = 'simpleuser.apps.SimpleUserConfig'
+default_app_config = 'improved_user.apps.ImprovedUserConfig'
