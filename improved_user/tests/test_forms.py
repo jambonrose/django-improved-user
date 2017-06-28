@@ -8,8 +8,8 @@ from django.test import TestCase, override_settings
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext as _
 
-from simpleuser.models import User
-from simpleuser.forms import UserCreationForm, UserChangeForm
+from ..forms import UserChangeForm, UserCreationForm
+from ..models import User
 
 
 @override_settings(
@@ -88,7 +88,7 @@ class UserCreationFormTest(TestCase):
             {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
         ]
     )
-    def test_simple_password(self):
+    def test_common_password(self):
         data = {
             'email': 'jsmith@example.com',
             'password1': 'password',

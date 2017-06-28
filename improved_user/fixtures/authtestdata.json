@@ -1,7 +1,7 @@
 [
     {
         "pk": "1",
-        "model": "simpleuser.user",
+        "model": "improved_user.user",
         "fields": {
             "email": "testclient@example.com",
             "full_name": "Test Client",
@@ -18,7 +18,7 @@
     },
     {
         "pk": "2",
-        "model": "simpleuser.user",
+        "model": "improved_user.user",
         "fields": {
             "email": "inactive@example.com",
             "full_name": "Inactive User",
@@ -35,7 +35,7 @@
     },
     {
         "pk": "3",
-        "model": "simpleuser.user",
+        "model": "improved_user.user",
         "fields": {
             "email": "staff@example.com",
             "full_name": "Staff Member",
@@ -52,7 +52,7 @@
     },
     {
         "pk": "4",
-        "model": "simpleuser.user",
+        "model": "improved_user.user",
         "fields": {
             "email": "empty_password@example.com",
             "full_name": "Empty Password",
@@ -69,7 +69,7 @@
     },
     {
         "pk": "5",
-        "model": "simpleuser.user",
+        "model": "improved_user.user",
         "fields": {
             "email": "unmanageable_password@example.com",
             "full_name": "Unmanageable Password",
@@ -86,7 +86,7 @@
     },
     {
         "pk": "6",
-        "model": "simpleuser.user",
+        "model": "improved_user.user",
         "fields": {
             "email": "unknown_password@example.com",
             "full_name": "Unknown Password",

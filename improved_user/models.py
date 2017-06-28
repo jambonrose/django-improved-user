@@ -1,5 +1,6 @@
+from django.contrib.auth.models import (
+    AbstractBaseUser, BaseUserManager, PermissionsMixin,)
 from django.core.mail import send_mail
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -33,10 +34,9 @@ class UserManager(BaseUserManager):
                                  **extra_fields)
 
 
-class SimpleIdentityMixin(models.Model):
+class ImprovedIdentityMixin(models.Model):
     """
-    A mixin class that provides a simple first name/last name representation
-    of user identity.
+    A mixin class that provides an international-friendly user identity
     """
     full_name = models.CharField(_('full name'), max_length=200, blank=True)
     short_name = models.CharField(_('short name'), max_length=50)
@@ -61,7 +61,7 @@ class SimpleIdentityMixin(models.Model):
         return self.short_name
 
 
-class AbstractUser(SimpleIdentityMixin, PermissionsMixin, AbstractBaseUser):
+class AbstractUser(ImprovedIdentityMixin, PermissionsMixin, AbstractBaseUser):
     """
     An abstract base class implementing a fully featured User model with
     admin-compliant permissions, using email as a username.
