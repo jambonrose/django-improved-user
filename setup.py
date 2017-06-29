@@ -10,14 +10,13 @@ with io.open('README.rst', encoding='utf8') as readme:
 
 setup(
     name='django-improved-user',
-    version='0.1.0',
+    version='0.1.1',
     description='A custom Django user model for best practices email-based login.',
     long_description=long_description,
     author=(
         'Russell Keith-Magee <russell at keith-magee dot com>, '
         'Andrew Pinkham <hello at andrewsforge dot com>',
     ),
-    author_email='hello at andrewsforge dot com',
     url='https://github.com/jambonsw/django-improved-user/',
     packages=find_packages(exclude=['docs', 'tests']),
     install_requires=[
