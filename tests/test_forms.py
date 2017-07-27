@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from unittest import skipUnless
 
 import django
@@ -8,8 +6,8 @@ from django.test import TestCase, override_settings
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext as _
 
-from ..forms import UserChangeForm, UserCreationForm
-from ..models import User
+from improved_user.forms import UserChangeForm, UserCreationForm
+from improved_user.models import User
 
 
 @override_settings(
