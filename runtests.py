@@ -38,7 +38,7 @@ def run_test_suite(*args):
         FIXTURE_DIRS=(join(dirname(__file__), 'tests', 'fixtures'),),
     )
     setup()
-    execute_from_command_line(['manage.py', 'test', *test_args])
+    execute_from_command_line(['manage.py', 'test'] + test_args)
 
 
 if __name__ == "__main__":
