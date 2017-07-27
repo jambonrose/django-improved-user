@@ -1,7 +1,7 @@
 from django.core import mail
 from django.test import TestCase, modify_settings, override_settings
 
-from ..models import AbstractUser, User, UserManager
+from improved_user.models import AbstractUser, User, UserManager
 
 
 class UserManagerTestCase(TestCase):
