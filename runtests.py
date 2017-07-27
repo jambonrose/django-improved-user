@@ -6,6 +6,16 @@ from django import setup
 from django.conf import settings
 from django.core.management import execute_from_command_line
 
+try:
+    import improved_user  # noqa: F401
+except ImportError:
+    print(
+        'Could not load improved_user!\n'
+        'Try running `./setup.py develop` before `./runtests.py`\n'
+        'or run `./setup.py test` for an all in one solution',
+    )
+    exit(-1)
+
 
 def run_test_suite(*args):
     test_args = args or []

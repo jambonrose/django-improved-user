@@ -1,3 +1,5 @@
-include *.py
 include LICENSE
-recursive-include improved_user *.json
+include requirements.txt
+include runtests.py
+recursive-include tests *.json
+recursive-include tests *.py
