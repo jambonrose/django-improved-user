@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from os.path import dirname, join
 
 from django import setup

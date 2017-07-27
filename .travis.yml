@@ -23,4 +23,4 @@ install:
   - "pip install django$DJANGO_VERSION"
   - "pip install ."
 script:
-  - "python runtests.py"
+  - "./runtests.py"
