@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""Utility script to setup Django and run tests against package"""
 import sys
 from os.path import dirname, join
 
@@ -7,7 +8,7 @@ from django.conf import settings
 from django.core.management import execute_from_command_line
 
 try:
-    import improved_user  # noqa: F401
+    import improved_user  # noqa: F401 pylint: disable=unused-import
 except ImportError:
     print(
         'Could not load improved_user!\n'
@@ -18,6 +19,7 @@ except ImportError:
 
 
 def run_test_suite(*args):
+    """Heart of script: setup Django, run tests based on args"""
     test_args = args or []
 
     settings.configure(

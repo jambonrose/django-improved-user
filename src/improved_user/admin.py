@@ -1,3 +1,4 @@
+"""Admin Configuration for Improved User"""
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import ugettext_lazy as _
@@ -7,6 +8,7 @@ from .models import User
 
 
 class UserAdmin(BaseUserAdmin):
+    """Admin panel for Improved User, mimics Django's default"""
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         (_('Personal info'), {'fields': ('full_name', 'short_name')}),
