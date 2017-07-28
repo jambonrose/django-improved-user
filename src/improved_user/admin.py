@@ -27,5 +27,4 @@ class UserAdmin(BaseUserAdmin):
     ordering = ('email',)
 
 
-
 admin.site.register(User, UserAdmin)

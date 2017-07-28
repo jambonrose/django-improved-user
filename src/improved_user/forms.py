@@ -79,7 +79,7 @@ class UserCreationForm(AbstractUserCreationForm):
         k: v
         for d in [
             AbstractUserCreationForm.error_messages,
-            { 'duplicate_email': _('A user with that email already exists.')}]
+            {'duplicate_email': _('A user with that email already exists.')}]
         for k, v in d.items()
     }
 

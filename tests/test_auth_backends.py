@@ -41,6 +41,7 @@ class BaseModelBackendTest(object):
         # be cached; flush the cache to ensure there are no side effects
         # Refs #14975, #14925
         ContentType.objects.clear_cache()
+
     def test_has_perm(self):
         user = self.UserModel._default_manager.get(pk=self.user.pk)
         self.assertEqual(user.has_perm('auth.test'), False)

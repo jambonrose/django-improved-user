@@ -82,9 +82,9 @@ class UserCreationFormTest(TestCase):
 
     @skipUnless(django.VERSION >= (1, 9), 'Password strength checks not available on Django 1.8')
     @override_settings(
-        AUTH_PASSWORD_VALIDATORS = [
+        AUTH_PASSWORD_VALIDATORS=[
             {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
-        ]
+        ],
     )
     def test_common_password(self):
         data = {
@@ -98,10 +98,10 @@ class UserCreationFormTest(TestCase):
 
     @skipUnless(django.VERSION >= (1, 9), 'Password strength checks not available on Django 1.8')
     @override_settings(
-        AUTH_PASSWORD_VALIDATORS = [{
+        AUTH_PASSWORD_VALIDATORS=[{
             'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-            'OPTIONS': { 'user_attributes': ('email', 'full_name', 'short_name') },
-        }]
+            'OPTIONS': {'user_attributes': ('email', 'full_name', 'short_name')},
+        }],
     )
     def test_password_help_text(self):
         form = UserCreationForm()
@@ -112,10 +112,10 @@ class UserCreationFormTest(TestCase):
 
     @skipUnless(django.VERSION >= (1, 9), 'Password strength checks not available on Django 1.8')
     @override_settings(
-        AUTH_PASSWORD_VALIDATORS = [{
+        AUTH_PASSWORD_VALIDATORS=[{
             'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-            'OPTIONS': { 'user_attributes': ('email', 'full_name', 'short_name') },
-        }]
+            'OPTIONS': {'user_attributes': ('email', 'full_name', 'short_name')},
+        }],
     )
     def test_similar_attribute(self):
         data = {
@@ -134,7 +134,7 @@ class UserCreationFormTest(TestCase):
 
 @override_settings(
     USE_TZ=False,
-    PASSWORD_HASHERS=('django.contrib.auth.hashers.SHA1PasswordHasher',)
+    PASSWORD_HASHERS=('django.contrib.auth.hashers.SHA1PasswordHasher',),
 )
 class UserChangeFormTest(TestCase):
 
@@ -177,13 +177,15 @@ class UserChangeFormTest(TestCase):
     def test_bug_17944_unmanageable_password(self):
         user = User.objects.get(email='unmanageable_password@example.com')
         form = UserChangeForm(instance=user)
-        self.assertIn(_('Invalid password format or unknown hashing algorithm.'),
+        self.assertIn(
+            _('Invalid password format or unknown hashing algorithm.'),
             form.as_table())
 
     def test_bug_17944_unknown_password_algorithm(self):
         user = User.objects.get(email='unknown_password@example.com')
         form = UserChangeForm(instance=user)
-        self.assertIn(_('Invalid password format or unknown hashing algorithm.'),
+        self.assertIn(
+            _('Invalid password format or unknown hashing algorithm.'),
             form.as_table())
 
     def test_bug_19133(self):
