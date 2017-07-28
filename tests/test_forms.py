@@ -37,7 +37,9 @@ class UserCreationFormTest(TestCase):
         }
         form = UserCreationForm(data)
         self.assertFalse(form.is_valid())
-        self.assertEqual(form['email'].errors, [_('Enter a valid email address.')])
+        self.assertEqual(
+            form['email'].errors,
+            [_('Enter a valid email address.')])
 
     def test_password_verification(self):
         # The verification password is incorrect.
@@ -48,8 +50,9 @@ class UserCreationFormTest(TestCase):
         }
         form = UserCreationForm(data)
         self.assertFalse(form.is_valid())
-        self.assertEqual(form['password2'].errors,
-                         [force_text(form.error_messages['password_mismatch'])])
+        self.assertEqual(
+            form['password2'].errors,
+            [force_text(form.error_messages['password_mismatch'])])
 
     def test_both_passwords(self):
         # One (or both) passwords weren't given
@@ -80,10 +83,13 @@ class UserCreationFormTest(TestCase):
         u = form.save()
         self.assertEqual(repr(u), '<User: jsmith@example.com>')
 
-    @skipUnless(django.VERSION >= (1, 9), 'Password strength checks not available on Django 1.8')
+    @skipUnless(
+        django.VERSION >= (1, 9),
+        'Password strength checks not available on Django 1.8')
     @override_settings(
         AUTH_PASSWORD_VALIDATORS=[
-            {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+            {'NAME': 'django.contrib.auth.password_validation.'
+                     'CommonPasswordValidator'},
         ],
     )
     def test_common_password(self):
@@ -94,13 +100,19 @@ class UserCreationFormTest(TestCase):
         }
         form = UserCreationForm(data)
         self.assertFalse(form.is_valid())
-        self.assertEqual(form['password1'].errors, ['This password is too common.'])
+        self.assertEqual(
+            form['password1'].errors,
+            ['This password is too common.'])
 
-    @skipUnless(django.VERSION >= (1, 9), 'Password strength checks not available on Django 1.8')
+    @skipUnless(
+        django.VERSION >= (1, 9),
+        'Password strength checks not available on Django 1.8')
     @override_settings(
         AUTH_PASSWORD_VALIDATORS=[{
-            'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-            'OPTIONS': {'user_attributes': ('email', 'full_name', 'short_name')},
+            'NAME': 'django.contrib.auth.password_validation.'
+                    'UserAttributeSimilarityValidator',
+            'OPTIONS': {
+                'user_attributes': ('email', 'full_name', 'short_name')},
         }],
     )
     def test_password_help_text(self):
@@ -110,11 +122,15 @@ class UserCreationFormTest(TestCase):
             '<ul><li>Your password can&#39;t be too similar to'
             ' your other personal information.</li></ul>')
 
-    @skipUnless(django.VERSION >= (1, 9), 'Password strength checks not available on Django 1.8')
+    @skipUnless(
+        django.VERSION >= (1, 9),
+        'Password strength checks not available on Django 1.8')
     @override_settings(
         AUTH_PASSWORD_VALIDATORS=[{
-            'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-            'OPTIONS': {'user_attributes': ('email', 'full_name', 'short_name')},
+            'NAME': 'django.contrib.auth.password_validation.'
+                    'UserAttributeSimilarityValidator',
+            'OPTIONS': {
+                'user_attributes': ('email', 'full_name', 'short_name')},
         }],
     )
     def test_similar_attribute(self):
@@ -145,7 +161,9 @@ class UserChangeFormTest(TestCase):
         data = {'email': 'not valid'}
         form = UserChangeForm(data, instance=user)
         self.assertFalse(form.is_valid())
-        self.assertEqual(form['email'].errors, [_('Enter a valid email address.')])
+        self.assertEqual(
+            form['email'].errors,
+            [_('Enter a valid email address.')])
 
     def test_bug_14242(self):
         # A regression test, introduce by adding an optimization for the
@@ -154,7 +172,8 @@ class UserChangeFormTest(TestCase):
         class MyUserForm(UserChangeForm):
             def __init__(self, *args, **kwargs):
                 super(MyUserForm, self).__init__(*args, **kwargs)
-                self.fields['groups'].help_text = 'These groups give users different permissions'
+                self.fields['groups'].help_text = (
+                    'These groups give users different permissions')
 
             class Meta(UserChangeForm.Meta):
                 fields = ('groups',)
@@ -203,7 +222,9 @@ class UserChangeFormTest(TestCase):
         form = UserChangeForm(instance=user, data=post_data)
 
         self.assertTrue(form.is_valid())
-        self.assertEqual(form.cleaned_data['password'], 'sha1$6efc0$f93efe9fd7542f25a7be94871ea45aa95de57161')
+        self.assertEqual(
+            form.cleaned_data['password'],
+            'sha1$6efc0$f93efe9fd7542f25a7be94871ea45aa95de57161')
 
     def test_bug_19349_bound_password_field(self):
         user = User.objects.get(email='testclient@example.com')
