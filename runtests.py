@@ -34,7 +34,7 @@ def run_test_suite(*args):
             'django.contrib.contenttypes',
             'django.contrib.sessions',
             'django.contrib.sites',
-            'improved_user',
+            'improved_user.apps.ImprovedUserConfig',
         ],
         AUTH_USER_MODEL='improved_user.User',
         FIXTURE_DIRS=(join(dirname(__file__), 'tests', 'fixtures'),),

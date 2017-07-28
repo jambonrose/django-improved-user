@@ -13,9 +13,10 @@ Usage
 
 Perform the following steps in your ``settings.py`` file.
 
-1. Add ``improved_user`` to ``INSTALLED_APPS``
+1. Add ``improved_user.apps.ImprovedUserConfig``
+   (or simply ``improved_user``) to ``INSTALLED_APPS``
 2. Define or replace ``AUTH_USER_MODEL`` with he new model, as below.
-   
+
 .. code:: python
 
     AUTH_USER_MODEL='improved_user.User'
