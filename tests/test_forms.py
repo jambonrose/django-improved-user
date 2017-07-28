@@ -26,7 +26,7 @@ class UserCreationFormTest(TestCase):
         }
         form = UserCreationForm(data)
         self.assertFalse(form.is_valid())
-        self.assertEqual(form["email"].errors,
+        self.assertEqual(form['email'].errors,
                          [force_text(form.error_messages['duplicate_email'])])
 
     def test_invalid_data(self):
@@ -37,7 +37,7 @@ class UserCreationFormTest(TestCase):
         }
         form = UserCreationForm(data)
         self.assertFalse(form.is_valid())
-        self.assertEqual(form["email"].errors, [_('Enter a valid email address.')])
+        self.assertEqual(form['email'].errors, [_('Enter a valid email address.')])
 
     def test_password_verification(self):
         # The verification password is incorrect.
@@ -48,7 +48,7 @@ class UserCreationFormTest(TestCase):
         }
         form = UserCreationForm(data)
         self.assertFalse(form.is_valid())
-        self.assertEqual(form["password2"].errors,
+        self.assertEqual(form['password2'].errors,
                          [force_text(form.error_messages['password_mismatch'])])
 
     def test_both_passwords(self):
@@ -80,7 +80,7 @@ class UserCreationFormTest(TestCase):
         u = form.save()
         self.assertEqual(repr(u), '<User: jsmith@example.com>')
 
-    @skipUnless(django.VERSION >= (1, 9), "Password strength checks not available on Django 1.8")
+    @skipUnless(django.VERSION >= (1, 9), 'Password strength checks not available on Django 1.8')
     @override_settings(
         AUTH_PASSWORD_VALIDATORS = [
             {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
@@ -94,9 +94,9 @@ class UserCreationFormTest(TestCase):
         }
         form = UserCreationForm(data)
         self.assertFalse(form.is_valid())
-        self.assertEqual(form["password1"].errors, ['This password is too common.'])
+        self.assertEqual(form['password1'].errors, ['This password is too common.'])
 
-    @skipUnless(django.VERSION >= (1, 9), "Password strength checks not available on Django 1.8")
+    @skipUnless(django.VERSION >= (1, 9), 'Password strength checks not available on Django 1.8')
     @override_settings(
         AUTH_PASSWORD_VALIDATORS = [{
             'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -110,7 +110,7 @@ class UserCreationFormTest(TestCase):
             '<ul><li>Your password can&#39;t be too similar to'
             ' your other personal information.</li></ul>')
 
-    @skipUnless(django.VERSION >= (1, 9), "Password strength checks not available on Django 1.8")
+    @skipUnless(django.VERSION >= (1, 9), 'Password strength checks not available on Django 1.8')
     @override_settings(
         AUTH_PASSWORD_VALIDATORS = [{
             'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -128,7 +128,7 @@ class UserCreationFormTest(TestCase):
         form = UserCreationForm(data)
         self.assertFalse(form.is_valid())
         self.assertEqual(
-            form["password1"].errors,
+            form['password1'].errors,
             ['The password is too similar to the full name.'])
 
 
@@ -145,7 +145,7 @@ class UserChangeFormTest(TestCase):
         data = {'email': 'not valid'}
         form = UserChangeForm(data, instance=user)
         self.assertFalse(form.is_valid())
-        self.assertEqual(form["email"].errors, [_('Enter a valid email address.')])
+        self.assertEqual(form['email'].errors, [_('Enter a valid email address.')])
 
     def test_bug_14242(self):
         # A regression test, introduce by adding an optimization for the
@@ -167,27 +167,27 @@ class UserChangeFormTest(TestCase):
         user.set_unusable_password()
         user.save()
         form = UserChangeForm(instance=user)
-        self.assertIn(_("No password set."), form.as_table())
+        self.assertIn(_('No password set.'), form.as_table())
 
     def test_bug_17944_empty_password(self):
         user = User.objects.get(email='empty_password@example.com')
         form = UserChangeForm(instance=user)
-        self.assertIn(_("No password set."), form.as_table())
+        self.assertIn(_('No password set.'), form.as_table())
 
     def test_bug_17944_unmanageable_password(self):
         user = User.objects.get(email='unmanageable_password@example.com')
         form = UserChangeForm(instance=user)
-        self.assertIn(_("Invalid password format or unknown hashing algorithm."),
+        self.assertIn(_('Invalid password format or unknown hashing algorithm.'),
             form.as_table())
 
     def test_bug_17944_unknown_password_algorithm(self):
         user = User.objects.get(email='unknown_password@example.com')
         form = UserChangeForm(instance=user)
-        self.assertIn(_("Invalid password format or unknown hashing algorithm."),
+        self.assertIn(_('Invalid password format or unknown hashing algorithm.'),
             form.as_table())
 
     def test_bug_19133(self):
-        "The change form does not return the password value"
+        """The change form does not return the password value"""
         # Use the form to construct the POST data
         user = User.objects.get(email='testclient@example.com')
         form_for_data = UserChangeForm(instance=user)

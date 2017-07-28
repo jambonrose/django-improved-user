@@ -22,17 +22,17 @@ def run_test_suite(*args):
 
     settings.configure(
         DATABASES={
-            "default": {
+            'default': {
                 'ENGINE': 'django.db.backends.sqlite3',
                 'NAME': ':memory:',
             },
         },
         INSTALLED_APPS=[
-            "django.contrib.auth",
-            "django.contrib.contenttypes",
-            "django.contrib.sessions",
-            "django.contrib.sites",
-            "improved_user",
+            'django.contrib.auth',
+            'django.contrib.contenttypes',
+            'django.contrib.sessions',
+            'django.contrib.sites',
+            'improved_user',
         ],
         AUTH_USER_MODEL='improved_user.User',
         FIXTURE_DIRS=(join(dirname(__file__), 'tests', 'fixtures'),),
@@ -41,5 +41,5 @@ def run_test_suite(*args):
     execute_from_command_line(['manage.py', 'test'] + test_args)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     run_test_suite(*sys.argv[1:])

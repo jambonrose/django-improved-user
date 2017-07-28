@@ -57,7 +57,7 @@ class ImprovedIdentityMixin(models.Model):
         return self.full_name
 
     def get_short_name(self):
-        "Returns the short name for the user."
+        """Returns the short name for the user."""
         return self.short_name
 
 
