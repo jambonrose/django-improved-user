@@ -1,26 +1,37 @@
 branches:
   only:
-    - development
+  - development
 language: python
 python:
-- '3.4'
-- '3.5'
+- 3.4
+- 3.5
 env:
-- DJANGO_VERSION=">=1.8,<1.9"
-- DJANGO_VERSION=">=1.9,<1.10"
-- DJANGO_VERSION=">=1.10,<1.11"
-- DJANGO_VERSION=">=1.11,<1.12"
+- DJANGO=django>=1.8,<1.9
+- DJANGO=django>=1.10,<1.11
+- DJANGO=django>=1.11,<1.12
 matrix:
   include:
-    - python: 3.6
-      env: DJANGO_VERSION=">=1.11,<1.12"
-    - python: '3.7-dev'
-      env: DJANGO_VERSION=">=1.11,<1.12"
+  - python: 3.5
+    env: DJANGO=https://github.com/django/django/archive/master.tar.gz
+  - python: 3.6
+    env: DJANGO=django>=1.11,<1.12
+  - python: 3.6
+    env: DJANGO=https://github.com/django/django/archive/master.tar.gz
+  - python: 3.7-dev
+    env: DJANGO=django>=1.11,<1.12
+  - python: 3.7-dev
+    env: DJANGO=https://github.com/django/django/archive/master.tar.gz
   allow_failures:
-    - python: '3.7-dev'
-      env: DJANGO_VERSION=">=1.11,<1.12"
+  - python: 3.5
+    env: DJANGO=https://github.com/django/django/archive/master.tar.gz
+  - python: 3.6
+    env: DJANGO=https://github.com/django/django/archive/master.tar.gz
+  - python: 3.7-dev
+    env: DJANGO=django>=1.11,<1.12
+  - python: 3.7-dev
+    env: DJANGO=https://github.com/django/django/archive/master.tar.gz
 install:
-  - "pip install -r requirements.txt"
-  - "pip install django$DJANGO_VERSION"
+- pip install -r requirements.txt
+- pip install $DJANGO
 script:
-  - "./setup.py test"
+- ./setup.py test
