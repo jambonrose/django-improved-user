@@ -3,38 +3,26 @@ branches:
   - development
 language: python
 cache: pip
-jobs:
-  include:
-  - stage: lint and warm cache
-    python: 3.6
-    install: pip install -r requirements.txt
-    script:
-    - ./setup.py check --strict --metadata --restructuredtext
-    -  check-manifest .
-    -  flake8 src tests setup.py runtests.py
-    -  isort --verbose --check-only --diff --recursive src tests setup.py runtests.py
-    -  pylint -d fixme src setup.py runtests.py
 python:
 - 3.4
 - 3.5
+- 3.6
+- 3.7-dev
 env:
 - DJANGO=django>=1.8,<1.9
 - DJANGO=django>=1.10,<1.11
 - DJANGO=django>=1.11,<1.12
+- DJANGO=https://github.com/django/django/archive/master.tar.gz
 matrix:
-  include:
-  - python: 3.4
-    env: DJANGO=https://github.com/django/django/archive/master.tar.gz
-  - python: 3.5
-    env: DJANGO=https://github.com/django/django/archive/master.tar.gz
+  exclude:
   - python: 3.6
-    env: DJANGO=django>=1.11,<1.12
+    env: DJANGO=django>=1.8,<1.9
   - python: 3.6
-    env: DJANGO=https://github.com/django/django/archive/master.tar.gz
+    env: DJANGO=django>=1.10,<1.11
   - python: 3.7-dev
-    env: DJANGO=django>=1.11,<1.12
+    env: DJANGO=django>=1.8,<1.9
   - python: 3.7-dev
-    env: DJANGO=https://github.com/django/django/archive/master.tar.gz
+    env: DJANGO=django>=1.10,<1.11
   allow_failures:
   - python: 3.4
     env: DJANGO=https://github.com/django/django/archive/master.tar.gz
@@ -46,6 +34,16 @@ matrix:
     env: DJANGO=django>=1.11,<1.12
   - python: 3.7-dev
     env: DJANGO=https://github.com/django/django/archive/master.tar.gz
-install: pip install $DJANGO
-script: ./setup.py test
-after_script: pip uninstall -y django  # to remove from cache
+before_install:
+- python -V | cut -d' ' -f 2 | grep -q -e 3.6 && ./setup.py check --strict --metadata --restructuredtext 
+- python -V | cut -d' ' -f 2 | grep -q -e 3.6 && check-manifest .
+- python -V | cut -d' ' -f 2 | grep -q -e 3.6 && flake8 src tests setup.py runtests.py
+- python -V | cut -d' ' -f 2 | grep -q -e 3.6 && isort --verbose --check-only --diff --recursive src tests setup.py runtests.py
+- python -V | cut -d' ' -f 2 | grep -q -e 3.6 && pylint -d fixme src setup.py runtests.py
+install:
+- pip install -r requirements.txt
+- pip install $DJANGO
+script:
+- ./setup.py test
+after_script:
+- pip uninstall -y django  # to remove from cache
