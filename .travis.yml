@@ -2,46 +2,51 @@ branches:
   only:
   - development
 language: python
-python:
-- 3.4
-- 3.5
-env:
-- DJANGO=django>=1.8,<1.9
-- DJANGO=django>=1.10,<1.11
-- DJANGO=django>=1.11,<1.12
-matrix:
+cache: pip
+jobs:
   include:
-  - python: 3.4
-    env: DJANGO=https://github.com/django/django/archive/master.tar.gz
-  - python: 3.5
-    env: DJANGO=https://github.com/django/django/archive/master.tar.gz
-  - python: 3.6
-    env: DJANGO=django>=1.11,<1.12
-  - python: 3.6
-    env: DJANGO=https://github.com/django/django/archive/master.tar.gz
-  - python: 3.7-dev
-    env: DJANGO=django>=1.11,<1.12
-  - python: 3.7-dev
-    env: DJANGO=https://github.com/django/django/archive/master.tar.gz
-  allow_failures:
-  - python: 3.4
-    env: DJANGO=https://github.com/django/django/archive/master.tar.gz
-  - python: 3.5
-    env: DJANGO=https://github.com/django/django/archive/master.tar.gz
-  - python: 3.6
-    env: DJANGO=https://github.com/django/django/archive/master.tar.gz
-  - python: 3.7-dev
-    env: DJANGO=django>=1.11,<1.12
-  - python: 3.7-dev
-    env: DJANGO=https://github.com/django/django/archive/master.tar.gz
-install:
-- pip install -r requirements.txt
-- pip install $DJANGO
-before_script:
-- ./setup.py check --strict --metadata --restructuredtext
--  check-manifest .
--  flake8 src tests setup.py runtests.py
--  isort --verbose --check-only --diff --recursive src tests setup.py runtests.py
--  pylint -d fixme src setup.py runtests.py
-script:
-- ./setup.py test
+  - stage: lint and warm cache
+    python: 3.6
+    install: pip install -r requirements.txt
+    script:
+    - ./setup.py check --strict --metadata --restructuredtext
+    -  check-manifest .
+    -  flake8 src tests setup.py runtests.py
+    -  isort --verbose --check-only --diff --recursive src tests setup.py runtests.py
+    -  pylint -d fixme src setup.py runtests.py
+  - stage: test
+    python:
+    - 3.4
+    - 3.5
+    env:
+    - DJANGO=django>=1.8,<1.9
+    - DJANGO=django>=1.10,<1.11
+    - DJANGO=django>=1.11,<1.12
+    matrix:
+      include:
+      - python: 3.4
+        env: DJANGO=https://github.com/django/django/archive/master.tar.gz
+      - python: 3.5
+        env: DJANGO=https://github.com/django/django/archive/master.tar.gz
+      - python: 3.6
+        env: DJANGO=django>=1.11,<1.12
+      - python: 3.6
+        env: DJANGO=https://github.com/django/django/archive/master.tar.gz
+      - python: 3.7-dev
+        env: DJANGO=django>=1.11,<1.12
+      - python: 3.7-dev
+        env: DJANGO=https://github.com/django/django/archive/master.tar.gz
+      allow_failures:
+      - python: 3.4
+        env: DJANGO=https://github.com/django/django/archive/master.tar.gz
+      - python: 3.5
+        env: DJANGO=https://github.com/django/django/archive/master.tar.gz
+      - python: 3.6
+        env: DJANGO=https://github.com/django/django/archive/master.tar.gz
+      - python: 3.7-dev
+        env: DJANGO=django>=1.11,<1.12
+      - python: 3.7-dev
+        env: DJANGO=https://github.com/django/django/archive/master.tar.gz
+    install: pip install $DJANGO
+    script: ./setup.py test
+    after_script: pip uninstall -y django  # to remove from cache
