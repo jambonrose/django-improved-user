@@ -38,6 +38,7 @@ install:
 - pip install -r requirements.txt
 - pip install $DJANGO
 before_script:
+- ./setup.py check --strict --metadata --restructuredtext
 -  check-manifest .
 -  flake8 src tests setup.py runtests.py
 -  isort --verbose --check-only --diff --recursive src tests setup.py runtests.py
