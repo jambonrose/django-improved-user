@@ -9,6 +9,7 @@ Django Improved User
 :license: Simplified BSD, see LICENSE for details.
 """
 
+from distutils.command.check import check as CheckCommand
 from operator import attrgetter
 from os.path import abspath, dirname, join
 
@@ -28,6 +29,72 @@ def load_file_contents(file_path, as_list=True):
 
 
 LONG_DESCRIPTION = load_file_contents('README.rst', as_list=False)
+
+
+class CustomCheckCommand(CheckCommand):
+    """Customized distutils check command"""
+    # https://github.com/python/cpython/blob/master/Lib/distutils/command/check.py
+    user_options = CheckCommand.user_options + [
+        ('disable-metadata', None, "don't check meta-data"),
+        ('enforce-email', 'e', 'Ensure that all author/maintainer use email'),
+    ]
+    negative_opt = {'disable-metadata': 'metadata'}
+
+    def initialize_options(self):
+        """Setup superclass and new options"""
+        super().initialize_options()
+        # pylint: disable=attribute-defined-outside-init
+        self.enforce_email = 0
+
+    def check_metadata(self):
+        """
+        Ensures that all required elements of meta-data are supplied.
+
+        Specifically: name, version, URL, author or maintainer
+        Warns if any are missing.
+
+        If enforce-email option is true, author and/or maintainer must
+        specify an email.
+
+        """
+        metadata = self.distribution.metadata
+
+        missing = []
+        for attr in ('name', 'version', 'url'):
+            if not (hasattr(metadata, attr) and getattr(metadata, attr)):
+                missing.append(attr)
+
+        # https://www.python.org/dev/peps/pep-0345/
+        # author or maintainer must be specified
+        # author is preferred; if identifcal, specify only author
+        if not metadata.author and not metadata.maintainer:
+            missing.append('author')
+            if self.enforce_email:
+                missing.append('author_email')
+        else:
+            # one or both of author or maintainer specified
+            if (metadata.author and self.enforce_email
+                    and not metadata.author_email):
+                missing.append('author_email')
+            if (metadata.maintainer and self.enforce_email
+                    and not metadata.maintainer_email):
+                missing.append('maintainer_email')
+            if (metadata.author and metadata.maintainer
+                    and metadata.author == metadata.maintainer):
+                self.warn(
+                    'Maintainer should be omitted if identical to Author.\n'
+                    'See https://www.python.org/dev/peps/pep-0345/'
+                    '#maintainer-email-optional')
+            if (metadata.author_email and metadata.maintainer_email
+                    and metadata.author_email == metadata.maintainer_email):
+                self.warn(
+                    'Maintainer Email should be omitted if'
+                    "identical to Author's.\n"
+                    'See https://www.python.org/dev/peps/pep-0345/'
+                    '#maintainer-email-optional')
+
+        if missing:
+            self.warn('missing required meta-data: %s' % ', '.join(missing))
 
 
 class CustomTestCommand(TestCommand):
@@ -80,12 +147,13 @@ setup(
     zip_safe=False,
 
     cmdclass={
+        'check': CustomCheckCommand,
         'test': CustomTestCommand,
     },
 
     author=(
         'Russell Keith-Magee, '
-        'Andrew Pinkham',
+        'Andrew Pinkham'
     ),
     license='Simplified BSD License',
     classifiers=[
