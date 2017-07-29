@@ -35,11 +35,11 @@ matrix:
   - python: 3.7-dev
     env: DJANGO=https://github.com/django/django/archive/master.tar.gz
 before_install:
-- python -V | cut -d' ' -f 2 | grep -q -e 3.6 && ./setup.py check --strict --metadata --restructuredtext 
-- python -V | cut -d' ' -f 2 | grep -q -e 3.6 && check-manifest .
-- python -V | cut -d' ' -f 2 | grep -q -e 3.6 && flake8 src tests setup.py runtests.py
-- python -V | cut -d' ' -f 2 | grep -q -e 3.6 && isort --verbose --check-only --diff --recursive src tests setup.py runtests.py
-- python -V | cut -d' ' -f 2 | grep -q -e 3.6 && pylint -d fixme src setup.py runtests.py
+- if [[ `python -V | grep -c -e 3.6` -eq 1 ]]; then ./setup.py check --strict --metadata --restructuredtext ; fi
+- if [[ `python -V | grep -c -e 3.6` -eq 1 ]]; then check-manifest . ; fi
+- if [[ `python -V | grep -c -e 3.6` -eq 1 ]]; then flake8 src tests setup.py runtests.py ; fi
+- if [[ `python -V | grep -c -e 3.6` -eq 1 ]]; then isort --verbose --check-only --diff --recursive src tests setup.py runtests.py ; fi
+- if [[ `python -V | grep -c -e 3.6` -eq 1 ]]; then pylint -d fixme src setup.py runtests.py ; fi
 install:
 - pip install -r requirements.txt
 - pip install $DJANGO
