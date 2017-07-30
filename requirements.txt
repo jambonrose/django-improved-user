@@ -2,7 +2,7 @@ check-manifest==0.35
 docutils==0.13.1
 flake8-commas==0.4.3
 flake8-quotes==0.11.0
-flake8==3.3.0
+flake8==3.4.1
 Pygments==2.2.0
 pylint-django==0.7.2
 pylint==1.7.2
