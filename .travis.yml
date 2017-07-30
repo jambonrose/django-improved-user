@@ -34,15 +34,15 @@ matrix:
     env: DJANGO=django>=1.11,<1.12
   - python: 3.7-dev
     env: DJANGO=https://github.com/django/django/archive/master.tar.gz
-before_install:
+install:
+- pip install -r requirements.txt
+- pip install $DJANGO
+before_script:
 - if [[ `python -V | grep -c -e 3.6` -eq 1 ]]; then ./setup.py check --strict --metadata --restructuredtext ; fi
 - if [[ `python -V | grep -c -e 3.6` -eq 1 ]]; then check-manifest . ; fi
 - if [[ `python -V | grep -c -e 3.6` -eq 1 ]]; then flake8 src tests setup.py runtests.py ; fi
 - if [[ `python -V | grep -c -e 3.6` -eq 1 ]]; then isort --verbose --check-only --diff --recursive src tests setup.py runtests.py ; fi
 - if [[ `python -V | grep -c -e 3.6` -eq 1 ]]; then pylint -d fixme src setup.py runtests.py ; fi
-install:
-- pip install -r requirements.txt
-- pip install $DJANGO
 script:
 - ./setup.py test
 after_script:
