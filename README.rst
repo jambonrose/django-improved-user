@@ -13,28 +13,29 @@ Usage
 
 Perform the following steps in your ``settings.py`` file.
 
-1. Add ``improved_user`` to ``INSTALLED_APPS``
+1. Add ``improved_user.apps.ImprovedUserConfig``
+   (or simply ``improved_user``) to ``INSTALLED_APPS``
 2. Define or replace ``AUTH_USER_MODEL`` with he new model, as below.
-   
-.. code:: python
 
-    AUTH_USER_MODEL='improved_user.User'
+    .. code:: python
+
+        AUTH_USER_MODEL='improved_user.User'
 
 3. In Django > 1.9, change ``UserAttributeSimilarityValidator`` to match
    correct ``User`` fields, as shown below.
 
-.. code:: python
+    .. code:: python
 
-    AUTH_PREFIX = 'django.contrib.auth.password_validation.'
-    AUTH_PASSWORD_VALIDATORS = [
-        {
-            'NAME': AUTH_PREFIX + 'UserAttributeSimilarityValidator',
-            'OPTIONS': {
-                'user_attributes': ('email', 'full_name', 'short_name')
+        AUTH_PREFIX = 'django.contrib.auth.password_validation.'
+        AUTH_PASSWORD_VALIDATORS = [
+            {
+                'NAME': AUTH_PREFIX + 'UserAttributeSimilarityValidator',
+                'OPTIONS': {
+                    'user_attributes': ('email', 'full_name', 'short_name')
+                },
             },
-        },
-        # include other password validators here
-    ]
+            # include other password validators here
+        ]
 
 Testing
 -------

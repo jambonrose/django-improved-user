@@ -1,5 +1,5 @@
 from django.core import mail
-from django.test import TestCase, modify_settings, override_settings
+from django.test import TestCase
 
 from improved_user.models import AbstractUser, User, UserManager
 
@@ -30,7 +30,8 @@ class UserManagerTestCase(TestCase):
         self.assertRaisesMessage(
             ValueError,
             'An email address must be provided.',
-            User.objects.create_user, email=''
+            User.objects.create_user,
+            email='',
         )
 
 
@@ -38,20 +39,23 @@ class AbstractUserTestCase(TestCase):
     def test_email_user(self):
         # valid send_mail parameters
         kwargs = {
-            "fail_silently": False,
-            "auth_user": None,
-            "auth_password": None,
-            "connection": None,
-            "html_message": None,
+            'fail_silently': False,
+            'auth_user': None,
+            'auth_password': None,
+            'connection': None,
+            'html_message': None,
         }
         abstract_user = AbstractUser(email='foo@bar.com')
-        abstract_user.email_user(subject="Subject here",
-            message="This is a message", from_email="from@domain.com", **kwargs)
+        abstract_user.email_user(
+            subject='Subject here',
+            message='This is a message',
+            from_email='from@domain.com',
+            **kwargs)
         # Test that one message has been sent.
         self.assertEqual(len(mail.outbox), 1)
         # Verify that test email contains the correct attributes:
         message = mail.outbox[0]
-        self.assertEqual(message.subject, "Subject here")
-        self.assertEqual(message.body, "This is a message")
-        self.assertEqual(message.from_email, "from@domain.com")
+        self.assertEqual(message.subject, 'Subject here')
+        self.assertEqual(message.body, 'This is a message')
+        self.assertEqual(message.from_email, 'from@domain.com')
         self.assertEqual(message.to, [abstract_user.email])

@@ -41,6 +41,7 @@ class BaseModelBackendTest(object):
         # be cached; flush the cache to ensure there are no side effects
         # Refs #14975, #14925
         ContentType.objects.clear_cache()
+
     def test_has_perm(self):
         user = self.UserModel._default_manager.get(pk=self.user.pk)
         self.assertEqual(user.has_perm('auth.test'), False)
@@ -62,7 +63,8 @@ class BaseModelBackendTest(object):
     def test_custom_perms(self):
         user = self.UserModel._default_manager.get(pk=self.user.pk)
         content_type = ContentType.objects.get_for_model(Group)
-        perm = Permission.objects.create(name='test', content_type=content_type, codename='test')
+        perm = Permission.objects.create(
+            name='test', content_type=content_type, codename='test')
         user.user_permissions.add(perm)
 
         # reloading user to purge the _perm_cache
@@ -72,17 +74,24 @@ class BaseModelBackendTest(object):
         self.assertEqual(user.has_module_perms('Group'), False)
         self.assertEqual(user.has_module_perms('auth'), True)
 
-        perm = Permission.objects.create(name='test2', content_type=content_type, codename='test2')
+        perm = Permission.objects.create(
+            name='test2', content_type=content_type, codename='test2')
         user.user_permissions.add(perm)
-        perm = Permission.objects.create(name='test3', content_type=content_type, codename='test3')
+        perm = Permission.objects.create(
+            name='test3', content_type=content_type, codename='test3')
         user.user_permissions.add(perm)
         user = self.UserModel._default_manager.get(pk=self.user.pk)
-        self.assertEqual(user.get_all_permissions(), {'auth.test2', 'auth.test', 'auth.test3'})
+        self.assertEqual(
+            user.get_all_permissions(),
+            {'auth.test2', 'auth.test', 'auth.test3'})
         self.assertEqual(user.has_perm('test'), False)
         self.assertEqual(user.has_perm('auth.test'), True)
         self.assertEqual(user.has_perms(['auth.test2', 'auth.test3']), True)
 
-        perm = Permission.objects.create(name='test_group', content_type=content_type, codename='test_group')
+        perm = Permission.objects.create(
+            name='test_group',
+            content_type=content_type,
+            codename='test_group')
         group = Group.objects.create(name='test_group')
         group.permissions.add(perm)
         user.groups.add(group)
@@ -90,7 +99,8 @@ class BaseModelBackendTest(object):
         exp = {'auth.test2', 'auth.test', 'auth.test3', 'auth.test_group'}
         self.assertEqual(user.get_all_permissions(), exp)
         self.assertEqual(user.get_group_permissions(), {'auth.test_group'})
-        self.assertEqual(user.has_perms(['auth.test3', 'auth.test_group']), True)
+        self.assertEqual(
+            user.has_perms(['auth.test3', 'auth.test_group']), True)
 
         user = AnonymousUser()
         self.assertEqual(user.has_perm('test'), False)
@@ -100,7 +110,8 @@ class BaseModelBackendTest(object):
         """Regressiontest for #12462"""
         user = self.UserModel._default_manager.get(pk=self.user.pk)
         content_type = ContentType.objects.get_for_model(Group)
-        perm = Permission.objects.create(name='test', content_type=content_type, codename='test')
+        perm = Permission.objects.create(
+            name='test', content_type=content_type, codename='test')
         user.user_permissions.add(perm)
 
         self.assertEqual(user.has_perm('auth.test', 'object'), False)
@@ -117,17 +128,25 @@ class BaseModelBackendTest(object):
 
         user = self.UserModel._default_manager.get(pk=self.user.pk)
         content_type = ContentType.objects.get_for_model(Group)
-        user_perm = Permission.objects.create(name='test', content_type=content_type, codename='test_user')
-        group_perm = Permission.objects.create(name='test2', content_type=content_type, codename='test_group')
+        user_perm = Permission.objects.create(
+            name='test', content_type=content_type, codename='test_user')
+        group_perm = Permission.objects.create(
+            name='test2', content_type=content_type, codename='test_group')
         user.user_permissions.add(user_perm)
 
         group = Group.objects.create(name='test_group')
         user.groups.add(group)
         group.permissions.add(group_perm)
 
-        self.assertEqual(backend.get_all_permissions(user), {'auth.test_user', 'auth.test_group'})
-        self.assertEqual(backend.get_user_permissions(user), {'auth.test_user', 'auth.test_group'})
-        self.assertEqual(backend.get_group_permissions(user), {'auth.test_group'})
+        self.assertEqual(
+            backend.get_all_permissions(user),
+            {'auth.test_user', 'auth.test_group'})
+        self.assertEqual(
+            backend.get_user_permissions(user),
+            {'auth.test_user', 'auth.test_group'})
+        self.assertEqual(
+            backend.get_group_permissions(user),
+            {'auth.test_group'})
 
         # In Django 1.10, is_anonymous became a property.
         is_anon = self.UserModel.is_anonymous
@@ -151,17 +170,25 @@ class BaseModelBackendTest(object):
 
         user = self.UserModel._default_manager.get(pk=self.user.pk)
         content_type = ContentType.objects.get_for_model(Group)
-        user_perm = Permission.objects.create(name='test', content_type=content_type, codename='test_user')
-        group_perm = Permission.objects.create(name='test2', content_type=content_type, codename='test_group')
+        user_perm = Permission.objects.create(
+            name='test', content_type=content_type, codename='test_user')
+        group_perm = Permission.objects.create(
+            name='test2', content_type=content_type, codename='test_group')
         user.user_permissions.add(user_perm)
 
         group = Group.objects.create(name='test_group')
         user.groups.add(group)
         group.permissions.add(group_perm)
 
-        self.assertEqual(backend.get_all_permissions(user), {'auth.test_user', 'auth.test_group'})
-        self.assertEqual(backend.get_user_permissions(user), {'auth.test_user', 'auth.test_group'})
-        self.assertEqual(backend.get_group_permissions(user), {'auth.test_group'})
+        self.assertEqual(
+            backend.get_all_permissions(user),
+            {'auth.test_user', 'auth.test_group'})
+        self.assertEqual(
+            backend.get_user_permissions(user),
+            {'auth.test_user', 'auth.test_group'})
+        self.assertEqual(
+            backend.get_group_permissions(user),
+            {'auth.test_group'})
 
         user.is_active = False
         user.save()
@@ -173,11 +200,19 @@ class BaseModelBackendTest(object):
     def test_get_all_superuser_permissions(self):
         """A superuser has all permissions. Refs #14795."""
         user = self.UserModel._default_manager.get(pk=self.superuser.pk)
-        self.assertEqual(len(user.get_all_permissions()), len(Permission.objects.all()))
+        self.assertEqual(
+            len(user.get_all_permissions()),
+            len(Permission.objects.all()))
 
-    @override_settings(PASSWORD_HASHERS=['tests.test_auth_backends.CountingMD5PasswordHasher'])
+    @override_settings(
+        PASSWORD_HASHERS=[
+            'tests.test_auth_backends.CountingMD5PasswordHasher'])
     def test_authentication_timing(self):
-        """Hasher is run once regardless of whether the user exists. Refs #20760."""
+        """
+        Hasher is run once regardless of whether the user exists.
+        Refs #20760.
+
+        """
         # Re-set the password, because this tests overrides PASSWORD_HASHERS
         self.user.set_password('test')
         self.user.save()
@@ -196,17 +231,18 @@ class ModelBackendTest(BaseModelBackendTest, TestCase):
     """
     Tests for the ModelBackend using the Improved User model.
 
-    This isn't a perfect test, because both auth.User and improved_user.User are
-    synchronized to the database, which wouldn't ordinarily happen in
-    production. As a result, it doesn't catch errors caused by the non-
-    existence of the User table.
+    This isn't a perfect test, because both auth.User and
+    improved_user.User are synchronized to the database, which wouldn't
+    ordinarily happen in production. As a result, it doesn't catch
+    errors caused by the non- existence of the User table.
 
-    The specific problem is queries on .filter(groups__user) et al, which
-    makes an implicit assumption that the user model is called 'User'. In
-    production, the auth.User table won't exist, so the requested join
-    won't exist either; in testing, the auth.User *does* exist, and
-    so does the join. However, the join table won't contain any useful
-    data; for testing, we check that the data we expect actually does exist.
+    The specific problem is queries on .filter(groups__user) et al,
+    which makes an implicit assumption that the user model is called
+    'User'. In production, the auth.User table won't exist, so the
+    requested join won't exist either; in testing, the auth.User *does*
+    exist, and so does the join. However, the join table won't contain
+    any useful data; for testing, we check that the data we expect
+    actually does exist.
     """
 
     UserModel = User
