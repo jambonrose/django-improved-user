@@ -38,7 +38,7 @@ install:
 - pip install -r requirements.txt
 - pip install "$DJANGO"
 - pip install codecov
-- ./setup develop
+- ./setup.py develop
 before_script:
 - if [[ `python -V | grep -c -e 3.6` -eq 1 && "$DJANGO" == 'django>=1.11,<1.12' ]]; then ./setup.py check --strict --metadata --restructuredtext ; fi
 - if [[ `python -V | grep -c -e 3.6` -eq 1 && "$DJANGO" == 'django>=1.11,<1.12' ]]; then check-manifest . ; fi
