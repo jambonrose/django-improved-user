@@ -2,6 +2,13 @@
 History
 =======
 
+Next Release
+------------
+
+- Integrate coverage and codecov service (PR `#16`_)
+
+.. _#16: https://github.com/jambonsw/django-improved-user/pull/16
+
 0.2.0 (2017-07-30)
 ------------------
 
