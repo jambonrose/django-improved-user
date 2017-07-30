@@ -1,6 +1,9 @@
+exclude Makefile
+include .bumpversion.cfg
 include .isort.cfg
 include .pylintrc
 include .pyup.yml
+include HISTORY.rst
 include LICENSE
 include requirements.txt
 include runtests.py
