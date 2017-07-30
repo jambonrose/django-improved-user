@@ -1,5 +1,6 @@
 include .isort.cfg
 include .pylintrc
+include .pyup.yml
 include LICENSE
 include requirements.txt
 include runtests.py
