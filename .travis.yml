@@ -42,7 +42,7 @@ before_script:
 - if [[ `python -V | grep -c -e 3.6` -eq 1 && "$DJANGO" == 'django>=1.11,<1.12' ]]; then check-manifest . ; fi
 - if [[ `python -V | grep -c -e 3.6` -eq 1 && "$DJANGO" == 'django>=1.11,<1.12' ]]; then flake8 src tests setup.py runtests.py ; fi
 - if [[ `python -V | grep -c -e 3.6` -eq 1 && "$DJANGO" == 'django>=1.11,<1.12' ]]; then isort --verbose --check-only --diff --recursive src tests setup.py runtests.py ; fi
-- if [[ `python -V | grep -c -e 3.6` -eq 1 && "$DJANGO" == 'django>=1.11,<1.12' ]]; then pylint -d fixme src setup.py runtests.py ; fi
+- if [[ `python -V | grep -c -e 3.6` -eq 1 && "$DJANGO" == 'django>=1.11,<1.12' ]]; then pylint --rcfile=.pylintrc -d fixme src setup.py runtests.py ; fi
 script:
 - ./setup.py test
 after_script:
