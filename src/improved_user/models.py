@@ -77,6 +77,8 @@ class AbstractUser(ImprovedIdentityMixin, PermissionsMixin, AbstractBaseUser):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
+    # misnomer; fields Dj prompts for when user calls createsuperuser
+    # https://docs.djangoproject.com/en/stable/topics/auth/customizing/#django.contrib.auth.models.CustomUser.REQUIRED_FIELDS
     REQUIRED_FIELDS = ['full_name', 'short_name']
 
     class Meta:
