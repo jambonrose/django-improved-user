@@ -6,6 +6,7 @@ Next Release
 ------------
 
 - Integrate coverage and codecov service (PR `#16`_)
+- Make TravisCI test builds public (first seen in PR `#16`_)
 
 .. _#16: https://github.com/jambonsw/django-improved-user/pull/16
 
