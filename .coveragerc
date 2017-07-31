@@ -1,0 +1,15 @@
+[paths]
+source =
+    src/improved_user
+    */site-packages/improved_user
+
+[run]
+branch = true
+omit =
+    setup.py
+parallel = true
+source = improved_user
+
+[report]
+show_missing = true
+precision = 2

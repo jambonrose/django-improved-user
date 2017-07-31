@@ -37,6 +37,8 @@ matrix:
 install:
 - pip install -r requirements.txt
 - pip install "$DJANGO"
+- pip install codecov
+- ./setup.py develop
 before_script:
 - if [[ `python -V | grep -c -e 3.6` -eq 1 && "$DJANGO" == 'django>=1.11,<1.12' ]]; then ./setup.py check --strict --metadata --restructuredtext ; fi
 - if [[ `python -V | grep -c -e 3.6` -eq 1 && "$DJANGO" == 'django>=1.11,<1.12' ]]; then check-manifest . ; fi
@@ -44,6 +46,12 @@ before_script:
 - if [[ `python -V | grep -c -e 3.6` -eq 1 && "$DJANGO" == 'django>=1.11,<1.12' ]]; then isort --verbose --check-only --diff --recursive src tests setup.py runtests.py ; fi
 - if [[ `python -V | grep -c -e 3.6` -eq 1 && "$DJANGO" == 'django>=1.11,<1.12' ]]; then pylint --rcfile=.pylintrc -d fixme src setup.py runtests.py ; fi
 script:
-- ./setup.py test
+# do not use setup.py test with coverage; missing files omitted entirely
+- coverage run runtests.py
+after_success:
+# coverage is run in parallel, so it is necessary to combine the reports
+# Note that this is only for our benefit: codecov handles this itself
+# https://github.com/codecov/codecov-python/issues/72
+- coverage combine --append && coverage report && coverage html && codecov
 after_script:
 - pip uninstall -y django  # to remove from cache

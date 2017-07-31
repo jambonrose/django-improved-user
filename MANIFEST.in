@@ -1,5 +1,6 @@
 exclude Makefile
 include .bumpversion.cfg
+include .coveragerc
 include .isort.cfg
 include .pylintrc
 include .pyup.yml
