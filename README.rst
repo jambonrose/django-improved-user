@@ -1,3 +1,43 @@
+Latest Release: |Version| |Tag|
+
+Compatibility: |Implementation| |Python| |License|
+
+Tests: |Build| |Coverage| |PyUp|
+
+.. |Version| image:: http://img.shields.io/pypi/v/django-improved-user.svg
+        :target: https://pypi.org/project/django-improved-user/
+        :alt: PyPI Version
+
+.. |Tag| image:: https://img.shields.io/github/tag/jambonsw/django-improved-user.svg
+        :target: https://github.com/jambonsw/django-improved-user/releases
+        :alt: Github Tag
+
+.. |Implementation| image:: https://img.shields.io/pypi/implementation/django-improved-user.svg
+        :target: https://pypi.python.org/pypi/django-improved-user/
+        :alt: Python Implementation Support
+
+.. |Python| image:: https://img.shields.io/pypi/pyversions/django-improved-user.svg
+        :target: https://pypi.python.org/pypi/django-improved-user/
+        :alt: Python Support
+
+.. |License| image:: http://img.shields.io/pypi/l/django-improved-user.svg
+        :target: http://opensource.org/licenses/BSD-2-Clause
+        :alt: License
+
+.. |Build| image:: https://travis-ci.org/jambonsw/django-improved-user.svg?branch=development
+        :target: https://travis-ci.org/jambonsw/django-improved-user
+        :alt: Build Status
+
+.. |Coverage| image:: https://codecov.io/gh/jambonsw/django-improved-user/branch/development/graph/badge.svg
+        :target: https://codecov.io/gh/jambonsw/django-improved-user
+        :alt: Coverage Status
+
+.. |PyUp| image:: https://pyup.io/repos/github/jambonsw/django-improved-user/shield.svg
+        :target: https://pyup.io/repos/github/jambonsw/django-improved-user/
+        :alt: Updates
+
+.. end-badges
+
 Read Me
 =======
 
