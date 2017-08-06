@@ -52,6 +52,6 @@ after_success:
 # coverage is run in parallel, so it is necessary to combine the reports
 # Note that this is only for our benefit: codecov handles this itself
 # https://github.com/codecov/codecov-python/issues/72
-- coverage combine --append && coverage report && coverage html && codecov
+- coverage combine --append && coverage report && codecov
 after_script:
 - pip uninstall -y django  # to remove from cache
