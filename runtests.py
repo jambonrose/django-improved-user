@@ -20,7 +20,7 @@ except ImportError:
 
 def run_test_suite(*args):
     """Heart of script: setup Django, run tests based on args"""
-    test_args = args or []
+    test_args = list(args) or []
 
     settings.configure(
         DATABASES={
