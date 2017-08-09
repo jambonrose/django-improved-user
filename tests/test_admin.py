@@ -2,16 +2,23 @@
 import os
 import re
 
+from django import VERSION as DjangoVersion
 from django.contrib.admin.models import LogEntry
 from django.contrib.auth import SESSION_KEY
 from django.test import TestCase, override_settings
 from django.test.utils import patch_logger
-from django.urls import reverse
 from django.utils.encoding import force_text
 
 from improved_user.admin import UserAdmin
 from improved_user.forms import UserChangeForm, UserCreationForm
 from improved_user.models import User
+
+# pylint: disable=ungrouped-imports
+try:
+    from django.urls import reverse
+except ImportError:
+    from django.core.urlresolvers import reverse
+# pylint: enable=ungrouped-imports
 
 
 # Redirect in test_user_change_password will fail if session auth hash
@@ -157,7 +164,10 @@ class UserAdminTests(TestCase):
             response,
             reverse('auth_test_admin:improved_user_user_changelist'))
         row = LogEntry.objects.latest('id')
-        self.assertEqual(row.get_change_message(), 'Changed email.')
+        if DjangoVersion >= (1, 9):
+            self.assertEqual(row.get_change_message(), 'Changed email.')
+        else:
+            self.assertEqual(row.change_message, 'Changed email.')
 
     def test_user_not_change(self):
         """Test that message is raised when form submitted unchanged"""
@@ -172,7 +182,10 @@ class UserAdminTests(TestCase):
             response,
             reverse('auth_test_admin:improved_user_user_changelist'))
         row = LogEntry.objects.latest('id')
-        self.assertEqual(row.get_change_message(), 'No fields changed.')
+        if DjangoVersion >= (1, 9):
+            self.assertEqual(row.get_change_message(), 'No fields changed.')
+        else:
+            self.assertEqual(row.change_message, 'No fields changed.')
 
     def test_user_change_password(self):
         """Test that URL to change password form is correct"""
@@ -203,9 +216,27 @@ class UserAdminTests(TestCase):
         )
         self.assertRedirects(response, user_change_url)
         row = LogEntry.objects.latest('id')
-        self.assertEqual(row.get_change_message(), 'Changed password.')
+        if DjangoVersion >= (1, 9):
+            self.assertEqual(row.get_change_message(), 'Changed password.')
+        else:
+            self.assertEqual(row.change_message, 'Changed password.')
         self.logout()
         self.login(password='password1')
+
+    def test_user_change_password_subclass_path(self):
+        """Test subclasses can override password URL"""
+        class CustomChangeForm(UserChangeForm):
+            """Subclass of UserChangeForm; uses rel_password_url"""
+            rel_password_url = 'moOps'
+
+        form = CustomChangeForm()
+        self.assertEqual(form.rel_password_url, 'moOps')
+        rel_link = re.search(
+            r'you can change the password using '
+            r'<a href="([^"]*)">this form</a>',
+            form.fields['password'].help_text,
+        ).groups()[0]
+        self.assertEqual(rel_link, 'moOps')
 
     def test_user_change_different_user_password(self):
         """Test that administrator can update other Users' passwords"""
@@ -228,7 +259,10 @@ class UserAdminTests(TestCase):
         row = LogEntry.objects.latest('id')
         self.assertEqual(row.user_id, self.admin.pk)
         self.assertEqual(row.object_id, str(user.pk))
-        self.assertEqual(row.get_change_message(), 'Changed password.')
+        if DjangoVersion >= (1, 9):
+            self.assertEqual(row.get_change_message(), 'Changed password.')
+        else:
+            self.assertEqual(row.change_message, 'Changed password.')
 
     def test_changelist_disallows_password_lookups(self):
         """Users shouldn't be allowed to guess password

@@ -2,7 +2,7 @@
 from unittest import skipUnless
 from unittest.mock import patch
 
-import django
+from django import VERSION as DjangoVersion
 from django.forms.fields import Field
 from django.test import TestCase, override_settings
 from django.utils.translation import gettext as _
@@ -98,6 +98,9 @@ class UserCreationFormTest(TestDataMixin, TestCase):
         self.assertEqual(form['password1'].errors, required_error)
         self.assertEqual(form['password2'].errors, [])
 
+    @skipUnless(
+        DjangoVersion >= (1, 9),
+        'Password strength checks not available on Django 1.8')
     @patch('django.contrib.auth.password_validation.password_changed')
     def test_success(self, password_changed):
         """Successful submission of form data"""
@@ -116,8 +119,26 @@ class UserCreationFormTest(TestDataMixin, TestCase):
         self.assertEqual(password_changed.call_count, 1)
         self.assertEqual(repr(user), '<User: jsmith@example.com>')
 
+    # TODO: Remove this test in favor of above after Dj1.8 dropped
     @skipUnless(
-        django.VERSION >= (1, 9),
+        DjangoVersion < (1, 9),
+        'Password strength checks not available on Django 1.8')
+    def test_success_pre_19(self):
+        """Successful submission of form data"""
+        data = {
+            'email': 'jsmith@example.com',
+            'full_name': 'John Smith',  # optional field
+            'short_name': 'John',
+            'password1': 'test123',
+            'password2': 'test123',
+        }
+        form = UserCreationForm(data)
+        self.assertTrue(form.is_valid())
+        user = form.save()
+        self.assertEqual(repr(user), '<User: jsmith@example.com>')
+
+    @skipUnless(
+        DjangoVersion >= (1, 9),
         'Password strength checks not available on Django 1.8')
     @override_settings(
         AUTH_PASSWORD_VALIDATORS=[
@@ -146,7 +167,7 @@ class UserCreationFormTest(TestDataMixin, TestCase):
             form['password1'].errors)
 
     @skipUnless(
-        django.VERSION >= (1, 9),
+        DjangoVersion >= (1, 9),
         'Password strength checks not available on Django 1.8')
     @override_settings(
         AUTH_PASSWORD_VALIDATORS=[
@@ -167,7 +188,7 @@ class UserCreationFormTest(TestDataMixin, TestCase):
             form['password1'].errors)
 
     @skipUnless(
-        django.VERSION >= (1, 9),
+        DjangoVersion >= (1, 9),
         'Password strength checks not available on Django 1.8')
     @override_settings(
         AUTH_PASSWORD_VALIDATORS=[{
@@ -184,7 +205,7 @@ class UserCreationFormTest(TestDataMixin, TestCase):
             ' your other personal information.</li></ul>')
 
     @skipUnless(
-        django.VERSION >= (1, 9),
+        DjangoVersion >= (1, 9),
         'Password strength checks not available on Django 1.8')
     @override_settings(
         AUTH_PASSWORD_VALIDATORS=[{
@@ -207,18 +228,19 @@ class UserCreationFormTest(TestDataMixin, TestCase):
             form['password1'].errors,
             ['The password is too similar to the full name.'])
 
-    def test_password_whitespace_not_stripped(self):
-        """Ensure we aren't mangling passwords by removing whitespaces"""
-        data = {
-            'email': 'jsmith@example.com',
-            'password1': '   test password   ',
-            'password2': '   test password   ',
-            'short_name': 'John',
-        }
-        form = UserCreationForm(data)
-        self.assertTrue(form.is_valid())
-        self.assertEqual(form.cleaned_data['password1'], data['password1'])
-        self.assertEqual(form.cleaned_data['password2'], data['password2'])
+    # TODO: Enable test below when Dj1.8 support dropped
+    # def test_password_whitespace_not_stripped(self):
+    #     """Ensure we aren't mangling passwords by removing whitespaces"""
+    #     data = {
+    #         'email': 'jsmith@example.com',
+    #         'password1': '   test password   ',
+    #         'password2': '   test password   ',
+    #         'short_name': 'John',
+    #     }
+    #     form = UserCreationForm(data)
+    #     self.assertTrue(form.is_valid())
+    #     self.assertEqual(form.cleaned_data['password1'], data['password1'])
+    #     self.assertEqual(form.cleaned_data['password2'], data['password2'])
 
 
 class UserChangeFormTest(TestDataMixin, TestCase):

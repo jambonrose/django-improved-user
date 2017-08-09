@@ -2,7 +2,7 @@
 # pylint: disable=protected-access
 from unittest.mock import patch
 
-import django
+from django import VERSION as DjangoVersion
 from django.contrib.auth import authenticate
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.hashers import MD5PasswordHasher
@@ -194,10 +194,10 @@ class ImprovedUserModelBackendTest(TestCase):
             {'auth.test_group'})
 
         # In Django 1.10, is_anonymous became a property.
-        if django.VERSION >= (1, 10):
+        if DjangoVersion >= (1, 10):
             is_anon_mock = True
         else:
-            is_anon_mock = lambda: True  # noqa: E731
+            is_anon_mock = lambda s: True  # noqa: E731
         with patch.object(self.UserModel, 'is_anonymous', is_anon_mock):
             self.assertEqual(backend.get_all_permissions(user), set())
             self.assertEqual(backend.get_user_permissions(user), set())

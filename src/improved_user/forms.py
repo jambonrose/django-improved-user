@@ -1,5 +1,5 @@
 """Forms for Creating and Updating Improved Users"""
-from django import forms
+from django import VERSION as DjangoVersion, forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
@@ -45,12 +45,14 @@ class AbstractUserCreationForm(forms.ModelForm):
 
     password1 = forms.CharField(
         label=_('Password'),
-        strip=False,
+        # TODO: Uncomment below when Dj1.8 dropped
+        # strip=False,
         widget=forms.PasswordInput,
         help_text=password_validation.password_validators_help_text_html())
     password2 = forms.CharField(
         label=_('Password confirmation'),
-        strip=False,
+        # TODO: Uncomment below when Dj1.8 dropped
+        # strip=False,
         widget=forms.PasswordInput,
         help_text=_('Enter the same password as above, for verification.'))
 
@@ -192,6 +194,8 @@ class AbstractUserChangeForm(forms.ModelForm):
         if (hasattr(self, 'rel_password_url')
                 and self.rel_password_url is not None):
             return self.rel_password_url
+        if DjangoVersion < (1, 9):
+            return './password/'
         return '../password/'
 
     def clean_password(self):

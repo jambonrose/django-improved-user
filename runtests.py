@@ -3,7 +3,7 @@
 import sys
 from os.path import dirname, join
 
-from django import setup
+from django import VERSION as DjangoVersion, setup
 from django.conf import settings
 from django.core.management import execute_from_command_line
 
@@ -22,6 +22,21 @@ def run_test_suite(*args):
     """Heart of script: setup Django, run tests based on args"""
     test_args = list(args) or []
 
+    middleware = [
+        'django.contrib.sessions.middleware.SessionMiddleware',
+        'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'django.contrib.messages.middleware.MessageMiddleware',
+    ]
+
+    if DjangoVersion >= (1, 10):
+        middleware_var_name = 'MIDDLEWARE'
+    else:
+        middleware_var_name = 'MIDDLEWARE_CLASSES'
+
+    middleware_kwargs = {
+        middleware_var_name: middleware,
+    }
+
     settings.configure(
         DATABASES={
             'default': {
@@ -37,11 +52,6 @@ def run_test_suite(*args):
             'django.contrib.sites',
             'improved_user.apps.ImprovedUserConfig',
         ],
-        MIDDLEWARE=[
-            'django.contrib.sessions.middleware.SessionMiddleware',
-            'django.contrib.auth.middleware.AuthenticationMiddleware',
-            'django.contrib.messages.middleware.MessageMiddleware',
-        ],
         SITE_ID=1,
         AUTH_USER_MODEL='improved_user.User',
         FIXTURE_DIRS=(join(dirname(__file__), 'tests', 'fixtures'),),
@@ -56,7 +66,8 @@ def run_test_suite(*args):
                 ],
             },
         }],
-
+        # TODO: when Dj1.8 dropped, use MIDDLEWARE directly
+        **middleware_kwargs  # noqa: C815
     )
     setup()
     execute_from_command_line(['manage.py', 'test'] + test_args)
