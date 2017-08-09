@@ -30,14 +30,33 @@ def run_test_suite(*args):
             },
         },
         INSTALLED_APPS=[
+            'django.contrib.admin',
             'django.contrib.auth',
             'django.contrib.contenttypes',
             'django.contrib.sessions',
             'django.contrib.sites',
             'improved_user.apps.ImprovedUserConfig',
         ],
+        MIDDLEWARE=[
+            'django.contrib.sessions.middleware.SessionMiddleware',
+            'django.contrib.auth.middleware.AuthenticationMiddleware',
+            'django.contrib.messages.middleware.MessageMiddleware',
+        ],
+        SITE_ID=1,
         AUTH_USER_MODEL='improved_user.User',
         FIXTURE_DIRS=(join(dirname(__file__), 'tests', 'fixtures'),),
+        TEMPLATES=[{
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'DIRS': [],
+            'APP_DIRS': True,
+            'OPTIONS': {
+                'context_processors': [
+                    'django.contrib.auth.context_processors.auth',
+                    'django.contrib.messages.context_processors.messages',
+                ],
+            },
+        }],
+
     )
     setup()
     execute_from_command_line(['manage.py', 'test'] + test_args)
