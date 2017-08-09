@@ -43,8 +43,7 @@ class CustomCheckCommand(CheckCommand):
     def initialize_options(self):
         """Setup superclass and new options"""
         super().initialize_options()
-        # pylint: disable=attribute-defined-outside-init
-        self.enforce_email = 0
+        self.enforce_email = 0  # pylint:disable=attribute-defined-outside-init
 
     def check_metadata(self):
         """
