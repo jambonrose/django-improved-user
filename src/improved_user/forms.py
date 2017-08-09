@@ -160,18 +160,39 @@ class AbstractUserChangeForm(forms.ModelForm):
     """Base form update User, but not their password"""
     password = ReadOnlyPasswordHashField(
         label=_('Password'),
-        help_text=_('Raw passwords are not stored, so there is no way to see '
-                    "this user's password, but you can change the password "
-                    'using <a href="password/">this form</a>.'))
+        help_text=_(
+            'Raw passwords are not stored, so there is no way to see this '
+            "user's password, but you can change the password using "
+            '<a href="{}">this form</a>.'),
+    )
+
+    rel_password_url = None
 
     def __init__(self, *args, **kwargs):
         """Initialize form; optimize user permission queryset"""
         super(AbstractUserChangeForm, self).__init__(*args, **kwargs)
+        self.fields['password'].help_text = (
+            self.fields['password'].help_text.format(
+                self.get_local_password_path()))
         permission_field = self.fields.get('user_permissions', None)
         if permission_field is not None:
             # pre-load content types associated with permissions
             permission_field.queryset = (
                 permission_field.queryset.select_related('content_type'))
+
+    def get_local_password_path(self):
+        """Method to return relative path to password form
+
+        Will return rel_password_url attribute on form
+        or else '../password/'. If subclasses cannot simply replace
+        rel_password_url, then they can override this method instead of
+        __init__.
+
+        """
+        if (hasattr(self, 'rel_password_url')
+                and self.rel_password_url is not None):
+            return self.rel_password_url
+        return '../password/'
 
     def clean_password(self):
         """
