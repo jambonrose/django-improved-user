@@ -16,10 +16,14 @@ class UserManager(BaseUserManager):
         """Helper method to save a User with improved user fields"""
         if not email:
             raise ValueError('An email address must be provided.')
+        if 'username' in extra_fields:
+            raise ValueError(
+                'The Improved User model does not have a username; '
+                'it uses only email')
         now = timezone.now()
         user = self.model(
             email=self.normalize_email(email),
-            is_active=True, is_staff=is_staff, is_superuser=is_superuser,
+            is_staff=is_staff, is_superuser=is_superuser,
             last_login=now, date_joined=now, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
@@ -27,11 +31,19 @@ class UserManager(BaseUserManager):
 
     def create_user(self, email=None, password=None, **extra_fields):
         """Save new User with email and password"""
-        return self._create_user(email, password, False, False, **extra_fields)
+        extra_fields.setdefault('is_staff', False)
+        extra_fields.setdefault('is_superuser', False)
+        return self._create_user(email, password, **extra_fields)
 
     def create_superuser(self, email, password, **extra_fields):
         """Save new User with is_staff and is_superuser set to True"""
-        return self._create_user(email, password, True, True, **extra_fields)
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True.')
+        return self._create_user(email, password, **extra_fields)
 
 
 class ImprovedIdentityMixin(models.Model):
@@ -76,13 +88,20 @@ class AbstractUser(ImprovedIdentityMixin, PermissionsMixin, AbstractBaseUser):
 
     objects = UserManager()
 
+    EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'email'
+    # misnomer; fields Dj prompts for when user calls createsuperuser
+    # https://docs.djangoproject.com/en/stable/topics/auth/customizing/#django.contrib.auth.models.CustomUser.REQUIRED_FIELDS
     REQUIRED_FIELDS = ['full_name', 'short_name']
 
     class Meta:
         verbose_name = _('user')
         verbose_name_plural = _('users')
         abstract = True
+
+    def clean(self):
+        super().clean()
+        self.email = self.__class__.objects.normalize_email(self.email)
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         """Sends an email to this User."""

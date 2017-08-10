@@ -43,8 +43,7 @@ class CustomCheckCommand(CheckCommand):
     def initialize_options(self):
         """Setup superclass and new options"""
         super().initialize_options()
-        # pylint: disable=attribute-defined-outside-init
-        self.enforce_email = 0
+        self.enforce_email = 0  # pylint:disable=attribute-defined-outside-init
 
     def check_metadata(self):
         """
@@ -132,7 +131,7 @@ class CustomTestCommand(TestCommand):
 
 setup(
     name='django-improved-user',
-    version='0.2.0',
+    version='0.3.0',
     description=(
         'A custom Django user model for best practices email-based login.'
     ),
