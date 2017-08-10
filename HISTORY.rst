@@ -5,25 +5,30 @@ History
 Next Release
 ------------
 
+- Nothing yet!
+
+0.3.0 (2017-08-10)
+------------------
+
 - Integrate coverage and codecov service (PR `#16`_)
 - Make TravisCI test builds public (first seen in PR `#16`_)
 - Merge appropriate tests from Django master (1.11.3 is current release
   at time of writing). This increases test coverage across the board and
   updates the test suite to check for parity between Django's User API
   and Improved User's API as well as check for the same security issues.
-  (PR `18_`)
+  (PR `#18_`)
 - UserManager raises a friendly error if the developer tries to pass a
-  username argument (PR `18_`)
+  username argument (PR `#18_`)
 - Password errors are shown above both password fields
-  (PR `18_`)
+  (PR `#18_`)
 - Bugfix: UserManager handles is_staff, is_active, and is_superuser
-  correctly (PR `18_`)
-- Bugfix: User has email normalized during Model.clean phase (PR `18_`)
+  correctly (PR `#18_`)
+- Bugfix: User has email normalized during Model.clean phase (PR `#18_`)
 - Bugfix: UserAdmin requires short_name in both add and change
-  (previously only in change; PR `18_`)
+  (previously only in change; PR `#18_`)
 - Bugfix: UserAdmin uses correct relative path URL for password change
-  in all versions of Django (was not working in Django 1.9+) (PR `18_`)
-- Bugfix: Runtests correctly handles test specification (PR `18_`)
+  in all versions of Django (was not working in Django 1.9+) (PR `#18_`)
+- Bugfix: Runtests correctly handles test specification (PR `#18_`)
 
 .. _#16: https://github.com/jambonsw/django-improved-user/pull/16
 .. _#18: https://github.com/jambonsw/django-improved-user/pull/18
