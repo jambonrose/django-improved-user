@@ -1,6 +1,6 @@
 Latest Release: |Version| |Tag|
 
-Compatibility: |Implementation| |Python| |License|
+Compatibility: |Implementation| |Python| |Django| |License|
 
 Tests: |Build| |Coverage| |PyUp|
 
@@ -19,6 +19,10 @@ Tests: |Build| |Coverage| |PyUp|
 .. |Python| image:: https://img.shields.io/pypi/pyversions/django-improved-user.svg
         :target: https://pypi.python.org/pypi/django-improved-user/
         :alt: Python Support
+
+.. |Django| image:: https://img.shields.io/badge/Django-1.8%2C%201.10%2C%201.11-blue.svg
+        :target: https://pypi.python.org/pypi/django-improved-user/
+        :alt: Django Support
 
 .. |License| image:: http://img.shields.io/pypi/l/django-improved-user.svg
         :target: http://opensource.org/licenses/BSD-2-Clause
