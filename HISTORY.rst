@@ -5,7 +5,10 @@ History
 Next Release
 ------------
 
-- Nothing yet!
+- Add UserFactory to make testing easier for developers using the
+  pacakge; requires factory_boy (PR `#20`_)
+
+.. _#20: https://github.com/jambonsw/django-improved-user/pull/20
 
 0.3.0 (2017-08-10)
 ------------------
