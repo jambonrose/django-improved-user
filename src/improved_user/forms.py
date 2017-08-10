@@ -43,24 +43,27 @@ class AbstractUserCreationForm(forms.ModelForm):
         'password_mismatch': _("The two password fields didn't match."),
     }
 
+    # TODO: move this to field when Django 1.8 support dropped
+    password_kwargs = {'strip': False} if DjangoVersion >= (1, 9) else {}
+
     password1 = forms.CharField(
         label=_('Password'),
-        # TODO: Uncomment below when Dj1.8 dropped
-        # strip=False,
         widget=forms.PasswordInput,
-        help_text=password_validation.password_validators_help_text_html())
+        help_text=password_validation.password_validators_help_text_html(),
+        **password_kwargs  # noqa: C815
+    )
     password2 = forms.CharField(
         label=_('Password confirmation'),
-        # TODO: Uncomment below when Dj1.8 dropped
-        # strip=False,
         widget=forms.PasswordInput,
-        help_text=_('Enter the same password as above, for verification.'))
+        help_text=_('Enter the same password as above, for verification.'),
+        **password_kwargs  # noqa: C815
+    )
 
     def clean_password2(self):
         """
         Check wether password 1 and password 2 are equivalent
 
-        While ideally this would be done in clean, there is a chance the
+        While ideally this would be done in clean, there is a chance a
         superclass could declare clean and forget to call super. We
         therefore opt to run this password mismatch check in password2
         clean, but to show the error above password1 (as we are unsure

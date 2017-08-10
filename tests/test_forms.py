@@ -228,19 +228,25 @@ class UserCreationFormTest(TestDataMixin, TestCase):
             form['password1'].errors,
             ['The password is too similar to the full name.'])
 
-    # TODO: Enable test below when Dj1.8 support dropped
-    # def test_password_whitespace_not_stripped(self):
-    #     """Ensure we aren't mangling passwords by removing whitespaces"""
-    #     data = {
-    #         'email': 'jsmith@example.com',
-    #         'password1': '   test password   ',
-    #         'password2': '   test password   ',
-    #         'short_name': 'John',
-    #     }
-    #     form = UserCreationForm(data)
-    #     self.assertTrue(form.is_valid())
-    #     self.assertEqual(form.cleaned_data['password1'], data['password1'])
-    #     self.assertEqual(form.cleaned_data['password2'], data['password2'])
+    def test_password_whitespace_not_stripped(self):
+        """Ensure we aren't mangling passwords by removing whitespaces
+
+        Starting in Django 1.9, form Charfield and subclasses allow for
+        whitestrip to be stripped automatically during the clean field
+        phase. This is a test to ensure that we are not stripping
+        whitespace from the password.
+
+        """
+        data = {
+            'email': 'jsmith@example.com',
+            'password1': '   test password   ',
+            'password2': '   test password   ',
+            'short_name': 'John',
+        }
+        form = UserCreationForm(data)
+        self.assertTrue(form.is_valid())
+        self.assertEqual(form.cleaned_data['password1'], data['password1'])
+        self.assertEqual(form.cleaned_data['password2'], data['password2'])
 
 
 class UserChangeFormTest(TestDataMixin, TestCase):
