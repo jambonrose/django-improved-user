@@ -143,6 +143,13 @@ setup(
     install_requires=[
         'django>=1.8',
     ],
+    extras_require={
+        'factory': [
+            'factory_boy==2.9.2',
+            'Faker==0.7.18',
+            'python-dateutil==2.6.1',
+        ],
+    },
     zip_safe=False,
 
     cmdclass={
