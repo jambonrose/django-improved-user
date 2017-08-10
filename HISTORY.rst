@@ -35,7 +35,7 @@ with v0.3.0 due to PR `#23`_
   at time of writing). This increases test coverage across the board and
   updates the test suite to check for parity between Django's User API
   and Improved User's API as well as check for the same security issues.
-  (PR `#18`)
+  (PR `#18`_)
 - UserManager raises a friendly error if the developer tries to pass a
   username argument (PR `#18`_)
 - Password errors are shown above both password fields
