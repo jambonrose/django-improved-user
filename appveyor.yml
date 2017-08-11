@@ -35,7 +35,11 @@ environment:
     - PYTHON: "C:\\Python36"
       DJANGO: "django>=1.11,<1.12"
 
+init:
+  - "ECHO %PYTHON% %DJANGO% %%DJANGO"
+
 install:
+  - 
   - "%PYTHON%\\python.exe -m pip install -r requirements.txt"
   - "%PYTHON%\\python.exe -m pip install %DJANGO%"
 
