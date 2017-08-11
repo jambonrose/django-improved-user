@@ -2,7 +2,7 @@ Latest Release: |Version| |Tag|
 
 Compatibility: |Implementation| |Python| |Django| |License|
 
-Tests: |Build| |Coverage| |PyUp|
+Tests: |Travis| |AppVeyor| |Coverage| |PyUp|
 
 .. |Version| image:: http://img.shields.io/pypi/v/django-improved-user.svg
         :target: https://pypi.org/project/django-improved-user/
@@ -28,9 +28,13 @@ Tests: |Build| |Coverage| |PyUp|
         :target: http://opensource.org/licenses/BSD-2-Clause
         :alt: License
 
-.. |Build| image:: https://travis-ci.org/jambonsw/django-improved-user.svg?branch=development
+.. |Travis| image:: https://travis-ci.org/jambonsw/django-improved-user.svg?branch=development
         :target: https://travis-ci.org/jambonsw/django-improved-user
-        :alt: Build Status
+        :alt: Travis Build Status
+
+.. |AppVeyor| image:: https://ci.appveyor.com/api/projects/status/mfbtcx2didsjpwo7/branch/development?svg=true
+        :target: https://ci.appveyor.com/project/jambonrose/django-improved-user/branch/development
+        :alt: AppVeyor Build Status
 
 .. |Coverage| image:: https://codecov.io/gh/jambonsw/django-improved-user/branch/development/graph/badge.svg
         :target: https://codecov.io/gh/jambonsw/django-improved-user
