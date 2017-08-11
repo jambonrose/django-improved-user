@@ -1,0 +1,48 @@
+# https://www.appveyor.com/docs/appveyor-yml/
+version: '{branch}-v0.3.0-{build}'
+branches:
+  only:
+  - development
+build: off
+
+cache:
+- '%LOCALAPPDATA%\pip\Cache'
+
+image:
+- Visual Studio 2015
+- Visual Studio 2017
+
+environment:
+  matrix:
+  # http://www.appveyor.com/docs/installed-software#python
+  - PYTHON: "C:\\Python34"
+    DJANGO: "django>=1.8,<1.9"
+
+  - PYTHON: "C:\\Python34"
+    DJANGO: "django>=1.10,<1.11"
+
+  - PYTHON: "C:\\Python34"
+    DJANGO: "django>=1.11,<1.12"
+
+  - PYTHON: "C:\\Python35"
+    DJANGO: "django>=1.8,<1.9"
+
+  - PYTHON: "C:\\Python35"
+    DJANGO: "django>=1.10,<1.11"
+
+  - PYTHON: "C:\\Python35"
+    DJANGO: "django>=1.11,<1.12"
+
+  - PYTHON: "C:\\Python36"
+    DJANGO: "django>=1.11,<1.12"
+
+init:
+- echo "%DJANGO%"
+- echo "%PYTHON%"
+
+install:
+- "%PYTHON%\\python.exe -m pip install -r requirements.txt"
+- "%PYTHON%\\python.exe -m pip install \"%DJANGO%\""
+
+test_script:
+- "%PYTHON%\\python.exe setup.py test"

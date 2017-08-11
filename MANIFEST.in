@@ -4,8 +4,10 @@ include .coveragerc
 include .isort.cfg
 include .pylintrc
 include .pyup.yml
+include .travis.yml
 include HISTORY.rst
 include LICENSE
+include appveyor.yml
 include requirements.txt
 include runtests.py
 include setup.cfg
