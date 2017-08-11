@@ -41,8 +41,8 @@ init:
 - echo "%PYTHON%"
 
 install:
-- %PYTHON%\\python.exe -m pip install -r requirements.txt
-- %PYTHON%\\python.exe -m pip install "%DJANGO%"
+- "%PYTHON%\\python.exe -m pip install -r requirements.txt"
+- "%PYTHON%\\python.exe -m pip install \"%DJANGO%\""
 
 test_script:
-- %PYTHON%\\python.exe setup.py test
+- "%PYTHON%\\python.exe setup.py test"
