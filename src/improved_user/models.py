@@ -9,7 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class UserManager(BaseUserManager):
-    """Manager for Users; overrides create commands for new fieldsets"""
+    """Manager for Users; overrides create commands for new fields"""
 
     def _create_user(
             self, email, password, is_staff, is_superuser, **extra_fields):
@@ -46,12 +46,8 @@ class UserManager(BaseUserManager):
         return self._create_user(email, password, **extra_fields)
 
 
-class ImprovedIdentityMixin(models.Model):
-    """
-    A mixin class that provides an international-friendly user identity
-    """
-    full_name = models.CharField(_('full name'), max_length=200, blank=True)
-    short_name = models.CharField(_('short name'), max_length=50)
+class DjangoIntegrationMixin(models.Model):
+    """Mixin provides fields for Django integration to work correctly"""
     is_staff = models.BooleanField(
         _('staff status'),
         default=False,
@@ -68,36 +64,41 @@ class ImprovedIdentityMixin(models.Model):
     class Meta:
         abstract = True
 
+
+class FullNameMixin(models.Model):
+    """A mixin to provide an optional full name field"""
+    full_name = models.CharField(_('full name'), max_length=200, blank=True)
+
+    class Meta:
+        abstract = True
+
     def get_full_name(self):
         """Returns the full name of the user."""
         return self.full_name
+
+
+class ShortNameMixin(models.Model):
+    """A mixin to provide a non-blank short name field"""
+    short_name = models.CharField(_('short name'), max_length=50)
+
+    class Meta:
+        abstract = True
 
     def get_short_name(self):
         """Returns the short name for the user."""
         return self.short_name
 
 
-class AbstractUser(ImprovedIdentityMixin, PermissionsMixin, AbstractBaseUser):
-    """
-    An abstract base class implementing a fully featured User model with
-    admin-compliant permissions, using email as a username.
+class EmailAuthMixin(models.Model):
+    """A mixin to use email as the username"""
 
-    All fields other than email and password are optional.
-    """
     email = models.EmailField(_('email address'), max_length=254, unique=True)
 
-    objects = UserManager()
+    class Meta:
+        abstract = True
 
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'email'
-    # misnomer; fields Dj prompts for when user calls createsuperuser
-    # https://docs.djangoproject.com/en/stable/topics/auth/customizing/#django.contrib.auth.models.CustomUser.REQUIRED_FIELDS
-    REQUIRED_FIELDS = ['full_name', 'short_name']
-
-    class Meta:
-        verbose_name = _('user')
-        verbose_name_plural = _('users')
-        abstract = True
 
     def clean(self):
         super().clean()
@@ -106,6 +107,28 @@ class AbstractUser(ImprovedIdentityMixin, PermissionsMixin, AbstractBaseUser):
     def email_user(self, subject, message, from_email=None, **kwargs):
         """Sends an email to this User."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+
+# pylint: disable=too-many-ancestors
+class AbstractUser(
+        DjangoIntegrationMixin, FullNameMixin, ShortNameMixin, EmailAuthMixin,
+        PermissionsMixin, AbstractBaseUser):
+    """
+    An abstract base class implementing a fully featured User model with
+    admin-compliant permissions, using email as a username.
+
+    All fields other than email, password and short_name are optional.
+    """
+    objects = UserManager()
+
+    # misnomer; fields Dj prompts for when user calls createsuperuser
+    # https://docs.djangoproject.com/en/stable/topics/auth/customizing/#django.contrib.auth.models.CustomUser.REQUIRED_FIELDS
+    REQUIRED_FIELDS = ['full_name', 'short_name']
+
+    class Meta:
+        abstract = True
+        verbose_name = _('user')
+        verbose_name_plural = _('users')
 
 
 class User(AbstractUser):
