@@ -78,8 +78,8 @@ class FullNameMixin(models.Model):
 
 
 class ShortNameMixin(models.Model):
-    """A mixin to provide a non-blank short name field"""
-    short_name = models.CharField(_('short name'), max_length=50)
+    """A mixin to provide an optional short name field"""
+    short_name = models.CharField(_('short name'), max_length=50, blank=True)
 
     class Meta:
         abstract = True
