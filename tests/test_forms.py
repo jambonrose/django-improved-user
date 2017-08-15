@@ -48,7 +48,6 @@ class UserCreationFormTest(TestDataMixin, TestCase):
             'email': 'testclient@example.com',
             'password1': 'test123',
             'password2': 'test123',
-            'short_name': 'John',
         }
         form = UserCreationForm(data)
         self.assertFalse(form.is_valid())
@@ -61,7 +60,6 @@ class UserCreationFormTest(TestDataMixin, TestCase):
             'email': '%%%',
             'password1': 'test123',
             'password2': 'test123',
-            'short_name': 'John',
         }
         form = UserCreationForm(data)
         self.assertFalse(form.is_valid())
@@ -76,7 +74,6 @@ class UserCreationFormTest(TestDataMixin, TestCase):
             'email': 'jsmith@example.com',
             'password1': 'test123',
             'password2': 'test',
-            'short_name': 'John',
         }
         form = UserCreationForm(data)
         self.assertFalse(form.is_valid())
@@ -107,7 +104,7 @@ class UserCreationFormTest(TestDataMixin, TestCase):
         data = {
             'email': 'jsmith@example.com',
             'full_name': 'John Smith',  # optional field
-            'short_name': 'John',
+            'short_name': 'John',  # optional field
             'password1': 'test123',
             'password2': 'test123',
         }
@@ -118,6 +115,9 @@ class UserCreationFormTest(TestDataMixin, TestCase):
         user = form.save()
         self.assertEqual(password_changed.call_count, 1)
         self.assertEqual(repr(user), '<User: jsmith@example.com>')
+        self.assertEqual(user.get_short_name(), 'John')
+        self.assertEqual(user.get_full_name(), 'John Smith')
+        self.assertTrue(user.check_password('test123'))
 
     # TODO: Remove this test in favor of above after Dj1.8 dropped
     @skipUnless(
@@ -128,7 +128,7 @@ class UserCreationFormTest(TestDataMixin, TestCase):
         data = {
             'email': 'jsmith@example.com',
             'full_name': 'John Smith',  # optional field
-            'short_name': 'John',
+            'short_name': 'John',  # optional field
             'password1': 'test123',
             'password2': 'test123',
         }
@@ -136,6 +136,9 @@ class UserCreationFormTest(TestDataMixin, TestCase):
         self.assertTrue(form.is_valid())
         user = form.save()
         self.assertEqual(repr(user), '<User: jsmith@example.com>')
+        self.assertEqual(user.get_short_name(), 'John')
+        self.assertEqual(user.get_full_name(), 'John Smith')
+        self.assertTrue(user.check_password('test123'))
 
     @skipUnless(
         DjangoVersion >= (1, 9),
@@ -153,7 +156,6 @@ class UserCreationFormTest(TestDataMixin, TestCase):
             'email': 'jsmith@example.com',
             'password1': 'password',
             'password2': 'password',
-            'short_name': 'John',
         }
         form = UserCreationForm(data)
         self.assertFalse(form.is_valid())
@@ -179,7 +181,6 @@ class UserCreationFormTest(TestDataMixin, TestCase):
             'email': 'jsmith@example.com',
             'password1': 'jsmith',
             'password2': 'jsmith',
-            'short_name': 'John',
         }
         form = UserCreationForm(data)
         self.assertFalse(form.is_valid())
@@ -241,7 +242,6 @@ class UserCreationFormTest(TestDataMixin, TestCase):
             'email': 'jsmith@example.com',
             'password1': '   test password   ',
             'password2': '   test password   ',
-            'short_name': 'John',
         }
         form = UserCreationForm(data)
         self.assertTrue(form.is_valid())

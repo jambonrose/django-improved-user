@@ -33,12 +33,10 @@ class UserAdminTests(TestCase):
         cls.user1 = User.objects.create_user(
             email='testclient@example.com',
             password='password',
-            short_name='client',
         )
         cls.user2 = User.objects.create_user(
             email='staffmember@example.com',
             password='password',
-            short_name='staff',
         )
 
     def setUp(self):
@@ -136,7 +134,6 @@ class UserAdminTests(TestCase):
             reverse('auth_test_admin:improved_user_user_add'),
             {
                 'email': 'newuser@example.com',
-                'short_name': 'New User',
                 'password1': 'passw0rd1!',
                 'password2': 'passw0rd1!',
             },
@@ -147,7 +144,6 @@ class UserAdminTests(TestCase):
             User.objects.filter(email='newuser@example.com').exists())
         new_user = User.objects.get(email='newuser@example.com')
         self.assertTrue(new_user.check_password('passw0rd1!'))
-        self.assertEqual(new_user.short_name, 'New User')
 
     def test_user_change_email(self):
         """Test that user can change email in Admin"""
