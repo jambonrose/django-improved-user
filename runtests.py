@@ -4,6 +4,7 @@ import sys
 from os.path import dirname, join
 
 from django import VERSION as DjangoVersion, setup
+from django.apps import apps
 from django.conf import settings
 from django.core.management import execute_from_command_line
 
@@ -18,10 +19,8 @@ except ImportError:
     exit(-1)
 
 
-def run_test_suite(*args):
-    """Heart of script: setup Django, run tests based on args"""
-    test_args = list(args) or []
-
+def configure_django():
+    """Configure Django before tests"""
     middleware = [
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -70,8 +69,54 @@ def run_test_suite(*args):
         **middleware_kwargs  # noqa: C815
     )
     setup()
+
+
+def run_test_suite(*args):
+    """Run the test suite"""
+    test_args = list(args) or []
     execute_from_command_line(['manage.py', 'test'] + test_args)
 
 
+def check_missing_migrations():
+    """Check that user model and migration files are in sync"""
+    from django.db.migrations.autodetector import MigrationAutodetector
+    from django.db.migrations.loader import MigrationLoader
+    from django.db.migrations.state import ProjectState
+    try:
+        from django.db.migrations.questioner import (
+            NonInteractiveMigrationQuestioner as Questioner,
+        )
+    except ImportError:
+        # TODO: remove this once Dj1.8 dropped
+        from django.db.migrations.questioner import (
+            InteractiveMigrationQuestioner as Questioner,
+        )
+
+    loader = MigrationLoader(None, ignore_no_migrations=True)
+    conflicts = loader.detect_conflicts()
+    if conflicts:
+        raise Exception(
+            'Migration conflicts detected. Please fix your migrations.')
+    questioner = Questioner(dry_run=True, specified_apps=None)
+    autodetector = MigrationAutodetector(
+        loader.project_state(),
+        ProjectState.from_apps(apps),
+        questioner,
+    )
+    changes = autodetector.changes(
+        graph=loader.graph,
+        trim_to_apps=None,
+        convert_apps=None,
+        migration_name=None,
+    )
+    if changes:
+        raise Exception(
+            'Migration changes detected. '
+            'Please update or add to the migration file as appropriate')
+    print('Migration-checker detected no problems.')
+
+
 if __name__ == '__main__':
+    configure_django()
+    check_missing_migrations()
     run_test_suite(*sys.argv[1:])
