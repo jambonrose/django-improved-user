@@ -125,7 +125,11 @@ class CustomTestCommand(TestCommand):
                 self.run_tests()
 
     def run_tests(self):
-        from runtests import run_test_suite
+        from runtests import (
+            check_missing_migrations, configure_django, run_test_suite,
+        )
+        configure_django()
+        check_missing_migrations()
         run_test_suite(*self.args)
 
 
