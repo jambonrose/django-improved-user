@@ -53,46 +53,49 @@ This project provides a custom user model that improves on Django's
 default by making a few modern and international changes.
 
 * Uses email as the username to simplify login for users
-* Replace ``first_name`` and ``last_name`` with international friendly
-  ``short_name`` ``full name`` fields
+* Replace :code:`first_name` and :code:`last_name` with international
+  friendly :code:`short_name` and :code:`full_name` fields
 
 Installation
 ------------
 
-In a Terminal, use `pip` to install the package from
-[PyPI](https://pypi.org/).
+In a Terminal, use :code:`pip` to install the package from `PyPI`_.
 
 .. code:: console
 
     pip install django-improved-user
 
-If you intend to use the `UserFactory` provided by the package to allow
-for testing with [factory_boy](https://github.com/FactoryBoy/factory_boy),
-you can specify so during install.
+If you intend to use the ``UserFactory`` provided by the package to
+allow for testing with |factory_boy|_, you can specify so during
+install.
 
 .. code:: console
 
     pip install django-improved-user[factory]
 
-If you do not but wish to use the `UserFactory`, you will need to
-install [factory_boy](https://github.com/FactoryBoy/factory_boy)
-yourself.
+If you do not but wish to use the :code:`UserFactory`, you will need to
+install |factory_boy|_ yourself.
+
+.. _PyPI: https://pypi.org
+.. _factory_boy: https://github.com/FactoryBoy/factory_boy
+.. |factory_boy| replace:: :code:`factory_boy`
 
 Usage
 -----
 
 Perform the following steps in your ``settings.py`` file.
 
-1. Add ``improved_user.apps.ImprovedUserConfig``
-   (or simply ``improved_user``) to ``INSTALLED_APPS``
-2. Define or replace ``AUTH_USER_MODEL`` with he new model, as below.
+1. Add :code:`improved_user.apps.ImprovedUserConfig`
+   (or simply :code:`improved_user`) to :code:`INSTALLED_APPS`
+2. Define or replace :code:`AUTH_USER_MODEL` with he new model, as
+   below.
 
     .. code:: python
 
         AUTH_USER_MODEL='improved_user.User'
 
-3. In Django > 1.9, change ``UserAttributeSimilarityValidator`` to match
-   correct ``User`` fields, as shown below.
+3. In Django > 1.9, change :code:`UserAttributeSimilarityValidator` to
+   match correct :code:`User` fields, as shown below.
 
     .. code:: python
 
@@ -111,22 +114,22 @@ Testing
 -------
 
 To run the test suite on a single version of Django (assuming you have a
-version of Django installed), run the `runtests.py` script from the root
-of the project.
+version of Django installed), run the ``runtests.py`` script from the
+root of the project.
 
 .. code:: console
 
     $ python runtests.py
 
 You can limit the tests or pass paramaters as if you had called
-`manage.py test`.
+``manage.py test``.
 
 .. code:: console
 
     $ ./runtests.py tests.test_basic -v 3
 
 To run all linters and test multiple Python and Django versions, use
-`tox`.
+``tox``.
 
 .. code:: console
 
