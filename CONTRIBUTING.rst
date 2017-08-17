@@ -12,7 +12,7 @@ judgment, and feel free to propose changes to this document in a pull
 request.
 
 Please remember that this is a volunteer-driven project. We will look at
-the issues and pull-requests as soon as possible.
+the issues and pull requests as soon as possible.
 
 Code of Conduct
 ---------------
