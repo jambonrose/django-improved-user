@@ -57,7 +57,7 @@ Write Documentation
 The documentation aims to provide reference material, how-to guides, and
 a general tutorial for getting started with Django and
 django-improved-user. If you believe the documentation can be expanded
-or added to, your contribution would be welcome.
+or added to, your contribution would be welcomed.
 
 For more about different kinds of documentations and how to think about
 the differences, please watch `Daniele Procida's PyCon US 2017 talk`_ on
