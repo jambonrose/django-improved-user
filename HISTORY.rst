@@ -13,12 +13,12 @@ Next Release
 **Warning**: This is a **breaking change**, and migrations will conflict
 with v0.3.0 due to PR `#23`_
 
-- Add UserFactory to make testing easier for developers using the
-  pacakge; requires factory_boy (PR `#20`_)
+- Add ``UserFactory`` to make testing easier for developers using the
+  package; requires factory_boy (PR `#20`_)
 - Split the ``ImprovedIdentityMixin`` class into atomic parts:
   ``DjangoIntegrationMixin``, ``FullNameMixin``, ``ShortNameMixin``,
   ``EmailAuthMixin``.  This allows developers to create their own custom
-  AbstractUsers if needed. (PR `#22`_)
+  ``AbstractUsers`` if needed. (PR `#22`_)
 - Change ``blank`` to ``True`` on ``short_name`` field of User model.
   (**Breaking change!** PR `#23`_).
 
