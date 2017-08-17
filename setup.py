@@ -28,7 +28,11 @@ def load_file_contents(file_path, as_list=True):
         return file_pointer.read()
 
 
-LONG_DESCRIPTION = load_file_contents('README.rst', as_list=False)
+LONG_DESCRIPTION = (
+    load_file_contents('README.rst', as_list=False)
+    .split('.. end-badges')[1]  # remove badge icons at top
+    .lstrip()  # remove any extraneous spaces before title
+)
 
 
 class CustomCheckCommand(CheckCommand):
