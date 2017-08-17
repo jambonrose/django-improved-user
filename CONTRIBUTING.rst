@@ -49,7 +49,7 @@ please reach out to them to work together on the issue to avoid
 duplicating work. Note that, as volunteers, people sometime are unable
 to complete work they start, and that it is reasonable after a certain
 amount of time to assume they are no longer working on the issue. Use
-your best judgement to assess the situation.
+your best judgment to assess the situation.
 
 Write Documentation
 ~~~~~~~~~~~~~~~~~~~
