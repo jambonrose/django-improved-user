@@ -68,8 +68,8 @@ the subject.
 Your First Contribution
 ----------------------------
 
-Read to contribute? Let's get django-improved-user working on your local
-machine.
+Ready to contribute? Let's get django-improved-user working on your
+local machine.
 
 This package relies on Python, pip, and Django. Please make sure you
 have the first two installed.
