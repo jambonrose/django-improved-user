@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'improved_user.apps.ImprovedUserConfig',
+    'user_integration.apps.UserIntegrationConfig',
 ]
 
 if DjangoVersion >= (1, 10):
