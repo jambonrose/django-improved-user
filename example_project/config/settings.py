@@ -85,6 +85,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
@@ -123,6 +124,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME':  AUTH_PREFIX + 'NumericPasswordValidator',
     },
 ]
+
+ACCOUNT_ACTIVATION_DAYS = 3
 
 
 # Internationalization
