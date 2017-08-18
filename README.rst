@@ -1,5 +1,7 @@
 Latest Release: |Version| |Tag|
 
+Documentation: |StableDocs| |DevelopmentDocs|
+
 Compatibility: |Implementation| |Python| |Django| |License|
 
 Tests: |Travis| |AppVeyor| |Coverage| |PyUp|
@@ -11,6 +13,14 @@ Tests: |Travis| |AppVeyor| |Coverage| |PyUp|
 .. |Tag| image:: https://img.shields.io/github/tag/jambonsw/django-improved-user.svg
         :target: https://github.com/jambonsw/django-improved-user/releases
         :alt: Github Tag
+
+.. |StableDocs| image:: https://readthedocs.org/projects/django-improved-user/badge/?version=stable
+        :target: http://django-improved-user.readthedocs.io/en/stable/?badge=stable
+        :alt: Stable Documentation Status
+
+.. |DevelopmentDocs| image:: https://readthedocs.org/projects/django-improved-user/badge/?version=latest
+        :target: http://django-improved-user.readthedocs.io/en/latest/?badge=latest
+        :alt: Development Documentation Status
 
 .. |Implementation| image:: https://img.shields.io/pypi/implementation/django-improved-user.svg
         :target: https://pypi.python.org/pypi/django-improved-user/
