@@ -1,4 +1,5 @@
 """Test Improved User Model"""
+from datetime import datetime
 from types import MethodType
 from unittest import skipUnless
 from unittest.mock import patch
@@ -77,6 +78,16 @@ class UserModelTestCase(TestCase):
 
         user2 = User.objects.create(email='test2@example.com')
         self.assertIsNone(user2.last_login)
+
+    def test_date_joined_default(self):
+        """Check date joined set upon creation"""
+        user1 = User.objects.create(email='test1@example.com')
+        self.assertIsNotNone(user1.date_joined)
+        self.assertIsInstance(user1.date_joined, datetime)
+
+        user2 = User.objects.create(email='test2@example.com')
+        self.assertIsNotNone(user2.date_joined)
+        self.assertIsInstance(user2.date_joined, datetime)
 
     def test_user_clean_normalize_email(self):
         """User email/username is normalized upon creation"""
