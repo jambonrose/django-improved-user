@@ -1,4 +1,6 @@
 """Test User model manager"""
+from datetime import datetime
+
 from django.test import TestCase
 
 from improved_user.models import User, UserManager
@@ -93,3 +95,24 @@ class UserManagerTestCase(TestCase):
         self.assertEqual(len(password), 5)
         for char in password:
             self.assertIn(char, allowed_chars)
+
+    def test_last_login_is_none(self):
+        """Check that last login is unset when created
+
+        https://github.com/jambonsw/django-improved-user/issues/25
+        """
+        user1 = User.objects.create_user('hello@jambonsw.com', 'password1')
+        self.assertIsNone(user1.last_login)
+
+        user2 = User.objects.create_superuser('clark@kent.com', 'password1')
+        self.assertIsNone(user2.last_login)
+
+    def test_date_joined_default(self):
+        """Check date joined set upon creation"""
+        user1 = User.objects.create_user('hello@jambonsw.com', 'password1')
+        self.assertIsNotNone(user1.date_joined)
+        self.assertIsInstance(user1.date_joined, datetime)
+
+        user2 = User.objects.create_superuser('clark@kent.com', 'password1')
+        self.assertIsNotNone(user2.date_joined)
+        self.assertIsInstance(user2.date_joined, datetime)

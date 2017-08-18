@@ -20,11 +20,10 @@ class UserManager(BaseUserManager):
             raise ValueError(
                 'The Improved User model does not have a username; '
                 'it uses only email')
-        now = timezone.now()
         user = self.model(
             email=self.normalize_email(email),
             is_staff=is_staff, is_superuser=is_superuser,
-            last_login=now, date_joined=now, **extra_fields)
+            **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
