@@ -48,3 +48,29 @@ class TestViews(TestCase):
             User.objects.filter(email=email).exists())
         user = User.objects.get(email=email)
         self.assertTrue(user.check_password(password))
+
+    def test_user_login_logout(self):
+        """Simulate a user logging in and then out"""
+        email = 'hello@jambonsw.com'
+        password = 's4f3passw0rd!'
+        User = get_user_model()  # pylint: disable=invalid-name
+        User.objects.create_user(email, password)
+        self.assertTrue(User.objects.filter(email=email).exists())
+
+        # get login
+        get_response = self.client.get(reverse('auth_login'))
+        self.assertEqual(200, get_response.status_code)
+        self.assertTemplateUsed(get_response, 'registration/login.html')
+        self.assertTemplateUsed(get_response, 'base.html')
+
+        # post login
+        form_data = {
+            'username': email,
+            'password': password,
+        }
+        post_response = self.client.post(reverse('auth_login'), data=form_data)
+        self.assertRedirects(post_response, reverse('home'))
+
+        # logout
+        get_logout_response = self.client.get(reverse('auth_logout'))
+        self.assertRedirects(get_logout_response, reverse('auth_login'))
