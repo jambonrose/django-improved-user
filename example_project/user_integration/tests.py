@@ -62,6 +62,7 @@ class TestViews(TestCase):
         user = User.objects.get(email=email)
         self.assertTrue(user.check_password(password))
         self.assertFalse(user.is_active)
+        self.assertFalse(self.client.login(username=email, password=password))
 
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].to, [email])
@@ -83,6 +84,7 @@ class TestViews(TestCase):
         # reload user from DB
         user = User.objects.get(email=email)
         self.assertTrue(user.is_active)
+        self.assertTrue(self.client.login(username=email, password=password))
 
     def test_user_login_logout(self):
         """Simulate a user logging in and then out"""
