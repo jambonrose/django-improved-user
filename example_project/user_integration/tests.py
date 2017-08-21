@@ -19,6 +19,12 @@ except ImportError:  # pragma: no cover
 class TestViews(TestCase):
     """Test Registration views to ensure User integration"""
 
+    def test_home(self):
+        get_response = self.client.get(reverse('home'))
+        self.assertEqual(200, get_response.status_code)
+        self.assertTemplateUsed(get_response, 'home.html')
+        self.assertTemplateUsed(get_response, 'base.html')
+
     def test_account_registration(self):
         """Test that users can register Improved User accounts"""
         User = get_user_model()  # pylint: disable=invalid-name

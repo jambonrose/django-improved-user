@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.views.generic import TemplateView
 
 from user_integration import urls as account_urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include(account_urls)),
+    url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
 ]
