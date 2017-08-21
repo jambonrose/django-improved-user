@@ -4,7 +4,9 @@ The goal is to ensure that all views provided by registration work as
 desired with improved user. These end-to-end tests may be used on full
 sites.
 """
+from re import search as re_search
 from django.contrib.auth import get_user_model
+from django.core import mail
 from django.test import TestCase
 
 from improved_user.forms import UserCreationForm
@@ -20,21 +22,32 @@ class TestViews(TestCase):
     """Test Registration views to ensure User integration"""
 
     def test_home(self):
+        """Test that homeview returns basic template"""
         get_response = self.client.get(reverse('home'))
         self.assertEqual(200, get_response.status_code)
         self.assertTemplateUsed(get_response, 'home.html')
         self.assertTemplateUsed(get_response, 'base.html')
+
+    def test_tester(self):
+        """Ensure that tests behave as expected"""
+        email = 'hello@jambonsw.com'
+        password = 's4f3passw0rd!'
+        User = get_user_model()  # pylint: disable=invalid-name
+        User.objects.create_user(email, password)
+        self.assertTrue(self.client.login(username=email, password=password))
 
     def test_account_registration(self):
         """Test that users can register Improved User accounts"""
         User = get_user_model()  # pylint: disable=invalid-name
         email = 'hello@jambonsw.com'
         password = 's4f3passw0rd!'
+
         get_response = self.client.get(reverse('registration_register'))
         self.assertEqual(200, get_response.status_code)
         self.assertIsInstance(get_response.context['form'], UserCreationForm)
         self.assertTemplateUsed('registration/registration_form.html')
         self.assertTemplateUsed('base.html')
+
         post_response = self.client.post(
             reverse('registration_register'),
             data={
@@ -48,6 +61,28 @@ class TestViews(TestCase):
             User.objects.filter(email=email).exists())
         user = User.objects.get(email=email)
         self.assertTrue(user.check_password(password))
+        self.assertFalse(user.is_active)
+
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].to, [email])
+        self.assertEqual(
+            mail.outbox[0].subject, 'Account activation on testserver')
+        urlmatch = re_search(
+            r'https?://[^/]*(/.*activate/\S*)',
+            mail.outbox[0].body)
+        self.assertIsNotNone(urlmatch, 'No URL found in sent email')
+        url_path = urlmatch.groups()[0]
+        self.assertEqual(
+            reverse('registration_activate',
+                    kwargs={'activation_key': url_path.split('/')[3]}),
+            url_path)
+        activation_get_response = self.client.get(urlmatch.groups()[0])
+        self.assertRedirects(
+            activation_get_response,
+            reverse('registration_activation_complete'))
+        # reload user from DB
+        user = User.objects.get(email=email)
+        self.assertTrue(user.is_active)
 
     def test_user_login_logout(self):
         """Simulate a user logging in and then out"""
