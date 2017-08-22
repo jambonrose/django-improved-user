@@ -6,6 +6,7 @@ sites.
 """
 from re import search as re_search
 
+from django import VERSION as DjangoVersion
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core import mail
@@ -112,7 +113,9 @@ class TestViews(TestCase):
 
         # logout
         get_logout_response = self.client.get(reverse('auth_logout'))
-        self.assertRedirects(get_logout_response, reverse('auth_login'))
+        # TODO: remove condition when Dj 1.8 dropped
+        if DjangoVersion >= (1, 10):
+            self.assertRedirects(get_logout_response, reverse('auth_login'))
 
     def test_password_change(self):
         """Simulate a user changing their password"""
@@ -125,8 +128,8 @@ class TestViews(TestCase):
         response = self.client.get(reverse('auth_password_change'))
         self.assertRedirects(
             response,
-            f'{reverse(settings.LOGIN_URL)}'
-            f'?next={reverse("auth_password_change")}')
+            '{}?next={}'.format(
+                reverse(settings.LOGIN_URL), reverse('auth_password_change')))
         self.client.login(username=email, password=password)
         response = self.client.get(reverse('auth_password_change'))
         # WARNING:
