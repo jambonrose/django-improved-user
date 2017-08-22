@@ -5,6 +5,8 @@ desired with improved user. These end-to-end tests may be used on full
 sites.
 """
 from re import search as re_search
+
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core import mail
 from django.test import TestCase
@@ -111,3 +113,41 @@ class TestViews(TestCase):
         # logout
         get_logout_response = self.client.get(reverse('auth_logout'))
         self.assertRedirects(get_logout_response, reverse('auth_login'))
+
+    def test_password_change_get(self):
+        """Simulate a user changing their password"""
+        email = 'hello@jambonsw.com'
+        password = 's4f3passw0rd!'
+        newpassword = 'neo.h1m1tsu!'
+        User = get_user_model()  # pylint: disable=invalid-name
+        User.objects.create_user(email, password)
+
+        response = self.client.get(reverse('auth_password_change'))
+        self.assertRedirects(
+            response,
+            f'{reverse(settings.LOGIN_URL)}?next={reverse("auth_password_change")}')
+        self.client.login(username=email, password=password)
+        response = self.client.get(reverse('auth_password_change'))
+        # WARNING:
+        # this uses Django's admin template
+        # to change this behavior, place user_integration app before
+        # the admin app in the INSTALLED_APPS settings
+        self.assertTemplateUsed(response, 'registration/password_change_form.html')
+
+        data = {
+            'old_password': password,
+            'new_password1': newpassword,
+            'new_password2': newpassword,
+        }
+        response = self.client.post(reverse('auth_password_change'), data=data, follow=True)
+        self.assertRedirects(response, reverse('auth_password_change_done'))
+        self.assertEqual(response.status_code, 200)
+        # WARNING:
+        # this uses Django's admin template
+        # to change this behavior, place user_integration app before
+        # the admin app in the INSTALLED_APPS settings
+        self.assertTemplateUsed(response, 'registration/password_change_done.html')
+
+        self.client.logout()
+        self.assertTrue(
+            self.client.login(username=email, password=newpassword))
