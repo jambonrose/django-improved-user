@@ -79,7 +79,7 @@ class TestViews(TestCase):
             reverse('registration_activate',
                     kwargs={'activation_key': url_path.split('/')[3]}),
             url_path)
-        activation_get_response = self.client.get(urlmatch.groups()[0])
+        activation_get_response = self.client.get(url_path)
         self.assertRedirects(
             activation_get_response,
             reverse('registration_activation_complete'))
@@ -153,5 +153,71 @@ class TestViews(TestCase):
             response, 'registration/password_change_done.html')
 
         self.client.logout()
+        self.assertTrue(
+            self.client.login(username=email, password=newpassword))
+
+    def test_password_reset(self):
+        """Simulate a user resetting their password"""
+        email = 'hello@jambonsw.com'
+        password = 's4f3passw0rd!'
+        newpassword = 'neo.h1m1tsu!'
+        User = get_user_model()  # pylint: disable=invalid-name
+        User.objects.create_user(email, password)
+
+        response = self.client.get(reverse('auth_password_reset'))
+        self.assertEqual(response.status_code, 200)
+        # WARNING:
+        # this uses Django's admin template
+        # to change this behavior, place user_integration app before
+        # the admin app in the INSTALLED_APPS settings
+        self.assertTemplateUsed(
+            response, 'registration/password_reset_form.html')
+
+        data = {'email': email}
+        post_response = self.client.post(
+            reverse('auth_password_reset'),
+            data=data,
+            follow=True)
+        self.assertRedirects(
+            post_response, reverse('auth_password_reset_done'))
+        # WARNING:
+        # this uses Django's admin template
+        # to change this behavior, place user_integration app before
+        # the admin app in the INSTALLED_APPS settings
+        self.assertTemplateUsed(
+            post_response, 'registration/password_reset_done.html')
+
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].to, [email])
+        self.assertEqual(
+            mail.outbox[0].subject, 'Password reset on testserver')
+        urlmatch = re_search(r'https?://[^/]*(/.*reset/\S*)',
+                             mail.outbox[0].body)
+        self.assertIsNotNone(urlmatch, 'No URL found in sent email')
+
+        url_path = urlmatch.groups()[0]
+        *_, uidb64, token = filter(None, url_path.split('/'))
+        self.assertEqual(
+            reverse('auth_password_reset_confirm',
+                    kwargs={'uidb64': uidb64, 'token': token}),
+            url_path)
+        reset_get_response = self.client.get(url_path)
+        self.assertEqual(reset_get_response.status_code, 200)
+        # WARNING:
+        # this uses Django's admin template
+        # to change this behavior, place user_integration app before
+        # the admin app in the INSTALLED_APPS settings
+        self.assertTemplateUsed(
+            reset_get_response, 'registration/password_reset_confirm.html')
+
+        data = {
+            'new_password1': newpassword,
+            'new_password2': newpassword,
+        }
+        reset_post_response = self.client.post(
+            url_path, data=data, follow=True)
+        self.assertRedirects(
+            reset_post_response, reverse('auth_password_reset_complete'))
+
         self.assertTrue(
             self.client.login(username=email, password=newpassword))
