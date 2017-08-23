@@ -48,7 +48,9 @@ before_script:
 script:
 # do not use setup.py test with coverage; missing files omitted entirely
 - coverage run runtests.py
-- cd example_project && ./manage.py test
+- cd example_project
+- ./manage.py test
+- cd ..  # for coverage reports
 after_success:
 # coverage is run in parallel, so it is necessary to combine the reports
 # Note that this is only for our benefit: codecov handles this itself
