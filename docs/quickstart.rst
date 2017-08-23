@@ -16,7 +16,7 @@ In a Terminal, use :code:`pip` to install the package from `PyPI`_.
 
 .. code:: console
 
-    pip install django-improved-user
+    $ pip install django-improved-user
 
 If you intend to use the :class:`~improved_user.factories.UserFactory` provided by the package to
 allow for testing with |factory_boy|_, you can specify so during
@@ -24,7 +24,7 @@ install.
 
 .. code:: console
 
-    pip install django-improved-user[factory]
+    $ pip install django-improved-user[factory]
 
 If you do not but wish to use the :code:`UserFactory`, you will need to
 install |factory_boy|_ yourself.
