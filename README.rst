@@ -137,3 +137,10 @@ To run all linters and test multiple Python and Django versions, use
 
 You will need to install Python 3.4, 3.5, and 3.6 on your system for
 this to work.
+
+You may also limit tests to specific environments or test suites with tox. For instance:
+
+.. code:: console
+
+    $ tox -e py36-django111-unit tests.test_basic
+    $ tox -e py36-django111-integration user_integration.tests.TestViews.test_home
