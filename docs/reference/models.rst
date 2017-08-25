@@ -1,10 +1,6 @@
-#################
-Reference: Models
-#################
-
-**********
-User Model
-**********
+#####################
+Reference: User Model
+#####################
 
 .. py:class:: improved_user.models.User(email, password, short_name=None, full_name=None)
 
@@ -36,13 +32,3 @@ User Model
 
         Returns the user's
         :py:attr:`improved_user.models.User.full_name`
-
-**************
-Mixin Classes
-**************
-
-These classes are provided as tools to help build your own User models.
-
-.. autoclass:: improved_user.models.DjangoIntegrationMixin
-   :members:
-   :undoc-members:
