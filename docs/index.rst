@@ -6,6 +6,7 @@ Welcome to Django Improved User's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   data_migrations
    contributing
    reference/models
    reference/managers
