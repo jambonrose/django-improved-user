@@ -7,6 +7,9 @@ Welcome to Django Improved User's documentation!
    :caption: Contents:
 
    contributing
+   reference/models
+   reference/managers
+   reference/forms
 
 
 
