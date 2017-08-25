@@ -2,24 +2,24 @@
 Reference: improved\_user package
 #################################
 
-**********
-Submodules
-**********
+.. toctree::
+   :caption: Package Reference Contents:
+   :glob:
+   :maxdepth: 2
 
-improved\_user\.admin module
-----------------------------
+   models
+   managers
+   forms
+   factories
+   admin
+   mixin_models
 
-.. automodule:: improved_user.admin
 
 improved\_user\.apps module
 ---------------------------
 
 .. automodule:: improved_user.apps
 
-improved\_user\.forms module
-----------------------------
-
-.. automodule:: improved_user.forms
 
 improved\_user\.models module
 -----------------------------

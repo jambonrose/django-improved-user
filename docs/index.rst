@@ -10,7 +10,6 @@ Welcome to Django Improved User's documentation!
    data_migrations
    contributing
    source/modules
-   reference/*
 
 
 

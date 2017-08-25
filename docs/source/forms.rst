@@ -1,6 +1,6 @@
-################
-Reference: Forms
-################
+#####
+Forms
+#####
 
 .. automodule:: improved_user.forms
     :members:
