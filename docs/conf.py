@@ -19,12 +19,15 @@ add these directories to sys.path here. If the directory is relative to the
 documentation root, use os.path.abspath to make it absolute, like shown here.
 """
 
+import inspect
 import sys
 from os.path import abspath, join
 
 import sphinx_rtd_theme  # noqa: F401
 from django import setup as django_setup
 from django.conf import settings as django_settings
+from django.utils.encoding import force_text
+from django.utils.html import strip_tags
 
 sys.path.insert(0, abspath(join('..', 'src')))
 django_settings.configure(
@@ -38,6 +41,50 @@ django_settings.configure(
     ],
 )
 django_setup()
+
+
+def process_docstring(app, what, name, obj, options, lines):
+    # https://djangosnippets.org/snippets/2533/
+    # https://gist.github.com/abulka/48b54ea4cbc7eb014308
+    from django.db import models
+
+    if inspect.isclass(obj) and issubclass(obj, models.Model):
+        for field in obj._meta.get_fields():
+            # skips ManyToOneRel and ManyToManyRel fields
+            if (not hasattr(field, 'verbose_name')
+                    and not hasattr(field, 'help_text')):
+                continue
+
+            if field.help_text:
+                # Decode and strip any html out of the field's help text
+                help_text = strip_tags(force_text(field.help_text))
+            else:
+                help_text = force_text(field.verbose_name).capitalize()
+            # Add the model field to the end of the docstring as a param
+            # using the verbose name as the description
+            lines.append(u':param %s: %s' % (field.attname, help_text))
+
+            # Add the field's type to the docstring
+            if isinstance(field, models.ForeignKey):
+                to = field.rel.to
+                lines.append(
+                    u':type %s: %s to :class:`~%s.%s`'
+                    % (field.attname,
+                       type(field).__name__,
+                       to.__module__,
+                       to.__name__))
+            else:
+                lines.append(
+                    u':type %s: %s'
+                    % (field.attname, type(field).__name__))
+
+    # Return the extended docstring
+    return lines
+
+
+def setup(app):
+    # Register the docstring processor with sphinx
+    app.connect('autodoc-process-docstring', process_docstring)
 
 
 # -- General configuration ------------------------------------------------
