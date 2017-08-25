@@ -19,12 +19,26 @@ add these directories to sys.path here. If the directory is relative to the
 documentation root, use os.path.abspath to make it absolute, like shown here.
 """
 
-import os
 import sys
+from os.path import abspath, join
 
 import sphinx_rtd_theme  # noqa: F401
+from django import setup as django_setup
+from django.conf import settings as django_settings
 
-sys.path.insert(0, os.path.abspath('.'))
+sys.path.insert(0, abspath(join('..', 'src')))
+django_settings.configure(
+    INSTALLED_APPS=[
+        'django.contrib.admin',
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.sessions',
+        'django.contrib.sites',
+        'improved_user.apps.ImprovedUserConfig',
+    ],
+)
+django_setup()
+
 
 # -- General configuration ------------------------------------------------
 
@@ -35,7 +49,18 @@ sys.path.insert(0, os.path.abspath('.'))
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode']
+extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.intersphinx',
+    'sphinx.ext.viewcode',
+]
+
+intersphinx_mapping = {
+    'django': (
+        'http://docs.djangoproject.com/en/stable/',
+        'http://docs.djangoproject.com/en/stable/_objects/',
+    ),
+}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
