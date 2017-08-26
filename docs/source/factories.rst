@@ -1,8 +1,7 @@
-#########################
-Reference: Test Factories
-#########################
+##############
+Test Factories
+##############
 
 .. automodule:: improved_user.factories
     :members:
-    :undoc-members:
     :show-inheritance:

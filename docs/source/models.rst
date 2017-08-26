@@ -1,34 +1,9 @@
-#####################
-Reference: User Model
-#####################
+###################
+Improved User Model
+###################
 
-.. py:class:: improved_user.models.User(email, password, short_name=None, full_name=None)
-
-    The Improved User model itself. Do not import this model directly.
-    Instead, please use :py:func:`~django.contrib.auth.get_user_model`.
-
-    .. py:attribute:: email
-
-        Django EmailField. Required.
-
-    .. py:attribute:: password
-
-        Django CharField with max 128 chararcters. Required. 
-
-    .. py:attribute:: short_name
-
-        A string to use when addressing the user casually. Optional.
-
-    .. py:attribute:: full_name
-
-        A string to use when addressing the user formally. Optional.
-
-    .. py:method:: get_short_name()
-
-        Returns the user's
-        :py:attr:`improved_user.models.User.short_name`
-
-    .. py:method:: get_full_name()
-
-        Returns the user's
-        :py:attr:`improved_user.models.User.full_name`
+.. autoclass:: improved_user.models.User(email, password, short_name=None, full_name=None)
+   :members: check_password, clean, email_user, get_full_name, get_short_name,
+             get_username, has_module_perms, has_perm, has_perms,
+             is_anonymous, is_authenticated, refresh_from_db
+   :show-inheritance:

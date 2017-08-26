@@ -12,7 +12,19 @@ except (ImportError, ModuleNotFoundError):  # pragma: no cover
 
 # pylint: disable=too-few-public-methods
 class UserFactory(DjangoModelFactory):
-    """Factory Boy factory for Improved User"""
+    """Factory Boy factory for Improved User
+
+    Generates a user with a default password of ``password!``.
+    The user is active, but is not staff or a superuser.
+    Any value can be overridden by passing in a value, as shown below.
+
+    .. code:: python
+
+        UserFactory(
+            password='mys3cr3tp4ssw0rd!',
+            is_superuser=True,
+        )
+    """
     class Meta:
         """Configuration Options"""
         model = User

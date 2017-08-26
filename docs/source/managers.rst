@@ -1,8 +1,6 @@
-###################
-Reference: Managers
-###################
-
-
+########
+Managers
+########
 
 .. autoclass:: improved_user.models.UserManager
    :members:
