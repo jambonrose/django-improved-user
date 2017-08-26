@@ -21,6 +21,16 @@ except ImportError:  # pragma: no cover
     from django.core.urlresolvers import reverse
 
 
+class TestDataMigration(TestCase):
+    """Test that the Improved User may be used in data migrations"""
+
+    def test_user_exists(self):
+        """Check UserManager properly created user"""
+        User = get_user_model()  # pylint: disable=invalid-name
+        self.assertTrue(
+            User.objects.filter(email='migrated@jambonsw.com').exists())
+
+
 class TestViews(TestCase):
     """Test Registration views to ensure User integration"""
 

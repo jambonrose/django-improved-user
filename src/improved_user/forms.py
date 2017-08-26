@@ -84,8 +84,7 @@ class AbstractUserCreationForm(forms.ModelForm):
         return password2
 
     def _post_clean(self):
-        """
-        Run password validaton after clean methods
+        """Run password validaton after clean methods
 
         When clean methods are run, the user instance does not yet
         exist.  To properly compare model values agains the password (in
@@ -139,8 +138,7 @@ class UserCreationForm(AbstractUserCreationForm):
         fields = ('email', 'full_name', 'short_name')
 
     def clean_email(self):
-        """
-        Clean email; set nice error message
+        """Clean email; set nice error message
 
         Since User.email is unique, this check is redundant,
         but it sets a nicer error message than the ORM. See #13147.
@@ -202,7 +200,8 @@ class AbstractUserChangeForm(forms.ModelForm):
         return '../password/'
 
     def clean_password(self):
-        """
+        """Change user info; not the password
+
         We seek to change the user, but not the password.
         Regardless of what the user provides, return the initial value.
         This is done here, rather than on the field, because the

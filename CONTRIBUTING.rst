@@ -14,6 +14,9 @@ request.
 Please remember that this is a volunteer-driven project. We will look at
 the issues and pull requests as soon as possible.
 
+.. contents::
+   :local:
+
 Code of Conduct
 ---------------
 

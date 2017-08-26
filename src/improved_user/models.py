@@ -9,7 +9,19 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class UserManager(BaseUserManager):
-    """Manager for Users; overrides create commands for new fields"""
+    """Manager for Users; overrides create commands for new fields
+
+    Meant to be interacted with via the user model.
+
+    .. code:: python
+
+        User.objects  # the UserManager
+        User.objects.all()  # has normal Manager/UserManager methods
+        User.objects.create_user  # overrides methods for Improved User
+
+    Set to :attr:`~django.db.models.Model.objects` by
+    :attr:`~improved_user.models.AbstractUser`
+    """
 
     def _create_user(
             self, email, password, is_staff, is_superuser, **extra_fields):
@@ -46,7 +58,11 @@ class UserManager(BaseUserManager):
 
 
 class DjangoIntegrationMixin(models.Model):
-    """Mixin provides fields for Django integration to work correctly"""
+    """Mixin provides fields for Django integration to work correctly
+
+    Provides permissions for Django Admin integration, as well as date
+    field used by authentication code.
+    """
     is_staff = models.BooleanField(
         _('staff status'),
         default=False,
@@ -100,6 +116,11 @@ class EmailAuthMixin(models.Model):
     USERNAME_FIELD = 'email'
 
     def clean(self):
+        """Override default clean method to normalize email.
+
+        Call :code:`super().clean()` if overriding.
+
+        """
         super().clean()
         self.email = self.__class__.objects.normalize_email(self.email)
 
@@ -113,10 +134,23 @@ class AbstractUser(
         DjangoIntegrationMixin, FullNameMixin, ShortNameMixin, EmailAuthMixin,
         PermissionsMixin, AbstractBaseUser):
     """
-    An abstract base class implementing a fully featured User model with
-    admin-compliant permissions, using email as a username.
+    An abstract base class meant to be inherited (do not instantiate
+    this). The class provides a fully featured User model with
+    admin-compliant permissions. Differs from Django's
+    :class:`~django.contrib.auth.models.AbstractUser`:
 
-    All fields other than email, password and short_name are optional.
+    1. Login occurs with an email and password instead of username.
+    2. Provides short_name and full_name instead of first_name and
+       last_name.
+
+    All fields other than email and password are optional.
+
+    Sets :attr:`~django.db.models.Model.objects` to
+    :class:`~improved_user.models.UserManager`.
+
+    Documentation about Django's
+    :class:`~django.contrib.auth.models.AbstractBaseUser` may be helpful
+    in understanding this class.
     """
     objects = UserManager()
 
@@ -131,7 +165,8 @@ class AbstractUser(
 
 
 class User(AbstractUser):
-    """
-    The abstract base class exists so that it can be easily extended, but
-    this class is the one that should be instantiated.
+    """The Improved User Model is intended to be used out-of-the-box.
+
+    Do **not** import this model directly: use
+    :py:func:`~django.contrib.auth.get_user_model`.
     """
