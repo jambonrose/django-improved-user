@@ -7,6 +7,8 @@ Welcome to Django Improved User's documentation!
    :glob:
    :maxdepth: 3
 
+   quickstart
+   testing
    data_migrations
    contributing
    source/modules
