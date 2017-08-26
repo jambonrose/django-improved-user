@@ -27,3 +27,4 @@ are split into two to best reflect those differences.
    factories
    admin
    mixin_models
+   mixin_forms

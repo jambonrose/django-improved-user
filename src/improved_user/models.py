@@ -58,7 +58,11 @@ class UserManager(BaseUserManager):
 
 
 class DjangoIntegrationMixin(models.Model):
-    """Mixin provides fields for Django integration to work correctly"""
+    """Mixin provides fields for Django integration to work correctly
+
+    Provides permissions for Django Admin integration, as well as date
+    field used by authentication code.
+    """
     is_staff = models.BooleanField(
         _('staff status'),
         default=False,
