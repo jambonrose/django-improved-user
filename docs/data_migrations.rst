@@ -2,11 +2,12 @@
 How To: Use Improved User in Data Migrations
 ############################################
 
-Creating users in migrations is **discouraged** as doing so represents a
-potential **security risk**, as passwords are stored in plaintext in the
-migration. However, doing so in proof-of-concepts or in special cases
-may be necessary, and the steps below will demonstrate how to create and
-remove new users in a Django data migration.
+Creating users in :ref:`data migrations <django:data-migrations>` is
+**discouraged** as doing so represents a potential **security risk**, as
+passwords are stored in plaintext in the migration. However, doing so in
+proof-of-concepts or in special cases may be necessary, and the steps
+below will demonstrate how to create and remove new users in a Django
+data migration.
 
 The ``django-improved-user`` package intentionally disallows use of
 :py:class:`~improved_user.models.UserManager` in data migrations (we
@@ -37,8 +38,10 @@ We start by importing the necessary tools
 .. literalinclude:: ../example_project/user_integration/migrations/0001_add_user.py
     :lines: 1-3
 
-We will use :class:`RunPython` to run our code. To start, we write
-a function to create a new user.
+We will use :py:class:`~django.db.migrations.operations.RunPython` to
+run our code. :py:class:`~django.db.migrations.operations.RunPython`
+expects two functions with specific parameters. Our first function
+creates a new user.
 
 .. literalinclude:: ../example_project/user_integration/migrations/0001_add_user.py
     :pyobject: add_user
@@ -49,17 +52,19 @@ is not validated or normalized. What's more, the :code:`password` field
 is not validated against the project's password validators. **It is up
 to the developer coding the migration file to provide proper values.**
 
-We then write a function to reverse this new change, just in case we
-need to undo our migration.
+The second function is technically optional, but providing one makes our
+lives easier and is considered best-practice. This function undoes the
+first, and deletes the user we created.
 
 .. literalinclude:: ../example_project/user_integration/migrations/0001_add_user.py
     :pyobject: remove_user
 
-Finally, we use our migration functions in a
-:py:class:`django:django.db.migrations.Migration`
-subclass. Please note the *addition* of the dependency below. If your
-file already had a dependency, please add the tuple below, but do not
-remove the existing tuple(s).
+Finally, we use our migration functions via
+:py:class:`~django.db.migrations.operations.RunPython` in a
+:py:class:`django:django.db.migrations.Migration` subclass.  Please note
+the *addition* of the dependency below. If your file already had a
+dependency, please add the tuple below, but do not remove the existing
+tuple(s).
 
 .. literalinclude:: ../example_project/user_integration/migrations/0001_add_user.py
     :pyobject: Migration
@@ -68,3 +73,7 @@ The final migration file is printed in totality below.
 
 .. literalinclude:: ../example_project/user_integration/migrations/0001_add_user.py
     :linenos:
+
+You may wish to read more about :ref:`Django Data Migrations
+<django:data-migrations>` and
+:py:class:`~django.db.migrations.operations.RunPython`.
