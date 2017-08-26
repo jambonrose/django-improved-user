@@ -7,6 +7,27 @@ Next Release
 
 - Nothing yet!
 
+0.5.0 (2017-08-26)
+------------------
+
+- Provide documentation for the package. This includes Sphinx
+  documentation hosted on ReadTheDocs.org, (`#26`_, `#29`_), but also
+  documents to help contribute to github more easily (`#26`_) as well as
+  a code of conduct (`#26`_). The Read Me includes badges (`#26`_).
+- In the event the documentation isn't enough, the project now includes
+  an example project demonstrating integration of django-improved-user
+  with Django as well as django-registration. (`#28`_) This content is
+  used to create some of the documentation (`#29`_).
+- The ``UserManager`` was setting the ``last_login`` attribute of new users at
+  creation time. Reported in `#25`_, fixed in `#27`_ (``last_login`` is left
+  blank until the user actually logs in).
+
+.. _#25: https://github.com/jambonsw/django-improved-user/issues/25
+.. _#26: https://github.com/jambonsw/django-improved-user/pull/26
+.. _#27: https://github.com/jambonsw/django-improved-user/pull/27
+.. _#28: https://github.com/jambonsw/django-improved-user/pull/28
+.. _#29: https://github.com/jambonsw/django-improved-user/pull/29
+
 0.4.0 (2017-08-14)
 ------------------
 
