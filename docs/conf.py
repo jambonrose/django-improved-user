@@ -77,6 +77,7 @@ def process_docstring(app, what, name, obj, options, lines):
     # https://djangosnippets.org/snippets/2533/
     # https://gist.github.com/abulka/48b54ea4cbc7eb014308
     from django.db import models
+    from django.forms import BaseForm
 
     if inspect.isclass(obj) and issubclass(obj, models.Model):
         sorted_fields = sorted(obj._meta.get_fields(), key=attrgetter('name'))
@@ -90,6 +91,24 @@ def process_docstring(app, what, name, obj, options, lines):
 
         for field in regular_fields:
             lines = annotate_field(lines, field, models)
+    elif inspect.isclass(obj) and issubclass(obj, BaseForm):
+        form = obj
+        for field_name in form.base_fields:
+            field = form.base_fields[field_name]
+            if field.help_text:
+                # Decode and strip any html out of the field's help text
+                help_text = strip_tags(force_text(field.help_text))
+            else:
+                help_text = force_text(field.label).capitalize()
+            lines.append(u':param %s: %s' % (field_name, help_text))
+            if field.widget.is_hidden:
+                lines.append(
+                    u':type %s: (Hidden) %s'
+                    % (field_name, type(field).__name__))
+            else:
+                lines.append(
+                    u':type %s: %s'
+                    % (field_name, type(field).__name__))
 
     # Return the extended docstring
     return lines
