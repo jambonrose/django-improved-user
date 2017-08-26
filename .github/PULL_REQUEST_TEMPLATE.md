@@ -1,6 +1,6 @@
 <!--
 
-Thank you for submitting a pull request (PR)! :tada::+1:
+Thank you for submitting a pull request (PR)! 🎉👍
 
 Remember that this is a volunteer-driven project. To help review your PR, please read the following guidelines.
 
