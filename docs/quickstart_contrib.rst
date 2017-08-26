@@ -1,8 +1,8 @@
-##################
-Testing Quickstart
-##################
+########################
+Quickstart: Contributing
+########################
 
-This document assumes that you have forked and clones the repository,
+This document assumes that you have forked and cloned the repository,
 and that you seek to work on the package locally. If you are unsure how
 to do this, please see the :doc:`contributing` documentation.
 
@@ -41,3 +41,14 @@ You may also limit tests to specific environments or test suites with tox. For i
 
     $ tox -e py36-django111-unit tests.test_basic
     $ tox -e py36-django111-integration user_integration.tests.TestViews.test_home
+
+Any change to the code should first be discussed in an issue.
+
+For any changes, please create a new branch, make your changes, and open
+a pull request on github agains the ``development`` branch. Refer to the
+issue you are fixing or building. To make review of the PR easier,
+please commit small, targeted changes.  Multiple small commits with
+clear commit messages make reviewing changes easier. Rebasing your
+branch to help clean up your changes is encouraged. Please remember that
+this is a volunteer-driven project; we will look at your PR as soon as
+possible.

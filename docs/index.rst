@@ -8,7 +8,7 @@ Welcome to Django Improved User's documentation!
    :maxdepth: 3
 
    quickstart
-   testing
+   quickstart_contrib
    data_migrations
    contributing
    source/modules

@@ -1,8 +1,9 @@
-##########
-Quickstart
-##########
+###############################
+Quickstart: Using Improved User
+###############################
 
-This document provides the least amount of info to get started.
+This document provides the least amount of info to get started with the
+package.
 
 .. contents::
    :local:
