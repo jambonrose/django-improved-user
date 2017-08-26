@@ -5,7 +5,7 @@ Welcome to Django Improved User's documentation!
 .. toctree::
    :caption: Contents:
    :glob:
-   :maxdepth: 2
+   :maxdepth: 3
 
    data_migrations
    contributing
