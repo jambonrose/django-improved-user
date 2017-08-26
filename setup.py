@@ -139,7 +139,7 @@ class CustomTestCommand(TestCommand):
 
 setup(
     name='django-improved-user',
-    version='0.4.0',
+    version='0.5.0',
     description=(
         'A custom Django user model for best practices email-based login.'
     ),
@@ -171,7 +171,7 @@ setup(
     ),
     license='Simplified BSD License',
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
