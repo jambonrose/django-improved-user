@@ -70,5 +70,5 @@ For information about getting started, please refer to the `quickstart
 documentation`_. For information about how to help with the project,
 please see the `contributing documentation`_.
 
-.. _contributing documentation: https://django-improved-user.readthedocs.io/en/development/contributing.html
-.. _quickstart documentation: https://django-improved-user.readthedocs.io/en/development/quickstart.html
+.. _contributing documentation: https://django-improved-user.readthedocs.io/en/latest/contributing.html
+.. _quickstart documentation: https://django-improved-user.readthedocs.io/en/stable/quickstart.html
