@@ -2,6 +2,7 @@ bumpversion==0.5.3
 check-manifest==0.35
 coverage==4.4.1
 django-registration==2.2
+Django==1.11.4
 docutils==0.14
 factory_boy==2.9.2
 Faker==0.7.18
