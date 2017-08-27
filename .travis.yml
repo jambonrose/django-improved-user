@@ -50,7 +50,7 @@ script:
 - coverage run runtests.py
 - cd example_project
 - ./manage.py test
-- cd docs
+- cd ../docs
 - if [[ `python -V | grep -c -e 3.6` -eq 1 && "$DJANGO" == 'django>=1.11,<1.12' ]]; then sphinx-build -nW -b html -d _build/doctrees . _build/html ; fi
 - cd ..  # for coverage reports
 after_success:
