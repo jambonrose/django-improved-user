@@ -61,10 +61,9 @@ first, and deletes the user we created.
 
 Finally, we use our migration functions via
 :py:class:`~django.db.migrations.operations.RunPython` in a
-:py:class:`django:django.db.migrations.Migration` subclass.  Please note
-the *addition* of the dependency below. If your file already had a
-dependency, please add the tuple below, but do not remove the existing
-tuple(s).
+``django.db.migrations.Migration`` subclass.  Please note the *addition*
+of the dependency below. If your file already had a dependency, please
+add the tuple below, but do not remove the existing tuple(s).
 
 .. literalinclude:: ../example_project/user_integration/migrations/0001_add_user.py
     :pyobject: Migration

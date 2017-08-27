@@ -1,6 +1,6 @@
 Latest Release: |Version| |Tag|
 
-Documentation: |StableDocs| |DevelopmentDocs|
+Documentation: |DevelopmentDocs|
 
 Compatibility: |Implementation| |Python| |Django| |License|
 
@@ -14,9 +14,9 @@ Tests: |Travis| |AppVeyor| |Coverage| |PyUp|
         :target: https://github.com/jambonsw/django-improved-user/releases
         :alt: Github Tag
 
-.. |StableDocs| image:: https://readthedocs.org/projects/django-improved-user/badge/?version=stable
-        :target: http://django-improved-user.readthedocs.io/en/stable/?badge=stable
-        :alt: Stable Documentation Status
+.. .. |StableDocs| image:: https://readthedocs.org/projects/django-improved-user/badge/?version=stable
+..         :target: http://django-improved-user.readthedocs.io/en/stable/?badge=stable
+..         :alt: Stable Documentation Status
 
 .. |DevelopmentDocs| image:: https://readthedocs.org/projects/django-improved-user/badge/?version=latest
         :target: http://django-improved-user.readthedocs.io/en/latest/?badge=latest
@@ -71,4 +71,4 @@ documentation`_. For information about how to help with the project,
 please see the `contributing documentation`_.
 
 .. _contributing documentation: https://django-improved-user.readthedocs.io/en/latest/contributing.html
-.. _quickstart documentation: https://django-improved-user.readthedocs.io/en/stable/quickstart.html
+.. _quickstart documentation: https://django-improved-user.readthedocs.io/en/latest/quickstart.html
