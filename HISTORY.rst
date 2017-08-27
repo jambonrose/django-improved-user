@@ -7,6 +7,16 @@ Next Release
 
 - Nothing yet!
 
+0.5.1 (2017-08-27)
+------------------
+
+- Docfix: Remove links to ReadTheDocs Stable version from ReadMe, as we
+  are unable to build that version until v1.0.0 release. See
+  `rtfd/readthedocs.org#2032`_ for more information. (`#31`_)
+
+.. _rtfd/readthedocs.org#2032: https://github.com/rtfd/readthedocs.org/issues/2032
+.. _#31: https://github.com/jambonsw/django-improved-user/pull/31
+
 0.5.0 (2017-08-26)
 ------------------
 
@@ -18,9 +28,9 @@ Next Release
   an example project demonstrating integration of django-improved-user
   with Django as well as django-registration. (`#28`_) This content is
   used to create some of the documentation (`#29`_).
-- The ``UserManager`` was setting the ``last_login`` attribute of new users at
-  creation time. Reported in `#25`_, fixed in `#27`_ (``last_login`` is left
-  blank until the user actually logs in).
+- Bugfix: The ``UserManager`` was setting the ``last_login`` attribute
+  of new users at creation time. Reported in `#25`_, fixed in `#27`_
+  (``last_login`` is ``None`` until the user actually logs in).
 
 .. _#25: https://github.com/jambonsw/django-improved-user/issues/25
 .. _#26: https://github.com/jambonsw/django-improved-user/pull/26
