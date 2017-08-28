@@ -7,6 +7,17 @@ Next Release
 
 - Nothing yet!
 
+0.5.2 (2017-08-27)
+------------------
+
+- Change `package PyPI`_ license identifier for better information on
+  `djangopackages.org detail page`_. See
+  `djangopackages/djangopackages#483`_ for more information.
+
+.. _package PyPI: https://pypi.python.org/pypi/django-improved-user
+.. _djangopackages.org detail page: https://djangopackages.org/packages/p/django-improved-user/
+.. _djangopackages/djangopackages#483: https://github.com/djangopackages/djangopackages/issues/483
+
 0.5.1 (2017-08-27)
 ------------------
 
