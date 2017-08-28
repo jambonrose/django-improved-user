@@ -12,6 +12,7 @@ Welcome to Django Improved User's documentation!
    data_migrations
    contributing
    source/modules
+   change_log
 
 
 

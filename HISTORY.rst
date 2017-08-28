@@ -5,7 +5,7 @@ History
 Next Release
 ------------
 
-- Nothing yet!
+- Include history of changes in online documentation.
 
 0.5.2 (2017-08-27)
 ------------------
