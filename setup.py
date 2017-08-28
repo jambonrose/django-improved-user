@@ -169,7 +169,7 @@ setup(
         'Russell Keith-Magee, '
         'Andrew Pinkham'
     ),
-    license='Simplified BSD License',
+    license='BSD License',
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
