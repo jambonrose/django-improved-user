@@ -5,9 +5,16 @@ History
 Next Release
 ------------
 
-- Include history of changes in online documentation.
-- Write documentation about why and how the project was built
-- Add section about contributing documentation.
+- Nothing yet!
+
+0.5.3 (2017-08-29)
+------------------
+
+- Include history of changes in online documentation. (`#34`_)
+- Write documentation about why and how the project was built. (`#34`_)
+- Add section about contributing documentation. (`#34`_)
+
+.. _#34: https://github.com/jambonsw/django-improved-user/pull/34
 
 0.5.2 (2017-08-27)
 ------------------
