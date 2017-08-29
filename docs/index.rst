@@ -9,9 +9,11 @@ Welcome to Django Improved User's documentation!
 
    quickstart
    quickstart_contrib
+   rationale
    data_migrations
    contributing
    source/modules
+   change_log
 
 
 
