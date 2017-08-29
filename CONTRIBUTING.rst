@@ -54,13 +54,17 @@ to complete work they start, and that it is reasonable after a certain
 amount of time to assume they are no longer working on the issue. Use
 your best judgment to assess the situation.
 
-Write Documentation
-~~~~~~~~~~~~~~~~~~~
+Write (or Request) Documentation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The documentation aims to provide reference material, how-to guides, and
 a general tutorial for getting started with Django and
 django-improved-user. If you believe the documentation can be expanded
 or added to, your contribution would be welcomed.
+
+If you are running into a problem, and believe that some documentation
+could clarify the problem (or the solution!) please feel free to request
+documentation on the `Github issue tracker`_.
 
 For more about different kinds of documentations and how to think about
 the differences, please watch `Daniele Procida's PyCon US 2017 talk`_ on
@@ -174,5 +178,67 @@ review your code.
 
 Congratulations on opening a pull request! 🎉
 
+Your First Documentation Contribution
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    If it isn't documented, it doesn't exist.
+
+    — `Mike Pope`_
+
+.. _Mike Pope: http://www.mikepope.com/blog/DisplayBlog.aspx?permalink=1680
+
+Documentation is crucial, and I am thrilled to get your help writing it!
+
+All of the documentation is written in `reStructuredText`_, sometimes
+called *rst*. Some of the documents (such as this one!) are in the root
+of the `Github`_ project, but the vast majority exist in the ``docs``
+directory. The documents found in this directory are compiled to HTML by
+`Sphinx`_ (which has a `primer on rst`_).
+
+You may use the ``Makefile`` in the ``docs`` directory to run Sphinx.
+
+.. code:: console
+
+    $ cd docs
+    $ make clean && make html
+
+If you browse to ``_build/html`` (within the ``docs`` directory), you'll
+find a local build of all the documentation! Open any of the HTML files
+in a browser to read the documentation.
+
+Alternatively, you can use ``tox`` to build the documentation (requires
+that Python 3.6 be installed). This is more of a check, as navigating to
+the built files is less easy.
+
+.. code:: console
+
+    $ tox -e docs
+
+The documentation automatically builds reference documentation for the
+project. To update these reference documents, you will need to change
+the Python docstrings in the code itself. Corrections and expansions to
+existing docs, as well as new tutorials and how-to guides are welcome
+additions. If you had a pain point while using this project, and you
+would like to add to an existing document or else to write a new one,
+you are encouraged to do it!
+
+If you run into an problems or have a question, please ask it on the
+`Github issue tracker`_ (after making sure someone hasn't already asked
+and answered the question!).
+
+Once you have made changes to the documents in question, you'll want to
+make sure that Sphinx builds the documentation without any errors.
+
+Commit your changes, and push them to your local branch. Using the
+Github interface, open a pull request to the development branch in the
+main repository!  Please follow all of the instructions in the pull
+request textfield when doing so, as it will help us understand and
+review your code.
+
+Congratulations on opening a pull request! 🎉
+
 .. _Github issue tracker: https://github.com/jambonsw/django-improved-user/issues
 .. _Github: https://github.com/jambonsw/django-improved-user
+.. _primer on rst: http://www.sphinx-doc.org/en/stable/rest.html#rst-primer
+.. _reStructuredText: http://docutils.sourceforge.net/rst.html
+.. _Sphinx: http://www.sphinx-doc.org/

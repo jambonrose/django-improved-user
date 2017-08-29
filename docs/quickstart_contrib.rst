@@ -2,6 +2,8 @@
 Quickstart: Contributing
 ########################
 
+First off, thanks for taking the time to contribute! ✨🎉
+
 This document assumes that you have forked and cloned the repository,
 and that you seek to work on the package locally. If you are unsure how
 to do this, please see the :doc:`contributing` documentation.

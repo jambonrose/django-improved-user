@@ -7,6 +7,7 @@ Next Release
 
 - Include history of changes in online documentation.
 - Write documentation about why and how the project was built
+- Add section about contributing documentation.
 
 0.5.2 (2017-08-27)
 ------------------
