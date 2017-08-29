@@ -32,7 +32,7 @@ Using the Package
 *****************
 
 If you seek to use the package directly, :py:mod:`~improved_user.models`
-provides the :py:class:`~improved_user.models.User` (connect to the
+provides the :py:class:`~improved_user.models.User` (connected to the
 :py:class:`~improved_user.models.UserManager`) and
 :py:mod:`~improved_user.forms` provides
 :py:class:`~improved_user.forms.UserCreationForm` and
