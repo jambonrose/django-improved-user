@@ -13,7 +13,7 @@ Pygments==2.2.0
 pylint-django==0.7.2
 pylint==1.7.2
 python-dateutil==2.6.1
-setuptools==36.3.0
+setuptools==36.4.0
 sphinx-rtd-theme==0.2.4
 Sphinx==1.6.3
 tox==2.7.0
