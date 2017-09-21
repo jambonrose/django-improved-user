@@ -18,4 +18,4 @@ sphinx-rtd-theme==0.2.4
 Sphinx==1.6.3
 tox==2.8.2
 twine==1.9.1
-wheel==0.29.0
+wheel==0.30.0
