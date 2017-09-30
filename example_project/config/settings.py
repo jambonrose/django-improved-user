@@ -105,7 +105,7 @@ DATABASES = {
 AUTH_USER_MODEL = 'improved_user.User'
 
 LOGIN_REDIRECT_URL = 'home'
-LOGIN_URL = LOGOUT_REDIRECT_URL = 'auth_login'
+LOGIN_URL = LOGOUT_REDIRECT_URL = 'login'
 
 AUTH_PREFIX = 'django.contrib.auth.password_validation.'
 AUTH_PASSWORD_VALIDATORS = [
