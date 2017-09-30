@@ -1,1 +1,2 @@
+django-extensions==1.9.1
 django-registration==2.2
