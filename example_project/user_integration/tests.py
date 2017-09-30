@@ -15,10 +15,16 @@ from django.test import TestCase
 from improved_user.forms import UserCreationForm
 
 # TODO: remove the conditional import when Dj 1.10 dropped
+# pylint: disable=ungrouped-imports
 try:
-    from django.urls import reverse  # pylint: disable=ungrouped-imports
+    from django.contrib.auth.views import (
+        INTERNAL_RESET_URL_TOKEN,
+    )
+    from django.urls import reverse
 except ImportError:  # pragma: no cover
     from django.core.urlresolvers import reverse
+    INTERNAL_RESET_URL_TOKEN = 'set-password'
+# pylint: enable=ungrouped-imports
 
 
 class TestDataMigration(TestCase):
@@ -214,6 +220,18 @@ class TestViews(TestCase):
             reverse('password_reset_confirm',
                     kwargs={'uidb64': uidb64, 'token': token}),
             url_path)
+        # TODO: remove condition when Django 1.10 dropped
+        if DjangoVersion >= (1, 11):
+            # Django class-based auth views redirects to a URL without a
+            # token to prevent leaking the token to third-parties
+            reset_get_response = self.client.get(url_path)
+            self.assertRedirects(
+                reset_get_response,
+                reverse('password_reset_confirm',
+                        kwargs={
+                            'uidb64': uidb64,
+                            'token': INTERNAL_RESET_URL_TOKEN}))
+            url_path = reset_get_response.url
         reset_get_response = self.client.get(url_path)
         self.assertEqual(reset_get_response.status_code, 200)
         # WARNING:
