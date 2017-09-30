@@ -1,0 +1,1 @@
+django-registration==2.2
