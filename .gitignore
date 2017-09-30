@@ -1,4 +1,6 @@
 # Project Specific
+example_project/categories.json
+example_project/confusables.json
 example_project/db.sqlite3
 
 # Byte-compiled / optimized / DLL files
