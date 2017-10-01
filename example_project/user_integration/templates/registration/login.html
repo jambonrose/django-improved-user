@@ -12,7 +12,7 @@
     {{ form.as_p }}
     <p>
       {% trans 'Forgot password?' %}
-      <a href="{% url 'auth_password_reset' %}">{% trans 'Reset it!' %}</a>
+      <a href="{% url 'password_reset' %}">{% trans 'Reset it!' %}</a>
     </p>
     <button type="submit">{% trans 'Log In' %}</button>
   </form>

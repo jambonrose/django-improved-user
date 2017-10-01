@@ -15,10 +15,16 @@ from django.test import TestCase
 from improved_user.forms import UserCreationForm
 
 # TODO: remove the conditional import when Dj 1.10 dropped
+# pylint: disable=ungrouped-imports
 try:
-    from django.urls import reverse  # pylint: disable=ungrouped-imports
+    from django.contrib.auth.views import (
+        INTERNAL_RESET_URL_TOKEN,
+    )
+    from django.urls import reverse
 except ImportError:  # pragma: no cover
     from django.core.urlresolvers import reverse
+    INTERNAL_RESET_URL_TOKEN = 'set-password'
+# pylint: enable=ungrouped-imports
 
 
 class TestDataMigration(TestCase):
@@ -108,7 +114,7 @@ class TestViews(TestCase):
         self.assertTrue(User.objects.filter(email=email).exists())
 
         # get login
-        get_response = self.client.get(reverse('auth_login'))
+        get_response = self.client.get(reverse('login'))
         self.assertEqual(200, get_response.status_code)
         self.assertTemplateUsed(get_response, 'registration/login.html')
         self.assertTemplateUsed(get_response, 'base.html')
@@ -118,14 +124,14 @@ class TestViews(TestCase):
             'username': email,
             'password': password,
         }
-        post_response = self.client.post(reverse('auth_login'), data=form_data)
+        post_response = self.client.post(reverse('login'), data=form_data)
         self.assertRedirects(post_response, reverse('home'))
 
         # logout
-        get_logout_response = self.client.get(reverse('auth_logout'))
+        get_logout_response = self.client.get(reverse('logout'))
         # TODO: remove condition when Dj 1.8 dropped
         if DjangoVersion >= (1, 10):
-            self.assertRedirects(get_logout_response, reverse('auth_login'))
+            self.assertRedirects(get_logout_response, reverse('login'))
 
     def test_password_change(self):
         """Simulate a user changing their password"""
@@ -135,13 +141,13 @@ class TestViews(TestCase):
         User = get_user_model()  # pylint: disable=invalid-name
         User.objects.create_user(email, password)
 
-        response = self.client.get(reverse('auth_password_change'))
+        response = self.client.get(reverse('password_change'))
         self.assertRedirects(
             response,
             '{}?next={}'.format(
-                reverse(settings.LOGIN_URL), reverse('auth_password_change')))
+                reverse(settings.LOGIN_URL), reverse('password_change')))
         self.client.login(username=email, password=password)
-        response = self.client.get(reverse('auth_password_change'))
+        response = self.client.get(reverse('password_change'))
         # WARNING:
         # this uses Django's admin template
         # to change this behavior, place user_integration app before
@@ -155,8 +161,8 @@ class TestViews(TestCase):
             'new_password2': newpassword,
         }
         response = self.client.post(
-            reverse('auth_password_change'), data=data, follow=True)
-        self.assertRedirects(response, reverse('auth_password_change_done'))
+            reverse('password_change'), data=data, follow=True)
+        self.assertRedirects(response, reverse('password_change_done'))
         self.assertEqual(response.status_code, 200)
         # WARNING:
         # this uses Django's admin template
@@ -177,7 +183,7 @@ class TestViews(TestCase):
         User = get_user_model()  # pylint: disable=invalid-name
         User.objects.create_user(email, password)
 
-        response = self.client.get(reverse('auth_password_reset'))
+        response = self.client.get(reverse('password_reset'))
         self.assertEqual(response.status_code, 200)
         # WARNING:
         # this uses Django's admin template
@@ -188,11 +194,11 @@ class TestViews(TestCase):
 
         data = {'email': email}
         post_response = self.client.post(
-            reverse('auth_password_reset'),
+            reverse('password_reset'),
             data=data,
             follow=True)
         self.assertRedirects(
-            post_response, reverse('auth_password_reset_done'))
+            post_response, reverse('password_reset_done'))
         # WARNING:
         # this uses Django's admin template
         # to change this behavior, place user_integration app before
@@ -211,9 +217,21 @@ class TestViews(TestCase):
         url_path = urlmatch.groups()[0]
         *_, uidb64, token = filter(None, url_path.split('/'))
         self.assertEqual(
-            reverse('auth_password_reset_confirm',
+            reverse('password_reset_confirm',
                     kwargs={'uidb64': uidb64, 'token': token}),
             url_path)
+        # TODO: remove condition when Django 1.10 dropped
+        if DjangoVersion >= (1, 11):
+            # Django class-based auth views redirects to a URL without a
+            # token to prevent leaking the token to third-parties
+            reset_get_response = self.client.get(url_path)
+            self.assertRedirects(
+                reset_get_response,
+                reverse('password_reset_confirm',
+                        kwargs={
+                            'uidb64': uidb64,
+                            'token': INTERNAL_RESET_URL_TOKEN}))
+            url_path = reset_get_response.url
         reset_get_response = self.client.get(url_path)
         self.assertEqual(reset_get_response.status_code, 200)
         # WARNING:
@@ -230,7 +248,7 @@ class TestViews(TestCase):
         reset_post_response = self.client.post(
             url_path, data=data, follow=True)
         self.assertRedirects(
-            reset_post_response, reverse('auth_password_reset_complete'))
+            reset_post_response, reverse('password_reset_complete'))
 
         self.assertTrue(
             self.client.login(username=email, password=newpassword))

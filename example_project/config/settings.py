@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'improved_user.apps.ImprovedUserConfig',
     'user_integration.apps.UserIntegrationConfig',
 ]
@@ -79,6 +80,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'debug': True,
         },
     },
 ]
@@ -104,7 +106,7 @@ DATABASES = {
 AUTH_USER_MODEL = 'improved_user.User'
 
 LOGIN_REDIRECT_URL = 'home'
-LOGIN_URL = LOGOUT_REDIRECT_URL = 'auth_login'
+LOGIN_URL = LOGOUT_REDIRECT_URL = 'login'
 
 AUTH_PREFIX = 'django.contrib.auth.password_validation.'
 AUTH_PASSWORD_VALIDATORS = [
