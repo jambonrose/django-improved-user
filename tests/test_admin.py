@@ -13,6 +13,7 @@ from improved_user.admin import UserAdmin
 from improved_user.forms import UserChangeForm, UserCreationForm
 from improved_user.models import User
 
+# TODO: remove conditional import when Dj 1.8 dropped
 # pylint: disable=ungrouped-imports
 try:
     from django.urls import reverse
