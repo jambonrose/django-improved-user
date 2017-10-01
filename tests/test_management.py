@@ -62,5 +62,4 @@ class CreatesuperuserManagementCommandTestCase(TestCase):
                 email=invalid_username,
                 short_name='Joe',
                 full_name='Joe Smith',
-                password='password1!',
                 stdout=new_io)
