@@ -149,7 +149,7 @@ setup(
     packages=find_packages('src'),
     package_dir={'': 'src'},
     install_requires=[
-        'django>=1.8',
+        'django>=1.8,!=1.9.*',
     ],
     extras_require={
         'factory': [

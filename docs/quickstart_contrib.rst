@@ -12,6 +12,7 @@ To test the package, start by installing the current package locally.
 
 .. code:: console
 
+    $ pip install -r requirements.txt
     $ python setup.py develop
 
 To run the test suite on a single version of Django (assuming you have a
