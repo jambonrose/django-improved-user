@@ -40,6 +40,7 @@ matrix:
 install:
 - pip install -r requirements.txt
 - pip install -r example_project/requirements.txt
+- if [[ `python -V | grep -c -e 3.5` -eq 1 && "$DJANGO" == 'django>=1.11,<1.12' ]]; then pip install -r doc-requirements.txt ; fi
 - pip install "$DJANGO"
 - pip install codecov
 - ./setup.py develop
@@ -55,7 +56,7 @@ script:
 - cd example_project
 - ./manage.py test
 - cd ../docs
-- if [[ `python -V | grep -c -e 3.6` -eq 1 && "$DJANGO" == 'django>=1.11,<1.12' ]]; then sphinx-build -W -b html -d _build/doctrees . _build/html ; fi
+- if [[ `python -V | grep -c -e 3.5` -eq 1 && "$DJANGO" == 'django>=1.11,<1.12' ]]; then sphinx-build -W -b html -d _build/doctrees . _build/html ; fi
 - cd ..  # for coverage reports
 after_success:
 # coverage is run in parallel, so it is necessary to combine the reports
