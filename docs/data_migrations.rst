@@ -35,7 +35,7 @@ name of the app for which you wish to create a migration.
 
 We start by importing the necessary tools
 
-.. literalinclude:: ../example_project/user_integration/migrations/0001_add_user.py
+.. literalinclude:: ../example_integration_project/user_integration/migrations/0001_add_user.py
     :lines: 1-3
 
 We will use :py:class:`~django.db.migrations.operations.RunPython` to
@@ -43,7 +43,7 @@ run our code. :py:class:`~django.db.migrations.operations.RunPython`
 expects two functions with specific parameters. Our first function
 creates a new user.
 
-.. literalinclude:: ../example_project/user_integration/migrations/0001_add_user.py
+.. literalinclude:: ../example_integration_project/user_integration/migrations/0001_add_user.py
     :pyobject: add_user
 
 **NB**: Due to the lack of :py:class:`~improved_user.models.UserManager` or
@@ -56,7 +56,7 @@ The second function is technically optional, but providing one makes our
 lives easier and is considered best-practice. This function undoes the
 first, and deletes the user we created.
 
-.. literalinclude:: ../example_project/user_integration/migrations/0001_add_user.py
+.. literalinclude:: ../example_integration_project/user_integration/migrations/0001_add_user.py
     :pyobject: remove_user
 
 Finally, we use our migration functions via
@@ -65,12 +65,12 @@ Finally, we use our migration functions via
 of the dependency below. If your file already had a dependency, please
 add the tuple below, but do not remove the existing tuple(s).
 
-.. literalinclude:: ../example_project/user_integration/migrations/0001_add_user.py
+.. literalinclude:: ../example_integration_project/user_integration/migrations/0001_add_user.py
     :pyobject: Migration
 
 The final migration file is printed in totality below.
 
-.. literalinclude:: ../example_project/user_integration/migrations/0001_add_user.py
+.. literalinclude:: ../example_integration_project/user_integration/migrations/0001_add_user.py
     :linenos:
 
 You may wish to read more about :ref:`Django Data Migrations
