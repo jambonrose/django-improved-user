@@ -3,7 +3,8 @@ from datetime import datetime
 
 from django.test import TestCase
 
-from improved_user.models import User, UserManager
+from improved_user.managers import UserManager
+from improved_user.models import User
 
 
 class UserManagerTestCase(TestCase):

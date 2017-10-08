@@ -16,6 +16,7 @@ include setup.cfg
 include tox.ini
 prune .github
 prune docs
-prune example_project
+prune example_extension_project
+prune example_integration_project
 recursive-include tests *.json
 recursive-include tests *.py

@@ -22,10 +22,13 @@ Django Improved User is organized like a regular Django app.
     Reference this class in ``INSTALLED_APPS`` to use the package.
 
 However, the package serves a dual purpose: providing a best-practice
-user model as well as providing mix-in classes. The reference
-documentation for :py:mod:`improved_user.models` and
-:py:mod:`improved_user.forms` are split into two to best reflect those
-differences.
+user model as well as providing mix-in classes. The
+:py:class:`~improved_user.models.User` model in
+:py:mod:`improved_user.models` is built with modular classes found in
+:py:mod:`improved_user.mixins`, which may be reused to build your own
+custom User. The classes in :py:mod:`improved_user.forms` may be used to
+either integrate or extend the improved ``User`` as well, and the
+documentation is therefore split to reflect that differences as well.
 
 *****************
 Using the Package
@@ -43,14 +46,14 @@ Extending the Package
 *********************
 
 You you wish to extend the code supplied by this package,
-:doc:`mixin_models` documents classes in :py:mod:`improved_user.models`
+:doc:`mixin_models` documents classes in :py:mod:`improved_user.mixins`
 to help build your own user.
-:py:class:`~improved_user.models.AbstractUser` is notably meant to be
+:py:class:`~improved_user.mixins.AbstractUser` is notably meant to be
 extended, while other classes such as
-:py:class:`~improved_user.models.DjangoIntegrationMixin`,
-:py:class:`~improved_user.models.EmailAuthMixin`
-:py:class:`~improved_user.models.FullNameMixin`
-:py:class:`~improved_user.models.ShortNameMixin` can be mixed and
+:py:class:`~improved_user.mixins.DjangoIntegrationMixin`,
+:py:class:`~improved_user.mixins.EmailAuthMixin`
+:py:class:`~improved_user.mixins.FullNameMixin`
+:py:class:`~improved_user.mixins.ShortNameMixin` can be mixed and
 matched as desired. Similarly, the :doc:`mixin_forms` details the
 :py:class:`~improved_user.forms.AbstractUserCreationForm` and
 :py:class:`~improved_user.forms.AbstractUserChangeForm` classes found in
