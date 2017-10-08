@@ -11,6 +11,7 @@ Welcome to Django Improved User's documentation!
    quickstart_contrib
    rationale
    data_migrations
+   create_custom_user_with_mixins
    contributing
    source/modules
    change_log
