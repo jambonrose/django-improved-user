@@ -10,11 +10,11 @@ below will demonstrate how to create and remove new users in a Django
 data migration.
 
 The ``django-improved-user`` package intentionally disallows use of
-:py:class:`~improved_user.models.UserManager` in data migrations (we
+:py:class:`~improved_user.managers.UserManager` in data migrations (we
 forgo the :django:ref:`use of model managers in migrations
 <django:using-managers-in-migrations>`). The
-:py:meth:`~improved_user.models.UserManager.create_user` and
-:py:meth:`~improved_user.models.UserManager.create_superuser` methods
+:py:meth:`~improved_user.managers.UserManager.create_user` and
+:py:meth:`~improved_user.managers.UserManager.create_superuser` methods
 are thus both unavailable when using data migrations. Both of these
 methods rely on :py:class:`~improved_user.models.User` model methods
 which are unavailable in :ref:`django:historical-models`, so we could
@@ -46,7 +46,8 @@ creates a new user.
 .. literalinclude:: ../example_integration_project/user_integration/migrations/0001_add_user.py
     :pyobject: add_user
 
-**NB**: Due to the lack of :py:class:`~improved_user.models.UserManager` or
+**NB**: Due to the lack of
+:py:class:`~improved_user.managers.UserManager` or
 :py:class:`~improved_user.models.User` methods, the :code:`email` field
 is not validated or normalized. What's more, the :code:`password` field
 is not validated against the project's password validators. **It is up
