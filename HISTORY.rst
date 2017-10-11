@@ -5,6 +5,11 @@ History
 Next Release
 ------------
 
+- Nothing Yet!
+
+1.0.0
+-----
+
 - Fix issue `#36`_: refactor package to allow for mix-in classes to be
   imported into third-party project without requiring project to be in
   ``INSTALLED_APPS`` (which would unnecessarily create unused tables in
