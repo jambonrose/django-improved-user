@@ -1,5 +1,7 @@
 """Factories to make testing with Improved User easier"""
-from .models import User
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 try:
     from factory import Faker, PostGenerationMethodCall

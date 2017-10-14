@@ -3,8 +3,9 @@ from django import VERSION as DjangoVersion, forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
+from django.contrib.auth import get_user_model
 
-from .models import User
+User = get_user_model()
 
 try:
     from django.contrib.auth import password_validation
