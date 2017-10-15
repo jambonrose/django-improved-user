@@ -1,6 +1,6 @@
 """
 Django settings for test project demonstrating
-extension of django-improved-user
+replacement of django-improved-user with mixins
 
 https://docs.djangoproject.com/en/stable/topics/settings/
 https://docs.djangoproject.com/en/stable/ref/settings/
@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
-    'user_extension.apps.UserExtensionConfig',
+    'user_replacement.apps.UserReplacementConfig',
 ]
 
 if DjangoVersion >= (1, 10):
@@ -94,7 +94,7 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/stable/ref/settings/#auth-password-validators
 
-AUTH_USER_MODEL = 'user_extension.User'
+AUTH_USER_MODEL = 'user_replacement.User'
 
 AUTH_PREFIX = 'django.contrib.auth.password_validation.'
 AUTH_PASSWORD_VALIDATORS = [

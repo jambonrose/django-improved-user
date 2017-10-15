@@ -2,6 +2,6 @@
 from django.apps import AppConfig
 
 
-class UserExtensionConfig(AppConfig):
-    """AppConfig definition for user integration code"""
-    name = 'user_extension'
+class UserReplacementConfig(AppConfig):
+    """AppConfig definition for user replacement code"""
+    name = 'user_replacement'

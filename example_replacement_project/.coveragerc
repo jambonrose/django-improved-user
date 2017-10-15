@@ -4,7 +4,7 @@ omit =
     *migrations*,
     *tests*,
 parallel = true
-source = user_extension
+source = user_replacement
 plugins =
     django_coverage_plugin
 
