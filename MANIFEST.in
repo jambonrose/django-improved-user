@@ -1,4 +1,5 @@
 exclude Makefile
+exclude .ignore
 include *.md
 include *.rst
 include .bumpversion.cfg
