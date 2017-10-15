@@ -40,6 +40,7 @@ django_settings.configure(
         'django.contrib.sites',
         'improved_user.apps.ImprovedUserConfig',
     ],
+    AUTH_USER_MODEL='improved_user.User',
 )
 django_setup()
 
@@ -82,9 +83,11 @@ def process_docstring(app, what, name, obj, options, lines):
     if inspect.isclass(obj) and issubclass(obj, models.Model):
         sorted_fields = sorted(obj._meta.get_fields(), key=attrgetter('name'))
         primary_fields = [
-            field for field in sorted_fields if field.primary_key is True]
+            field for field in sorted_fields
+            if hasattr(field, 'primary_key') and field.primary_key is True]
         regular_fields = [
-            field for field in sorted_fields if field.primary_key is False]
+            field for field in sorted_fields
+            if hasattr(field, 'primary_key') and field.primary_key is False]
 
         for field in primary_fields:
             lines = annotate_field(lines, field, models)
