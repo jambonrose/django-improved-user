@@ -2,6 +2,8 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
+from .factories import UserFactory
+
 User = get_user_model()  # pylint: disable=invalid-name
 
 
@@ -47,3 +49,24 @@ class ExtensionTestCase(TestCase):
         user = User.objects.get(email=email_lowercase)
         self.assertTrue(user.verified)
         self.assertTrue(user.is_verified())
+
+    def test_basic_factory_build(self):
+        """Test creation of User via factory"""
+        user = UserFactory.build()
+        self.assertIsInstance(user.verified, bool)
+        self.assertEqual(User.objects.all().count(), 0)
+        user.save()
+        self.assertEqual(User.objects.all().count(), 1)
+
+    def test_basic_factory_create(self):
+        """Test creation of User via factory saves to DB"""
+        user = UserFactory()
+        self.assertIsInstance(user, User)
+        self.assertEqual(User.objects.all().count(), 1)
+
+    def test_verified_attribute(self):
+        """Ensure that verified attribute may be overridden"""
+        user = UserFactory(verified=True)
+        self.assertTrue(user.verified)
+        user = UserFactory(verified=False)
+        self.assertFalse(user.verified)
