@@ -19,13 +19,13 @@ release:
 	git push --tags
 
 clean:
-	rm -f .coverage
-	rm -f .coverage.*
-	rm -rf *.egg-info
-	rm -rf .eggs
-	rm -rf .tox
 	rm -rf build
 	rm -rf dist
+	rm -rf example*_project/db.sqlite3
 	rm -rf htmlcov
-	find . -name "*.py[co]" -delete
-	find . -name "__pycache__" -delete
+	rm -rf src/*.egg-info
+	rm -rf src/*.eggs
+	find -X . \( -path '*/.tox/*' -o -path '*/.git/*' \) -prune -o \( -name "*.py[co]" -type f -print0 \) | xargs -0 -I {} rm {}
+	find -X . \( -path '*/.tox/*' -o -path '*/.git/*' \) -prune -o \( -name ".coverage" -type f -print0 \) | xargs -0 -I {} rm {}
+	find -X . \( -path '*/.tox/*' -o -path '*/.git/*' \) -prune -o \( -name ".coverage.*" -type f -print0 \) | xargs -0 -I {} rm {}
+	find -X . \( -path '*/.tox/*' -o -path '*/.git/*' \) -prune -o \( -name "__pycache__" -type d -print0 \) | xargs -0 -I {} rm -r {}
