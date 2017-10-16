@@ -1,4 +1,4 @@
-"""Replacement project URL Configuration"""
+"""Extension project URL Configuration"""
 from django.contrib import admin
 
 try:
