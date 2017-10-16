@@ -1,6 +1,6 @@
 """
 Django settings for test project demonstrating
-extension of django-improved-user
+replacement of django-improved-user with mixins
 
 https://docs.djangoproject.com/en/stable/topics/settings/
 https://docs.djangoproject.com/en/stable/ref/settings/
@@ -14,7 +14,7 @@ from django import VERSION as DjangoVersion
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '!8_-4bh_ecnux#)2v%1w+zf+#0(9dm-h=jz0qhsu(qfz8tzh)c'
+SECRET_KEY = '4u4m#*7xy764)@$%w#)%txv)ktqj1y!o17a23b63-6xcdye@e-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
-    'user_extension.apps.UserExtensionConfig',
+    'user_replacement.apps.UserReplacementConfig',
 ]
 
 if DjangoVersion >= (1, 10):
@@ -94,14 +94,14 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/stable/ref/settings/#auth-password-validators
 
-AUTH_USER_MODEL = 'user_extension.User'
+AUTH_USER_MODEL = 'user_replacement.User'
 
 AUTH_PREFIX = 'django.contrib.auth.password_validation.'
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': AUTH_PREFIX + 'UserAttributeSimilarityValidator',
         'OPTIONS': {
-            'user_attributes': ('email', 'full_name', 'short_name'),
+            'user_attributes': ('email',),
         },
     },
     {

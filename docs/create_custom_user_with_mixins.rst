@@ -30,7 +30,7 @@ password, but which does not feature either the ``short_name`` or
 In an existing app, in the ``models.py`` file, we start by importing the
 tools we need to build the model. We first import classes from Django.
 
-.. literalinclude:: ../example_extension_project/user_extension/models.py
+.. literalinclude:: ../example_replacement_project/user_replacement/models.py
     :lines: 2-3
 
 :py:class:`~django.contrib.auth.models.AbstractBaseUser` and
@@ -42,7 +42,7 @@ of our strings.
 
 We then import mix-in classes from Improved User.
 
-.. literalinclude:: ../example_extension_project/user_extension/models.py
+.. literalinclude:: ../example_replacement_project/user_replacement/models.py
     :lines: 5-6
 
 The :py:class:`~improved_user.mixins.DjangoIntegrationMixin` class
@@ -87,14 +87,14 @@ then we tie the :py:class:`~improved_user.managers.UserManager` to the
 new model.
 
 
-.. literalinclude:: ../example_extension_project/user_extension/models.py
+.. literalinclude:: ../example_replacement_project/user_replacement/models.py
     :lines: 9-15
 
 For good measure, we can specify the name and verbose name of the model,
 making sure to internationalize the strings. Our full and final
 ``models.py`` file is shown below.
 
-.. literalinclude:: ../example_extension_project/user_extension/models.py
+.. literalinclude:: ../example_replacement_project/user_replacement/models.py
 
 .. TIP::
     Setting ``abstract = True`` in the ``Meta`` class would allow the

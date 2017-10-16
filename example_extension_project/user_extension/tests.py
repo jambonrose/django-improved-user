@@ -1,14 +1,19 @@
-"""Tests for the extended User model"""
-from types import MethodType
+"""Tests to ensure proper subclassing of models, forms, and factories"""
+from unittest import skipUnless
+from unittest.mock import patch
 
 from django import VERSION as DjangoVersion
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from .models import User
+from .factories import UserFactory
+from .forms import UserChangeForm, UserCreationForm
+
+User = get_user_model()  # pylint: disable=invalid-name
 
 
-class ExtendedUserModelTests(TestCase):
-    """Tests for the extended User model"""
+class ExtensionTestCase(TestCase):
+    """Test Custom Extended User"""
 
     def test_user_creation(self):
         """Users can be created and can set/modify their password"""
@@ -30,48 +35,100 @@ class ExtendedUserModelTests(TestCase):
         user.set_password(None)
         self.assertFalse(user.has_usable_password())
 
-        if DjangoVersion >= (2, 0):
-            # no name methods on this one!
-            self.assertFalse(hasattr(user, 'get_full_name'))
-            self.assertFalse(hasattr(user, 'get_short_name'))
-        else:
-            with self.assertRaises(NotImplementedError):
-                user.get_full_name()
-            with self.assertRaises(NotImplementedError):
-                user.get_short_name()
+        # can add short and full name
+        user.full_name = 'John Smith'
+        user.short_name = 'John'
+        user.save()
+        self.assertEqual(user.get_full_name(), 'John Smith')
+        self.assertEqual(user.get_short_name(), 'John')
 
-    def test_fields_and_attributes(self):
-        """Ensure the model has the fields and attributes we expect"""
-        expected_fields = (
-            'id',
-            'password',
-            'last_login',
-            'is_superuser',
-            'is_staff',
-            'is_active',
-            'date_joined',
-            'email',
-            'groups',
-            'user_permissions',
-        )
-        excluded_fields = (
-            'full_name',
-            'short_name',
-        )
-        user_fields = [field.name for field in User._meta.get_fields()]
-        for expected_field in expected_fields:
-            with self.subTest(expected_field=expected_field):
-                self.assertIn(expected_field, user_fields)
-        for excluded_field in excluded_fields:
-            with self.subTest(excluded_field=excluded_field):
-                self.assertNotIn(excluded_field, user_fields)
-        # Pre-empt Django check auth.E001
-        self.assertTrue(isinstance(User.REQUIRED_FIELDS, (list, tuple)))
-        # Pre-empt Django check auth.E002
-        self.assertNotIn(User.USERNAME_FIELD, User.REQUIRED_FIELDS)
-        # Pre-empt Django check auth.E003
-        self.assertIs(User._meta.get_field(User.USERNAME_FIELD).unique, True)
-        # Pre-empt Django check auth.C009
-        self.assertFalse(isinstance(User.is_anonymous, MethodType))
-        # Pre-empt Django check auth.C010
-        self.assertFalse(isinstance(User.is_authenticated, MethodType))
+    def test_extra_boolean_field(self):
+        """Verify that the current User has an extra boolean field"""
+        email_lowercase = 'test@example.com'
+        password = 'password1!'
+        user = User.objects.create_user(email_lowercase, password)
+        self.assertFalse(user.verified)
+        self.assertFalse(user.is_verified())
+        user.verified = True
+        user.save()
+        user = User.objects.get(email=email_lowercase)
+        self.assertTrue(user.verified)
+        self.assertTrue(user.is_verified())
+
+    def test_basic_factory_build(self):
+        """Test creation of User via factory"""
+        user = UserFactory.build()
+        self.assertIsInstance(user.verified, bool)
+        self.assertEqual(User.objects.all().count(), 0)
+        user.save()
+        self.assertEqual(User.objects.all().count(), 1)
+
+    def test_basic_factory_create(self):
+        """Test creation of User via factory saves to DB"""
+        user = UserFactory()
+        self.assertIsInstance(user, User)
+        self.assertEqual(User.objects.all().count(), 1)
+
+    def test_verified_attribute(self):
+        """Ensure that verified attribute may be overridden"""
+        user = UserFactory(verified=True)
+        self.assertTrue(user.verified)
+        user = UserFactory(verified=False)
+        self.assertFalse(user.verified)
+
+    @skipUnless(
+        DjangoVersion >= (1, 9),
+        'Password strength checks not available on Django 1.8')
+    @patch('django.contrib.auth.password_validation.password_changed')
+    def test_create_form_success(self, password_changed):
+        """Successful submission of form data"""
+        data = {
+            'email': 'jsmith@example.com',
+            'full_name': 'John Smith',  # optional field
+            'short_name': 'John',  # optional field
+            'password1': 'k4b3c14gl9077954',
+            'password2': 'k4b3c14gl9077954',
+        }
+        form = UserCreationForm(data)
+        self.assertTrue(form.is_valid())
+        form.save(commit=False)
+        self.assertEqual(password_changed.call_count, 0)
+        user = form.save()
+        self.assertEqual(password_changed.call_count, 1)
+        self.assertEqual(repr(user), '<User: jsmith@example.com>')
+        self.assertEqual(user.get_short_name(), 'John')
+        self.assertEqual(user.get_full_name(), 'John Smith')
+        self.assertTrue(user.check_password('k4b3c14gl9077954'))
+        self.assertFalse(user.verified)
+
+    # TODO: Remove this test in favor of above after Dj1.8 dropped
+    @skipUnless(
+        DjangoVersion < (1, 9),
+        'Password strength checks not available on Django 1.8')
+    def test_create_form_success_pre_19(self):
+        """Successful submission of form data"""
+        data = {
+            'email': 'jsmith@example.com',
+            'full_name': 'John Smith',  # optional field
+            'short_name': 'John',  # optional field
+            'password1': 'test123',
+            'password2': 'test123',
+        }
+        form = UserCreationForm(data)
+        self.assertTrue(form.is_valid())
+        user = form.save()
+        self.assertEqual(repr(user), '<User: jsmith@example.com>')
+        self.assertEqual(user.get_short_name(), 'John')
+        self.assertEqual(user.get_full_name(), 'John Smith')
+        self.assertTrue(user.check_password('test123'))
+        self.assertFalse(user.verified)
+
+    def test_update_form_success(self):
+        """Test successful submission of update form"""
+        user = UserFactory()
+        data = {
+            'email': user.email,
+            'date_joined': user.date_joined,
+        }
+        form = UserChangeForm(data, instance=user)
+        self.assertTrue(form.is_valid())

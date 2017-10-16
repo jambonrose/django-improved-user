@@ -39,8 +39,9 @@ matrix:
     env: DJANGO=https://github.com/django/django/archive/master.tar.gz
 install:
 - pip install -r requirements.txt
-- pip install -r example_integration_project/requirements.txt
 - pip install -r example_extension_project/requirements.txt
+- pip install -r example_integration_project/requirements.txt
+- pip install -r example_replacement_project/requirements.txt
 - if [[ `python -V | grep -c -e 3.5` -eq 1 && "$DJANGO" == 'django>=1.11,<1.12' ]]; then pip install -r doc-requirements.txt ; fi
 - pip install "$DJANGO"
 - pip install codecov
@@ -54,9 +55,11 @@ before_script:
 script:
 # do not use setup.py test with coverage; missing files omitted entirely
 - coverage run runtests.py
-- cd example_integration_project
+- cd example_extension_project
 - ./manage.py test
-- cd ../example_extension_project
+- cd ../example_integration_project
+- ./manage.py test
+- cd ../example_replacement_project
 - ./manage.py test
 - cd ../docs
 - if [[ `python -V | grep -c -e 3.5` -eq 1 && "$DJANGO" == 'django>=1.11,<1.12' ]]; then sphinx-build -W -b html -d _build/doctrees . _build/html ; fi

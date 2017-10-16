@@ -1,10 +1,9 @@
 """Forms for Creating and Updating Improved Users"""
 from django import VERSION as DjangoVersion, forms
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
-
-from .models import User
 
 try:
     from django.contrib.auth import password_validation
@@ -32,6 +31,9 @@ except ImportError:  # pragma: no cover
         # pylint: enable=no-self-use
 
     password_validation = EmptyValidator()
+
+
+User = get_user_model()  # pylint: disable=invalid-name
 
 
 class AbstractUserCreationForm(forms.ModelForm):

@@ -1,4 +1,5 @@
 exclude Makefile
+exclude .ignore
 include *.md
 include *.rst
 include .bumpversion.cfg
@@ -18,5 +19,6 @@ prune .github
 prune docs
 prune example_extension_project
 prune example_integration_project
+prune example_replacement_project
 recursive-include tests *.json
 recursive-include tests *.py

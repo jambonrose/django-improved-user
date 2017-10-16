@@ -1,19 +1,19 @@
-"""A User model created by django-improved-user mixins"""
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+"""Demonstration of how to extend the Improved User model"""
+from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from improved_user.managers import UserManager
-from improved_user.mixins import DjangoIntegrationMixin, EmailAuthMixin
+from improved_user.mixins import AbstractUser
 
 
-class User(DjangoIntegrationMixin, EmailAuthMixin,
-           PermissionsMixin, AbstractBaseUser):
-    """A user created using mix-ins from Django and improved-user
+# pylint: disable=too-many-ancestors
+class User(AbstractUser):
+    """A User model that extends the Improved User"""
+    verified = models.BooleanField(
+        _('email verified'),
+        default=False,
+        help_text=_(
+            'Designates whether the user has verified their email.'))
 
-    Note that the lack of name methods will cause errors in the Admin
-    """
-    objects = UserManager()
-
-    class Meta:
-        verbose_name = _('user')
-        verbose_name_plural = _('users')
+    def is_verified(self):
+        """Is the user properly verified?"""
+        return self.is_active and self.verified

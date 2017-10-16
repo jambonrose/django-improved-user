@@ -1,0 +1,13 @@
+[run]
+branch = true
+omit =
+    *migrations*,
+    *tests*,
+parallel = true
+source = user_replacement
+plugins =
+    django_coverage_plugin
+
+[report]
+show_missing = true
+precision = 2
