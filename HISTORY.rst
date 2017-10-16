@@ -10,15 +10,20 @@ Next Release
 1.0.0
 -----
 
+- Fix issue `#49`_: allow form classes to be imported without requiring
+  project to be in ``INSTALLED_APPS`` (See `#36`_ and `#46`_ below for
+  associated error and reasoning) (`#50`_)
 - Fix issue `#36`_: refactor package to allow for mix-in classes to be
   imported into third-party project without requiring project to be in
   ``INSTALLED_APPS`` (which would unnecessarily create unused tables in
   the project). Add documentation/tutorial on subject. (`#46`_)
 - Prepare for Django 2.0 by testing against Django 2.0 alpha. (`#43`_)
 
+.. _#36: https://github.com/jambonsw/django-improved-user/issues/36
 .. _#43: https://github.com/jambonsw/django-improved-user/pull/43
 .. _#46: https://github.com/jambonsw/django-improved-user/pull/46
-.. _#36: https://github.com/jambonsw/django-improved-user/issues/36
+.. _#49: https://github.com/jambonsw/django-improved-user/issues/49
+.. _#50: https://github.com/jambonsw/django-improved-user/pull/50
 
 
 0.5.3 (2017-08-29)

@@ -139,7 +139,7 @@ class CustomTestCommand(TestCommand):
 
 setup(
     name='django-improved-user',
-    version='1.0a1',
+    version='1.0a2',
     description=(
         'A custom Django user model for best practices email-based login.'
     ),
@@ -154,7 +154,7 @@ setup(
     extras_require={
         'factory': [
             'factory_boy==2.9.2',
-            'Faker==0.8.4',
+            'Faker==0.8.5',
             'python-dateutil==2.6.1',
         ],
     },
