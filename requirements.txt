@@ -3,7 +3,7 @@ check-manifest==0.35
 coverage==4.4.1
 docutils==0.14
 factory_boy==2.9.2
-Faker==0.8.5
+Faker==0.8.6
 flake8-commas==0.4.3
 flake8-quotes==0.11.0
 flake8==3.4.1

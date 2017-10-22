@@ -153,9 +153,9 @@ setup(
     ],
     extras_require={
         'factory': [
-            'factory_boy==2.9.2',
-            'Faker==0.8.5',
-            'python-dateutil==2.6.1',
+            'factory_boy>=2.9',
+            'Faker>=0.8',
+            'python-dateutil>=2.6',
         ],
     },
     zip_safe=False,

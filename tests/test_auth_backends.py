@@ -186,9 +186,17 @@ class ImprovedUserModelBackendTest(TestCase):
         self.assertEqual(
             backend.get_all_permissions(user),
             {'auth.test_user', 'auth.test_group'})
-        self.assertEqual(
-            backend.get_user_permissions(user),
-            {'auth.test_user', 'auth.test_group'})
+        # Django 2.0 avoids cache permission problems
+        # https://code.djangoproject.com/ticket/28713
+        # https://github.com/django/django/pull/9242
+        if DjangoVersion >= (2, 0):
+            self.assertEqual(
+                backend.get_user_permissions(user),
+                {'auth.test_user'})
+        else:
+            self.assertEqual(
+                backend.get_user_permissions(user),
+                {'auth.test_user', 'auth.test_group'})
         self.assertEqual(
             backend.get_group_permissions(user),
             {'auth.test_group'})
@@ -228,9 +236,17 @@ class ImprovedUserModelBackendTest(TestCase):
         self.assertEqual(
             backend.get_all_permissions(user),
             {'auth.test_user', 'auth.test_group'})
-        self.assertEqual(
-            backend.get_user_permissions(user),
-            {'auth.test_user', 'auth.test_group'})
+        # Django 2.0 avoids cache permission problems
+        # https://code.djangoproject.com/ticket/28713
+        # https://github.com/django/django/pull/9242
+        if DjangoVersion >= (2, 0):
+            self.assertEqual(
+                backend.get_user_permissions(user),
+                {'auth.test_user'})
+        else:
+            self.assertEqual(
+                backend.get_user_permissions(user),
+                {'auth.test_user', 'auth.test_group'})
         self.assertEqual(
             backend.get_group_permissions(user),
             {'auth.test_group'})
