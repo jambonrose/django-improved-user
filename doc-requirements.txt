@@ -1,4 +1,4 @@
-Django==2.0
+Django>=2.0,<2.1
 factory_boy==2.9.2
 Faker==0.8.8
 Pygments==2.2.0
