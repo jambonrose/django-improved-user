@@ -4,4 +4,4 @@ Faker==0.8.10
 Pygments==2.2.0
 python-dateutil==2.6.1
 sphinx-rtd-theme==0.2.4
-Sphinx==1.6.6
+Sphinx==1.6.7
