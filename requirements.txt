@@ -6,10 +6,10 @@ docutils==0.14
 factory_boy==2.10.0
 Faker==0.8.11
 flake8-commas==1.0.0
-flake8-quotes==0.13.1
+flake8-quotes==0.14.0
 flake8==3.5.0
 Pygments==2.2.0
-pylint-django==0.9.0
+pylint-django==0.9.1
 pylint==1.8.2
 python-dateutil==2.6.1
 setuptools==38.5.1
