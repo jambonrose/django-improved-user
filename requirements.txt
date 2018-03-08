@@ -9,10 +9,10 @@ flake8-commas==1.0.0
 flake8-quotes==0.14.0
 flake8==3.5.0
 Pygments==2.2.0
-pylint-django==0.9.1
+pylint-django==0.9.3
 pylint==1.8.2
 python-dateutil==2.6.1
-setuptools==38.5.1
+setuptools==38.5.2
 tox==2.9.1
-twine==1.9.1
+twine==1.10.0
 wheel==0.30.0
