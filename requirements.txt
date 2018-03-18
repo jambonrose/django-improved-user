@@ -1,4 +1,4 @@
-astroid==1.6.1
+astroid==1.6.2
 bumpversion==0.5.3
 check-manifest==0.36
 coverage==4.5.1
@@ -10,9 +10,9 @@ flake8-quotes==0.14.0
 flake8==3.5.0
 Pygments==2.2.0
 pylint-django==0.9.4
-pylint==1.8.2
+pylint==1.8.3
 python-dateutil==2.7.0
-setuptools==38.5.2
+setuptools==39.0.0
 tox==2.9.1
 twine==1.10.0
 wheel==0.30.0
