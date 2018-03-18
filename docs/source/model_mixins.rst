@@ -2,7 +2,7 @@
 Mix-in Model Classes
 ####################
 
-.. py:module:: improved_user.mixins
+.. py:module:: improved_user.model_mixins
 
 These classes are provided as tools to help build your own User models.
 
@@ -13,7 +13,7 @@ These classes are provided as tools to help build your own User models.
 AbstractUser
 ************
 
-.. autoclass:: improved_user.mixins.AbstractUser
+.. autoclass:: improved_user.model_mixins.AbstractUser
    :inherited-members:
    :members:
    :show-inheritance:
@@ -22,26 +22,26 @@ AbstractUser
 DjangoIntegrationMixin
 **********************
 
-.. autoclass:: improved_user.mixins.DjangoIntegrationMixin
+.. autoclass:: improved_user.model_mixins.DjangoIntegrationMixin
    :members:
 
 **************
 EmailAuthMixin
 **************
 
-.. autoclass:: improved_user.mixins.EmailAuthMixin
+.. autoclass:: improved_user.model_mixins.EmailAuthMixin
    :members:
 
 *************
 FullNameMixin
 *************
 
-.. autoclass:: improved_user.mixins.FullNameMixin
+.. autoclass:: improved_user.model_mixins.FullNameMixin
    :members:
 
 **************
 ShortNameMixin
 **************
 
-.. autoclass:: improved_user.mixins.ShortNameMixin
+.. autoclass:: improved_user.model_mixins.ShortNameMixin
    :members:

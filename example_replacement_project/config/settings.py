@@ -1,6 +1,6 @@
 """
 Django settings for test project demonstrating
-replacement of django-improved-user with mixins
+replacement of django-improved-user with model mixins
 
 https://docs.djangoproject.com/en/stable/topics/settings/
 https://docs.djangoproject.com/en/stable/ref/settings/

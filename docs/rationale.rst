@@ -37,9 +37,9 @@ decade of working in Django. Andrew took what he had learned from
 `Django Unleashed`_ and his `consulting experience`_, and integrated it
 into the project. The result is a :class:`~improved_user.models.User`
 model that can be used out of the box (see :doc:`quickstart` for
-details) and a set of :doc:`mix-in classes <source/mixin_models>` to
+details) and a set of :doc:`mix-in classes <source/model_mixins>` to
 allow for creation of new User models (notably, the
-:class:`~improved_user.mixins.DjangoIntegrationMixin`).
+:class:`~improved_user.model_mixins.DjangoIntegrationMixin`).
 
 We hope you find our work useful!
 
