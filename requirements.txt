@@ -14,5 +14,5 @@ pylint==1.8.3
 python-dateutil==2.7.0
 setuptools==39.0.1
 tox==2.9.1
-twine==1.10.0
+twine==1.11.0
 wheel==0.30.0
