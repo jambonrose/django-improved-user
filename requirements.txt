@@ -12,7 +12,7 @@ Pygments==2.2.0
 pylint-django==0.11
 pylint==1.9.1
 python-dateutil==2.7.3
-setuptools==39.1.0
+setuptools==39.2.0
 tox==3.0.0
 twine==1.11.0
 wheel==0.31.0
