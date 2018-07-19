@@ -192,10 +192,9 @@ class TestViews(TestCase):
         self.assertTemplateUsed(
             response, 'registration/password_reset_form.html')
 
-        data = {'email': email}
         post_response = self.client.post(
             reverse('password_reset'),
-            data=data,
+            data={'email': email},
             follow=True)
         self.assertRedirects(
             post_response, reverse('password_reset_done'))
@@ -241,12 +240,14 @@ class TestViews(TestCase):
         self.assertTemplateUsed(
             reset_get_response, 'registration/password_reset_confirm.html')
 
-        data = {
-            'new_password1': newpassword,
-            'new_password2': newpassword,
-        }
         reset_post_response = self.client.post(
-            url_path, data=data, follow=True)
+            url_path,
+            data={
+                'new_password1': newpassword,
+                'new_password2': newpassword,
+            },
+            follow=True,
+        )
         self.assertRedirects(
             reset_post_response, reverse('password_reset_complete'))
 
