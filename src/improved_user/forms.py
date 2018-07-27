@@ -24,10 +24,10 @@ except ImportError:  # pragma: no cover
         def password_validators_help_text_html(self):
             """
             Used by password1 field;
-            return None, as all strings are valid passwords
+            implicitly return None, as all strings are valid passwords
 
             """
-            return None
+            pass
         # pylint: enable=no-self-use
 
     password_validation = EmptyValidator()

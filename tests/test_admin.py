@@ -108,7 +108,11 @@ class UserAdminTests(TestCase):
                 and hasattr(field, 'blank') and field.blank is False)
         ]
         extra_form_fields = [
-            field_name for field_name in list(UserCreationForm.declared_fields)
+
+            field_name
+            for field_name in list(
+                UserCreationForm.declared_fields,  # pylint: disable=no-member
+            )
         ]
         admin_add_fields = [
             fieldname
