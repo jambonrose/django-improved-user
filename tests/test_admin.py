@@ -99,7 +99,9 @@ class UserAdminTests(TestCase):
 
     def test_add_has_required_fields(self):
         """Test all required fields in Admin Add view"""
-        excluded_model_fields = ['date_joined', 'password']
+        excluded_model_fields = [
+            'date_joined', 'is_active', 'is_staff', 'is_superuser', 'password',
+        ]
         required_model_fields = [
             field.name
             for field in User._meta.get_fields()
@@ -108,7 +110,6 @@ class UserAdminTests(TestCase):
                 and hasattr(field, 'blank') and field.blank is False)
         ]
         extra_form_fields = [
-
             field_name
             for field_name in list(
                 UserCreationForm.declared_fields,  # pylint: disable=no-member
