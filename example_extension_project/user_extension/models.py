@@ -2,7 +2,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from improved_user.mixins import AbstractUser
+from improved_user.model_mixins import AbstractUser
 
 
 # pylint: disable=too-many-ancestors
