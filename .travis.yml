@@ -1,6 +1,7 @@
 branches:
   only:
   - development
+dist: xenial
 language: python
 cache: pip
 python:
