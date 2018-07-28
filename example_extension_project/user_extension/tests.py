@@ -6,8 +6,9 @@ from django import VERSION as DjangoVersion
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
+from improved_user.forms import UserChangeForm, UserCreationForm
+
 from .factories import UserFactory
-from .forms import UserChangeForm, UserCreationForm
 
 User = get_user_model()  # pylint: disable=invalid-name
 

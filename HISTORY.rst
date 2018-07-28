@@ -7,9 +7,14 @@ Next Release
 
 - Nothing Yet!
 
-1.0.0
------
+1.0.0 (2018-07-28)
+------------------
 
+- Django 1.8, 1.11, 2.0, 2.1 officially supported.
+- Django 1.9 and 1.10 are not tested against, as Django does not support
+  them, but they likely work.
+- **Breaking change**: Model mix-in classes now exist in their own
+  module! Import from `model_mixin` instead of `models`. (`#46`_, `#96`_)
 - Fix issue `#49`_: allow form classes to be imported without requiring
   project to be in ``INSTALLED_APPS`` (See `#36`_ and `#46`_ below for
   associated error and reasoning) (`#50`_)
@@ -17,13 +22,15 @@ Next Release
   imported into third-party project without requiring project to be in
   ``INSTALLED_APPS`` (which would unnecessarily create unused tables in
   the project). Add documentation/tutorial on subject. (`#46`_)
-- Prepare for Django 2.0 by testing against Django 2.0 alpha. (`#43`_)
+- Django 2.0, 2.1 compatibility. (`#43`_, `#93`_)
 
 .. _#36: https://github.com/jambonsw/django-improved-user/issues/36
 .. _#43: https://github.com/jambonsw/django-improved-user/pull/43
 .. _#46: https://github.com/jambonsw/django-improved-user/pull/46
 .. _#49: https://github.com/jambonsw/django-improved-user/issues/49
 .. _#50: https://github.com/jambonsw/django-improved-user/pull/50
+.. _#93: https://github.com/jambonsw/django-improved-user/pull/93
+.. _#96: https://github.com/jambonsw/django-improved-user/pull/96
 
 
 0.5.3 (2017-08-29)

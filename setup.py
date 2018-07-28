@@ -5,7 +5,7 @@ Django Improved User
 ====================
 
 :website: https://github.com/jambonsw/django-improved-user/
-:copyright: Copyright 2017 JamBon Software
+:copyright: Copyright 2018 JamBon Software
 :license: Simplified BSD, see LICENSE for details.
 """
 
@@ -139,7 +139,7 @@ class CustomTestCommand(TestCommand):
 
 setup(
     name='django-improved-user',
-    version='1.0a2',
+    version='1.0.0',
     description=(
         'A custom Django user model for best practices email-based login.'
     ),
@@ -171,7 +171,7 @@ setup(
     ),
     license='BSD License',
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
