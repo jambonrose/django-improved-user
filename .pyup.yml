@@ -1,6 +1,6 @@
 update: all
 pin: True
 branch: development
-schedule: "monthly"
+schedule: "every month"
 branch_prefix: update/
 pr_prefix: "❗️ "
