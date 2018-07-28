@@ -7,6 +7,7 @@ python:
 - 3.4
 - 3.5
 - 3.6
+- 3.7
 env:
 - DJANGO='django>=1.8,<1.9'
 - DJANGO='django>=1.11,<1.12'
@@ -15,10 +16,6 @@ env:
 - DJANGO=https://github.com/django/django/archive/master.tar.gz
 matrix:
   include:
-  - python: 3.7
-    env: DJANGO='django>=1.11,<1.12'
-    sudo: required
-    dist: xenial
   - python: 3.7
     env: DJANGO='django>=2.0,<2.1'
     sudo: required
@@ -34,6 +31,10 @@ matrix:
     env: DJANGO='django>=2.1rc,<2.2'
   - python: 3.6
     env: DJANGO='django>=1.8,<1.9'
+  - python: 3.7
+    env: DJANGO='django>=1.8,<1.9'
+  - python: 3.7
+    env: DJANGO='django>=1.11,<1.12'
   allow_failures:
   - python: 3.5
     env: DJANGO=https://github.com/django/django/archive/master.tar.gz
