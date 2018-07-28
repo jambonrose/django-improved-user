@@ -158,7 +158,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Django Improved User'
-copyright = '2017 JamBon Software'
+copyright = '2018 JamBon Software'
 author = 'Russell Keith-Magee, Andrew Pinkham'
 
 # The version info for the project you're documenting, acts as replacement for

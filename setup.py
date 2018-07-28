@@ -5,7 +5,7 @@ Django Improved User
 ====================
 
 :website: https://github.com/jambonsw/django-improved-user/
-:copyright: Copyright 2017 JamBon Software
+:copyright: Copyright 2018 JamBon Software
 :license: Simplified BSD, see LICENSE for details.
 """
 
