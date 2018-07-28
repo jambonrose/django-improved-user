@@ -139,7 +139,7 @@ class CustomTestCommand(TestCommand):
 
 setup(
     name='django-improved-user',
-    version='1.0a2',
+    version='1.0.0',
     description=(
         'A custom Django user model for best practices email-based login.'
     ),

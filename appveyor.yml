@@ -1,5 +1,5 @@
 # https://www.appveyor.com/docs/appveyor-yml/
-version: '{branch}-v1.0a2-{build}'
+version: '{branch}-v1.0.0-{build}'
 branches:
   only:
   - development
