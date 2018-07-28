@@ -23,15 +23,15 @@ Tests: |Travis| |AppVeyor| |Coverage| |PyUp|
         :alt: Development Documentation Status
 
 .. |Implementation| image:: https://img.shields.io/pypi/implementation/django-improved-user.svg
-        :target: https://pypi.python.org/pypi/django-improved-user/
+        :target: https://pypi.org/project/django-improved-user/
         :alt: Python Implementation Support
 
 .. |Python| image:: https://img.shields.io/pypi/pyversions/django-improved-user.svg
-        :target: https://pypi.python.org/pypi/django-improved-user/
+        :target: https://pypi.org/project/django-improved-user/
         :alt: Python Support
 
 .. |Django| image:: https://img.shields.io/badge/Django-1.8%2C%201.11%2C%202.0%2C%202.1-blue.svg
-        :target: https://pypi.python.org/pypi/django-improved-user/
+        :target: https://pypi.org/project/django-improved-user/
         :alt: Django Support
 
 .. |License| image:: http://img.shields.io/pypi/l/django-improved-user.svg

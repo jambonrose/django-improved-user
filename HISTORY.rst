@@ -49,7 +49,7 @@ Next Release
   `djangopackages.org detail page`_. See
   `djangopackages/djangopackages#483`_ for more information.
 
-.. _package PyPI: https://pypi.python.org/pypi/django-improved-user
+.. _package PyPI: https://pypi.org/project/django-improved-user/
 .. _djangopackages.org detail page: https://djangopackages.org/packages/p/django-improved-user/
 .. _djangopackages/djangopackages#483: https://github.com/djangopackages/djangopackages/issues/483
 
