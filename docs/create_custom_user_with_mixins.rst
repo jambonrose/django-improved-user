@@ -20,7 +20,7 @@ password, but which does not feature either the ``short_name`` or
     :py:class:`~improved_user.models.User` model, rather than replace
     it as shown in this tutorial, use the following steps:
 
-    1. inherit :py:class:`~improved_user.mixins.AbstractUser`
+    1. inherit :py:class:`~improved_user.model_mixins.AbstractUser`
     2. add new fields as desired
     3. override
        :attr:`~django.contrib.auth.models.CustomUser.REQUIRED_FIELDS`
@@ -45,12 +45,12 @@ We then import mix-in classes from Improved User.
 .. literalinclude:: ../example_replacement_project/user_replacement/models.py
     :lines: 5-6
 
-The :py:class:`~improved_user.mixins.DjangoIntegrationMixin` class
+The :py:class:`~improved_user.model_mixins.DjangoIntegrationMixin` class
 provides fields that allow the model to integrate with Django's default
 Authentication Backend as well as a field to allow for integration with
 Django's Admin.
 
-The :py:class:`~improved_user.mixins.EmailAuthMixin` creates an
+The :py:class:`~improved_user.model_mixins.EmailAuthMixin` creates an
 :py:class:`~django.db.models.EmailField` and sets the field to be used
 as the username during the authentication process.
 
@@ -63,7 +63,7 @@ used in Django.
 .. DANGER::
     Improved Users' custom
     :py:class:`~improved_user.managers.UserManager` is intended to work
-    with subclasses of :py:class:`~improved_user.mixins.EmailAuthMixin`,
+    with subclasses of :py:class:`~improved_user.model_mixins.EmailAuthMixin`,
     and will likely not work with your User subclass if you are using a
     different field for your username. You will, in that case, need to
     create your own ``UserManager``. The source code for Improved Users'
@@ -78,7 +78,7 @@ used in Django.
     :attr:`~django.contrib.auth.models.CustomUser.USERNAME_FIELD` on
     your User model to the name of the field that should serve as the
     username.  Please take a look at the source of
-    :py:class:`~improved_user.mixins.EmailAuthMixin` for an example of
+    :py:class:`~improved_user.model_mixins.EmailAuthMixin` for an example of
     this.
 
 With all our tools in place, we can now create a User model. We start by
@@ -99,4 +99,4 @@ making sure to internationalize the strings. Our full and final
 .. TIP::
     Setting ``abstract = True`` in the ``Meta`` class would allow the
     class above to be an AbstractUser model similar to
-    :py:class:`~improved_user.mixins.AbstractUser`
+    :py:class:`~improved_user.model_mixins.AbstractUser`

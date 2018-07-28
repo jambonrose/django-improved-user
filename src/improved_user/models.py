@@ -5,7 +5,7 @@ Mixin classes used to create this class may be found in mixins.py
 The UserManager is found in managers.py
 
 """
-from .mixins import AbstractUser
+from .model_mixins import AbstractUser
 
 
 # pylint: disable=too-many-ancestors

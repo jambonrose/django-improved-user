@@ -25,7 +25,7 @@ However, the package serves a dual purpose: providing a best-practice
 user model as well as providing mix-in classes. The
 :py:class:`~improved_user.models.User` model in
 :py:mod:`improved_user.models` is built with modular classes found in
-:py:mod:`improved_user.mixins`, which may be reused to build your own
+:py:mod:`improved_user.model_mixins`, which may be reused to build your own
 custom User. The classes in :py:mod:`improved_user.forms` may be used to
 either integrate or extend the improved ``User`` as well, and the
 documentation is therefore split to reflect that differences as well.
@@ -45,15 +45,15 @@ provides the :py:class:`~improved_user.models.User` (connected to the
 Extending the Package
 *********************
 
-You you wish to extend the code supplied by this package,
-:doc:`mixin_models` documents classes in :py:mod:`improved_user.mixins`
+If you wish to extend the code supplied by this package,
+:doc:`model_mixins` documents classes in :py:mod:`improved_user.model_mixins`
 to help build your own user.
-:py:class:`~improved_user.mixins.AbstractUser` is notably meant to be
+:py:class:`~improved_user.model_mixins.AbstractUser` is notably meant to be
 extended, while other classes such as
-:py:class:`~improved_user.mixins.DjangoIntegrationMixin`,
-:py:class:`~improved_user.mixins.EmailAuthMixin`
-:py:class:`~improved_user.mixins.FullNameMixin`
-:py:class:`~improved_user.mixins.ShortNameMixin` can be mixed and
+:py:class:`~improved_user.model_mixins.DjangoIntegrationMixin`,
+:py:class:`~improved_user.model_mixins.EmailAuthMixin`
+:py:class:`~improved_user.model_mixins.FullNameMixin`
+:py:class:`~improved_user.model_mixins.ShortNameMixin` can be mixed and
 matched as desired. Similarly, the :doc:`mixin_forms` details the
 :py:class:`~improved_user.forms.AbstractUserCreationForm` and
 :py:class:`~improved_user.forms.AbstractUserChangeForm` classes found in
@@ -73,5 +73,5 @@ Reference Documents
    forms
    factories
    admin
-   mixin_models
+   model_mixins
    mixin_forms
