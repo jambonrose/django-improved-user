@@ -100,3 +100,7 @@ Configuration and Usage
 
 7. You're done! 🎉 Run migrations or go back to programming the rest
    of your project.
+
+.. NOTE::
+    Improved user also comes with forms, test factories, and an admin panel.
+    Take a look at the :doc:`source/modules` for more information.
