@@ -36,3 +36,7 @@ In a new Django project, perform the following steps in the
             },
             # include other password validators here
         ]
+
+.. NOTE::
+    Improved user also comes with forms, test factories, and an admin panel.
+    Take a look at the :doc:`source/modules` for more information.
