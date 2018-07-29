@@ -19,12 +19,11 @@ as an introduction to using custom User models in Django.
     <iframe width="560" height="315" src="https://www.youtube.com/embed/458KmAKq0bQ?list=PLs4CJRBY5F1KsK4AbFaPsUT8X8iXc7X84" frameborder="0" allowfullscreen></iframe>
     </center>
 
-In turn, Andrew was frustrated by the lack of modularity in Django's
-existing ``auth`` codebase. Having described (in painstaking detail) the
-process of creating custom User models in `his book, Django Unleashed`_,
-Andrew felt that developers should be able to import and compose classes
-to properly integrate with Django's permissions and/or admin. The two
-set out to build a project that would:
+In turn, Andrew wished for more modularity in Django's existing ``auth``
+codebase. Having described the process of creating custom User models in
+`his book, Django Unleashed`_, Andrew felt that developers should be
+able to import and compose classes to properly integrate with Django's
+permissions and/or admin. The two set out to build a project that would:
 
 1. provide a User model that authenticates via email (not username)
 2. provide a User model with global identity name-fields (full name and short
