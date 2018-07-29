@@ -14,7 +14,8 @@ Next Release
 - Django 1.9 and 1.10 are not tested against, as Django does not support
   them, but they likely work.
 - **Breaking change**: Model mix-in classes now exist in their own
-  module! Import from `model_mixin` instead of `models`. (`#46`_, `#96`_)
+  module! Import from `model_mixins` instead of `models`. (`#46`_,
+  `#96`_)
 - Fix issue `#49`_: allow form classes to be imported without requiring
   project to be in ``INSTALLED_APPS`` (See `#36`_ and `#46`_ below for
   associated error and reasoning) (`#50`_)
@@ -49,7 +50,7 @@ Next Release
   `djangopackages.org detail page`_. See
   `djangopackages/djangopackages#483`_ for more information.
 
-.. _package PyPI: https://pypi.python.org/pypi/django-improved-user
+.. _package PyPI: https://pypi.org/project/django-improved-user/
 .. _djangopackages.org detail page: https://djangopackages.org/packages/p/django-improved-user/
 .. _djangopackages/djangopackages#483: https://github.com/djangopackages/djangopackages/issues/483
 

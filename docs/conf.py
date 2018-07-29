@@ -120,6 +120,11 @@ def process_docstring(app, what, name, obj, options, lines):
 def setup(app):
     # Register the docstring processor with sphinx
     app.connect('autodoc-process-docstring', process_docstring)
+    app.add_crossref_type(
+        directivename='setting',
+        rolename='setting',
+        indextemplate='pair: %s; setting',
+    )
 
 
 # -- General configuration ------------------------------------------------

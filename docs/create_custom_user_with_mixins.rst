@@ -2,14 +2,22 @@
 How To: Create a Custom User using Mixins
 #########################################
 
-The :py:class:`~improved_user.models.User` supplied by the package is
-not always what you want, and being able to flexibly create a custom
-User model for specific use cases is important.  While extending the
-model is a straightforward process, creating a new User model that does
-not have fields found on the improved User is more difficult.  In this
-tutorial, we will create a new custom User that has an email field and
-password, but which does not feature either the ``short_name`` or
-``full_name`` fields.
+.. WARNING::
+    This configuration method is but one of three, and may not make the
+    most sense for your project. Please read
+    :doc:`select_configuration_method` before continuing, or else follow
+    the instructions in :doc:`quickstart`.
+
+The :py:class:`~improved_user.models.User` and
+:py:class:`~improved_user.model_mixins.AbstractUser` classes supplied by
+the package are not always what you want. In some cases, they may supply
+fields you do not need or wish for. This tutorial demonstrates how to
+create :code:`User` models using the provided mix-in classes,
+effectively building the model from scratch.
+
+In this tutorial, we will create a new custom User that has an email
+field and password, but which does not feature either the ``short_name``
+or ``full_name`` fields.
 
 .. WARNING::
     Not supplying methods for names on the User model will cause
@@ -21,6 +29,7 @@ password, but which does not feature either the ``short_name`` or
     it as shown in this tutorial, use the following steps:
 
     1. inherit :py:class:`~improved_user.model_mixins.AbstractUser`
+       (follow the instructions in :doc:`quickstart` to see how)
     2. add new fields as desired
     3. override
        :attr:`~django.contrib.auth.models.CustomUser.REQUIRED_FIELDS`
@@ -100,3 +109,6 @@ making sure to internationalize the strings. Our full and final
     Setting ``abstract = True`` in the ``Meta`` class would allow the
     class above to be an AbstractUser model similar to
     :py:class:`~improved_user.model_mixins.AbstractUser`
+
+For all of the classes you may use to create your own :code:`User`
+model, please see :mod:`~improved_user.model_mixins`.

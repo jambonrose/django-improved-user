@@ -1,6 +1,13 @@
-================================================
-Welcome to Django Improved User's documentation!
-================================================
+======================================
+Documentation for Django Improved User
+======================================
+
+Welcome! Below you will find the table of contents for Improved User.
+
+If you're in a rush, head over to :doc:`quickstart`.
+
+If you're new and want to see what your options are, please read
+:doc:`select_configuration_method`.
 
 .. toctree::
    :caption: Contents:
@@ -10,8 +17,11 @@ Welcome to Django Improved User's documentation!
    quickstart
    quickstart_contrib
    rationale
-   data_migrations
+   select_configuration_method
+   email_warning
+   integration
    create_custom_user_with_mixins
+   data_migrations
    contributing
    source/modules
    change_log

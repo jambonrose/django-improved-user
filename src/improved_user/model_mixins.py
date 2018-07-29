@@ -97,7 +97,7 @@ class AbstractUser(
     All fields other than email and password are optional.
 
     Sets :attr:`~django.db.models.Model.objects` to
-    :class:`~improved_user.models.UserManager`.
+    :class:`~improved_user.managers.UserManager`.
 
     Documentation about Django's
     :class:`~django.contrib.auth.models.AbstractBaseUser` may be helpful
