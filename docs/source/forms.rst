@@ -2,8 +2,14 @@
 Forms
 #####
 
-Forms meant to be used directly in your views. For classes to help build
-your own forms, please see :doc:`mixin_forms`.
+.. py:module:: improved_user.forms
+
+Abstract forms meant to be inherited or concrete forms meant to be
+used direction in your views.
+
+.. NOTE::
+    These forms are unnecessary starting in Django 2.1, as Django now
+    supports custom user models in its own forms.
 
 .. contents::
    :local:
@@ -22,6 +28,24 @@ UserChangeForm
 **************
 
 .. autoclass::  improved_user.forms.UserChangeForm
+   :members:
+   :private-members:
+   :show-inheritance:
+
+************************
+AbstractUserCreationForm
+************************
+
+.. autoclass::  improved_user.forms.AbstractUserCreationForm
+   :members:
+   :private-members:
+   :show-inheritance:
+
+**********************
+AbstractUserChangeForm
+**********************
+
+.. autoclass::  improved_user.forms.AbstractUserChangeForm
    :members:
    :private-members:
    :show-inheritance:
