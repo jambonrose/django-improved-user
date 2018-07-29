@@ -64,6 +64,10 @@ Configuration and Usage
     .. literalinclude:: ../example_extension_project/user_extension/models.py
         :lines: 9-10
 
+.. ATTENTION::
+    If you add your own fields to the model, you may wish to modify
+    :attr:`~django.contrib.auth.models.CustomUser.REQUIRED_FIELDS`.
+
 5. Define or replace :setting:`AUTH_USER_MODEL` in your project settings
    with the new model, as below (replace :code:`user_app` with the name
    of your own app).
@@ -71,6 +75,10 @@ Configuration and Usage
     .. code:: python
 
         AUTH_USER_MODEL='user_app.User'
+
+.. TIP::
+    Remember to use :py:func:`~django.contrib.auth.get_user_model` to
+    get your new model. Don't import it directly!
 
 6. In Django > 1.9, while still in settings, change
    :class:`UserAttributeSimilarityValidator` to match correct
