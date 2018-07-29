@@ -18,6 +18,7 @@ If you're new and want to see what your options are, please read
    quickstart_contrib
    rationale
    select_configuration_method
+   email_warning
    integration
    create_custom_user_with_mixins
    data_migrations
