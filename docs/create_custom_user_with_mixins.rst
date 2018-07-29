@@ -109,3 +109,6 @@ making sure to internationalize the strings. Our full and final
     Setting ``abstract = True`` in the ``Meta`` class would allow the
     class above to be an AbstractUser model similar to
     :py:class:`~improved_user.model_mixins.AbstractUser`
+
+For all of the classes you may use to create your own :code:`User`
+model, please see :mod:`~improved_user.model_mixins`.
