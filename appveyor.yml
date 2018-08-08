@@ -33,7 +33,7 @@ environment:
     DJANGO: "django>=2.0,<2.1"
 
   - PYTHON: "C:\\Python35"
-    DJANGO: "django>=2.1rc,<2.2"
+    DJANGO: "django>=2.1,<2.2"
 
   - PYTHON: "C:\\Python36"
     DJANGO: "django>=1.11,<1.12"
@@ -42,13 +42,13 @@ environment:
     DJANGO: "django>=2.0,<2.1"
 
   - PYTHON: "C:\\Python36"
-    DJANGO: "django>=2.1rc,<2.2"
+    DJANGO: "django>=2.1,<2.2"
 
   - PYTHON: "C:\\Python37"
     DJANGO: "django>=2.0,<2.1"
 
   - PYTHON: "C:\\Python37"
-    DJANGO: "django>=2.1rc,<2.2"
+    DJANGO: "django>=2.1,<2.2"
 
 
 init:
