@@ -9,7 +9,7 @@ flake8-commas==2.0.0
 flake8-quotes==1.0.0
 flake8==3.5.0
 Pygments==2.2.0
-pylint-django==2.0
+pylint-django==2.0.2
 pylint==2.1.0
 python-dateutil==2.7.3
 setuptools==40.0.0
