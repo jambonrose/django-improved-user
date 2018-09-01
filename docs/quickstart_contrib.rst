@@ -4,9 +4,9 @@ Quickstart: Contributing
 
 First off, thanks for taking the time to contribute! ✨🎉
 
-This document assumes that you have forked and cloned the repository to 
-work on the package locally. If you are unsure how to do this, please see 
-the :doc:`contributing` documentation.
+This document assumes that you have forked and cloned the repository to
+work on the package locally. If you are unsure how to do this, please
+see the :doc:`contributing` documentation.
 
 To test the package, start by installing it locally.
 
@@ -29,14 +29,16 @@ You can limit tests or pass paramaters as when using ``manage.py test``.
 
     $ ./runtests.py tests.test_basic -v 3
 
-If you have Python 3.4 or greater installed, you may use ``tox`` to run 
-all linters and test the package with multiple versions of Python and Django.
+If you have all of the supported Python versions installed (Python 3.4,
+3.5, 3.6, and 3.7), you may use ``tox`` to run all linters and test the
+package with multiple versions of Python and Django.
 
 .. code:: console
 
     $ tox
 
-You may also limit tests to specific environments or test suites with tox. For instance:
+You may also limit tests to specific environments or test suites with
+tox. For instance:
 
 .. code:: console
 
