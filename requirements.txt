@@ -13,6 +13,6 @@ pylint-django==2.0.2
 pylint==2.1.1
 python-dateutil==2.7.3
 setuptools==40.4.3
-tox==3.2.1
+tox==3.4.0
 twine==1.11.0
 wheel==0.31.1
