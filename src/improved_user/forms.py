@@ -18,7 +18,6 @@ except ImportError:  # pragma: no cover
         """
         def validate_password(self, password, instance):
             """Accept password and user model and do nothing"""
-            pass
 
         # pylint: disable=no-self-use
         def password_validators_help_text_html(self):
@@ -27,7 +26,6 @@ except ImportError:  # pragma: no cover
             implicitly return None, as all strings are valid passwords
 
             """
-            pass
         # pylint: enable=no-self-use
 
     password_validation = EmptyValidator()

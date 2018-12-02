@@ -114,7 +114,6 @@ class CustomTestCommand(TestCommand):
 
     def finalize_options(self):
         """Needed by Superclass"""
-        pass
 
     def run(self):
         installed_dists = self.install_dists(self.distribution)
