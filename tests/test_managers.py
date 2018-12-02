@@ -25,8 +25,8 @@ class UserManagerTestCase(TestCase):
     def test_create_user_email_domain_normalize_with_whitespace(self):
         """Normalize email allows whitespace in email local section"""
         # pylint: disable=anomalous-backslash-in-string
-        returned = UserManager.normalize_email('email\ with_whitespace@D.COM')
-        self.assertEqual(returned, 'email\ with_whitespace@d.com')
+        returned = UserManager.normalize_email(r'email\ with_whitespace@D.COM')
+        self.assertEqual(returned, r'email\ with_whitespace@d.com')
         # pylint: enable=anomalous-backslash-in-string
 
     def test_empty_username(self):
