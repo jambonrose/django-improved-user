@@ -10,7 +10,7 @@ flake8-quotes==1.0.0
 flake8==3.7.7
 Pygments==2.3.1
 pylint-django==2.0.6
-pylint==2.2.2
+pylint==2.3.0
 python-dateutil==2.8.0
 setuptools==40.6.2
 tox==3.5.3
