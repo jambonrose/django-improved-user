@@ -1,4 +1,4 @@
-astroid==2.1.0
+astroid==2.2.0
 bumpversion==0.5.3
 check-manifest==0.37
 coverage==4.5.2
