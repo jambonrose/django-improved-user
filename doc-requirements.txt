@@ -3,5 +3,5 @@ factory_boy==2.11.1
 Faker==1.0.5
 Pygments==2.3.1
 python-dateutil==2.8.0
-sphinx-rtd-theme==0.4.2
+sphinx-rtd-theme==0.4.3
 Sphinx==1.8.2
