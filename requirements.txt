@@ -1,6 +1,6 @@
 astroid==2.2.5
 bumpversion==0.5.3
-check-manifest==0.37
+check-manifest==0.38
 coverage==4.5.2
 docutils==0.14
 factory_boy==2.12.0
