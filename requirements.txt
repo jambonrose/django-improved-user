@@ -15,4 +15,4 @@ python-dateutil==2.8.0
 setuptools==41.0.1
 tox==3.13.2
 twine==1.13.0
-wheel==0.32.3
+wheel==0.33.4
