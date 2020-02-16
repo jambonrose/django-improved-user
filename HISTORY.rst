@@ -7,6 +7,11 @@ Next Release
 
 - Nothing Yet!
 
+1.0.1 (2020-02-16)
+------------------
+
+- Add flexibility to admin panel usage; document usage
+
 1.0.0 (2018-07-28)
 ------------------
 

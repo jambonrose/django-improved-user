@@ -22,6 +22,7 @@ If you're new and want to see what your options are, please read
    integration
    create_custom_user_with_mixins
    data_migrations
+   admin_usage
    contributing
    source/modules
    change_log
