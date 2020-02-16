@@ -1,12 +1,8 @@
 """Admin Configuration for Improved User"""
-from django.contrib import admin
-from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import ugettext_lazy as _
 
 from .forms import UserChangeForm, UserCreationForm
-
-User = get_user_model()  # pylint: disable=invalid-name
 
 
 class UserAdmin(BaseUserAdmin):
@@ -24,7 +20,7 @@ class UserAdmin(BaseUserAdmin):
                     "is_superuser",
                     "groups",
                     "user_permissions",
-                )
+                ),
             },
         ),
         (_("Important dates"), {"fields": ("last_login", "date_joined")}),
@@ -43,6 +39,3 @@ class UserAdmin(BaseUserAdmin):
     list_display = ("email", "full_name", "short_name", "is_staff")
     search_fields = ("email", "full_name", "short_name")
     ordering = ("email",)
-
-
-admin.site.register(User, UserAdmin)
