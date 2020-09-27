@@ -1,6 +1,6 @@
 """Admin Configuration for Improved User"""
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from .forms import UserChangeForm, UserCreationForm
 

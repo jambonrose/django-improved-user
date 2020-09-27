@@ -46,7 +46,7 @@ tools we need to build the model. We first import classes from Django.
 :py:class:`~django.contrib.auth.models.PermissionsMixin` will serve as a
 base for the User (click the classes in this sentence to see Django's
 official documentation on the subject). We also import
-:py:func:`~django.utils.translation.ugettext_lazy` to enable translation
+:py:func:`~django.utils.translation.gettext_lazy` to enable translation
 of our strings.
 
 We then import mix-in classes from Improved User.
