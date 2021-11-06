@@ -20,7 +20,7 @@ class UserManager(BaseUserManager):
     def _create_user(
         self, email, password, is_staff, is_superuser, **extra_fields
     ):
-        """Helper method to save a User with improved user fields"""
+        """Save a User with improved user fields; helper method"""
         if not email:
             raise ValueError("An email address must be provided.")
         if "username" in extra_fields:

@@ -4,11 +4,11 @@ from django.contrib.auth import get_user_model
 try:
     from factory import Faker, PostGenerationMethodCall
     from factory.django import DjangoModelFactory
-except (ImportError, ModuleNotFoundError):  # pragma: no cover
+except ImportError:  # pragma: no cover
     raise Exception(
         "Please install factory_boy to use Improved User's UserFactory.\n"
         "pip install factory_boy==2.9.2"
-    )
+    ) from None
 
 User = get_user_model()  # pylint: disable=invalid-name
 

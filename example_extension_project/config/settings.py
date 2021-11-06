@@ -1,6 +1,4 @@
-"""
-Django settings for test project demonstrating
-extension of django-improved-user
+"""Settings for example extension project of django-improved-user
 
 https://docs.djangoproject.com/en/stable/topics/settings/
 https://docs.djangoproject.com/en/stable/ref/settings/

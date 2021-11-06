@@ -10,12 +10,10 @@ try:
 except ImportError:  # pragma: no cover
 
     class EmptyValidator:
-        """
-        Class to mimic password validator API
+        """Mimic of password validator API
 
         Django 1.8 doesn't have password strength validation
         We therefore introduce a mimic into the namespace
-
         """
 
         def validate_password(self, password, instance):
@@ -23,10 +21,10 @@ except ImportError:  # pragma: no cover
 
         # pylint: disable=no-self-use
         def password_validators_help_text_html(self):
-            """
+            """Mimic function
+
             Used by password1 field;
             implicitly return None, as all strings are valid passwords
-
             """
 
         # pylint: enable=no-self-use
@@ -38,9 +36,9 @@ User = get_user_model()  # pylint: disable=invalid-name
 
 
 class AbstractUserCreationForm(forms.ModelForm):
-    """
-    A form that creates a user, with no privileges, from the given
-    username and password.
+    """Abstract Form to create an unprivileged user
+
+    Create a User with no permissions based on username and password.
     """
 
     error_messages = {
@@ -64,8 +62,7 @@ class AbstractUserCreationForm(forms.ModelForm):
     )
 
     def clean_password2(self):
-        """
-        Check wether password 1 and password 2 are equivalent
+        """Check wether password 1 and password 2 are equivalent
 
         While ideally this would be done in clean, there is a chance a
         superclass could declare clean and forget to call super. We
@@ -121,7 +118,8 @@ class AbstractUserCreationForm(forms.ModelForm):
 
 
 class UserCreationForm(AbstractUserCreationForm):
-    """
+    """Form to create an unprivileged user
+
     A concrete implementation of AbstractUserCreationForm that uses an
     e-mail address as a user's identifier.
     """
@@ -194,7 +192,7 @@ class AbstractUserChangeForm(forms.ModelForm):
             )
 
     def get_local_password_path(self):
-        """Method to return relative path to password form
+        """Return relative path to password form
 
         Will return rel_password_url attribute on form
         or else '../password/'. If subclasses cannot simply replace

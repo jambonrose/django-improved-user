@@ -46,6 +46,7 @@ django_setup()
 
 
 def annotate_field(lines, field, models):
+    """Add documentation based on Django field data"""
     if not hasattr(field, "verbose_name") and not hasattr(field, "help_text"):
         return lines
 
@@ -70,6 +71,7 @@ def annotate_field(lines, field, models):
 
 
 def process_docstring(app, what, name, obj, options, lines):
+    """Use Model or Form data to improve docstrings"""
     # https://djangosnippets.org/snippets/2533/
     # https://gist.github.com/abulka/48b54ea4cbc7eb014308
     from django.db import models
@@ -118,7 +120,7 @@ def process_docstring(app, what, name, obj, options, lines):
 
 
 def setup(app):
-    # Register the docstring processor with sphinx
+    """Register the docstring processor with sphinx"""
     app.connect("autodoc-process-docstring", process_docstring)
     app.add_crossref_type(
         directivename="setting",

@@ -13,9 +13,9 @@ from improved_user.models import User
 
 # pylint: disable=missing-docstring,too-few-public-methods
 def mock_inputs(inputs):
-    """
-    Decorator to temporarily replace input/getpass to allow interactive
-    createsuperuser.
+    """Replace input/getpass
+
+    Use as decorator to allow interactive createsuperuser.
     """
 
     def inner(test_func):
@@ -58,12 +58,13 @@ def mock_inputs(inputs):
 
 
 class MockTTY:
-    """
-    A fake stdin object that pretends to be a TTY to be used in conjunction
-    with mock_inputs.
+    """A fake stdin object
+
+    Pretend to be a TTY; to be used in conjunction with mock_inputs.
     """
 
     def isatty(self):  # pylint: disable=no-self-use
+        """Assert this is a TTY"""
         return True
 
 

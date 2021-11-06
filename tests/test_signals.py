@@ -10,7 +10,7 @@ class TestCreateSuperUserSignals(TestCase):
 
     # pylint: disable=unused-argument
     def post_save_listener(self, *args, **kwargs):
-        """Utility function to note when signal sent"""
+        """Note when signal sent; helper function"""
         self.signals_count += 1
 
     # pylint: enable=unused-argument

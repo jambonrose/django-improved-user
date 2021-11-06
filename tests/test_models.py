@@ -100,9 +100,7 @@ class UserModelTestCase(TestCase):
         "Password strength checks not available on Django 1.8",
     )
     def test_user_double_save(self):
-        """
-        Calling user.save() twice should trigger password_changed() once.
-        """
+        """Trigger password_changed() once if user.save() called twice"""
         user = User.objects.create_user(
             email="test@example.com", password="foo"
         )
@@ -120,7 +118,8 @@ class UserModelTestCase(TestCase):
         "Password strength checks not available on Django 1.8",
     )
     def test_check_password_upgrade(self):
-        """
+        """Don't update password if adjusting hash iteration
+
         password_changed() shouldn't be called if User.check_password()
         triggers a hash iteration upgrade.
         """

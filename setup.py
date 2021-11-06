@@ -1,20 +1,17 @@
 #!/usr/bin/env python3
-"""
-====================
-Django Improved User
-====================
+"""Django Improved User
 
 :website: https://github.com/jambonsw/django-improved-user/
 :copyright: Copyright 2018 JamBon Software
 :license: Simplified BSD, see LICENSE for details.
 """
 
-from distutils.command.check import check as CheckCommand
+from distutils.command.check import check as CheckCommand  # noqa: N812
 from operator import attrgetter
 from os.path import abspath, dirname, join
 
 from setuptools import find_packages, setup
-from setuptools.command.test import test as TestCommand
+from setuptools.command.test import test as TestCommand  # noqa: N812
 
 HERE = abspath(dirname(__file__))
 
@@ -46,20 +43,18 @@ class CustomCheckCommand(CheckCommand):
     negative_opt = {"disable-metadata": "metadata"}
 
     def initialize_options(self):
-        """Setup superclass and new options"""
+        """Initialize superclass and new options"""
         super().initialize_options()
         self.enforce_email = 0  # pylint:disable=attribute-defined-outside-init
 
     def check_metadata(self):
-        """
-        Ensures that all required elements of meta-data are supplied.
+        """Ensure all required meta-data are supplied.
 
         Specifically: name, version, URL, author or maintainer
         Warns if any are missing.
 
         If enforce-email option is true, author and/or maintainer must
         specify an email.
-
         """
         metadata = self.distribution.metadata
 
@@ -132,6 +127,7 @@ class CustomTestCommand(TestCommand):
         """Needed by Superclass"""
 
     def run(self):
+        """Handle command and determine whether to run tests"""
         installed_dists = self.install_dists(self.distribution)
 
         if self.dry_run:
@@ -144,6 +140,7 @@ class CustomTestCommand(TestCommand):
                 self.run_tests()
 
     def run_tests(self):
+        """Test project"""
         from runtests import (
             check_missing_migrations,
             configure_django,

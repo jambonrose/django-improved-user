@@ -45,7 +45,7 @@ class FullNameMixin(models.Model):
         abstract = True
 
     def get_full_name(self):
-        """Returns the full name of the user."""
+        """Return the full name of the user."""
         return self.full_name
 
 
@@ -58,7 +58,7 @@ class ShortNameMixin(models.Model):
         abstract = True
 
     def get_short_name(self):
-        """Returns the short name for the user."""
+        """Return the short name for the user."""
         return self.short_name
 
 
@@ -83,7 +83,7 @@ class EmailAuthMixin(models.Model):
         self.email = self.__class__.objects.normalize_email(self.email)
 
     def email_user(self, subject, message, from_email=None, **kwargs):
-        """Sends an email to this User."""
+        """Send an email to this User."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
 
@@ -96,11 +96,11 @@ class AbstractUser(
     PermissionsMixin,
     AbstractBaseUser,
 ):
-    """
-    An abstract base class meant to be inherited (do not instantiate
-    this). The class provides a fully featured User model with
-    admin-compliant permissions. Differs from Django's
-    :class:`~django.contrib.auth.models.AbstractUser`:
+    """Abstract User base class to be inherited.
+
+    Do not instantiate this class directly. The class provides a fully
+    featured User model with admin-compliant permissions. Differs from
+    Django's :class:`~django.contrib.auth.models.AbstractUser`:
 
     1. Login occurs with an email and password instead of username.
     2. Provides short_name and full_name instead of first_name and
