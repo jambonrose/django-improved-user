@@ -1,7 +1,7 @@
 """Tests for the extended User model"""
 from types import MethodType
 
-from django import VERSION as DjangoVersion
+from django import VERSION as DJANGO_VERSION
 from django.test import TestCase
 
 from .models import User
@@ -12,12 +12,12 @@ class ExtendedUserModelTests(TestCase):
 
     def test_user_creation(self):
         """Users can be created and can set/modify their password"""
-        email_lowercase = 'test@example.com'
-        password = 'password1!'
+        email_lowercase = "test@example.com"
+        password = "password1!"
         user = User.objects.create_user(email_lowercase, password)
         self.assertEqual(user.email, email_lowercase)
         self.assertTrue(user.has_usable_password())
-        self.assertFalse(user.check_password('wrong'))
+        self.assertFalse(user.check_password("wrong"))
         self.assertTrue(user.check_password(password))
 
         # Check we can manually set an unusable password
@@ -30,10 +30,10 @@ class ExtendedUserModelTests(TestCase):
         user.set_password(None)
         self.assertFalse(user.has_usable_password())
 
-        if DjangoVersion >= (2, 0):
+        if DJANGO_VERSION >= (2, 0):
             # no name methods on this one!
-            self.assertFalse(hasattr(user, 'get_full_name'))
-            self.assertFalse(hasattr(user, 'get_short_name'))
+            self.assertFalse(hasattr(user, "get_full_name"))
+            self.assertFalse(hasattr(user, "get_short_name"))
         else:
             with self.assertRaises(NotImplementedError):
                 user.get_full_name()
@@ -43,20 +43,20 @@ class ExtendedUserModelTests(TestCase):
     def test_fields_and_attributes(self):
         """Ensure the model has the fields and attributes we expect"""
         expected_fields = (
-            'id',
-            'password',
-            'last_login',
-            'is_superuser',
-            'is_staff',
-            'is_active',
-            'date_joined',
-            'email',
-            'groups',
-            'user_permissions',
+            "id",
+            "password",
+            "last_login",
+            "is_superuser",
+            "is_staff",
+            "is_active",
+            "date_joined",
+            "email",
+            "groups",
+            "user_permissions",
         )
         excluded_fields = (
-            'full_name',
-            'short_name',
+            "full_name",
+            "short_name",
         )
         user_fields = [field.name for field in User._meta.get_fields()]
         for expected_field in expected_fields:

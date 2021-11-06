@@ -32,4 +32,3 @@ front.
 
 .. _`RFC 5321`: https://tools.ietf.org/rfc/rfc5321.txt
 .. _`cause obscure security issues`: https://www.schneier.com/blog/archives/2018/04/obscure_e-mail_.html
-

@@ -63,4 +63,3 @@ the :py:class:`~improved_user.model_mixins.AbstractUser` are not
 desired. We recommend this method only to those very familiar with
 Django. For more information, please refer to
 :doc:`create_custom_user_with_mixins`.
-

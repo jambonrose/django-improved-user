@@ -10,8 +10,9 @@ class TestCreateSuperUserSignals(TestCase):
 
     # pylint: disable=unused-argument
     def post_save_listener(self, *args, **kwargs):
-        """Utility function to note when signal sent"""
+        """Note when signal sent; helper function"""
         self.signals_count += 1
+
     # pylint: enable=unused-argument
 
     def setUp(self):
@@ -25,10 +26,10 @@ class TestCreateSuperUserSignals(TestCase):
 
     def test_create_user(self):
         """Test User Creation"""
-        User.objects.create_user('mail@example.com')
+        User.objects.create_user("mail@example.com")
         self.assertEqual(self.signals_count, 1)
 
     def test_create_superuser(self):
         """Test Super User Creation"""
-        User.objects.create_superuser('mail@example.com', 'password')
+        User.objects.create_superuser("mail@example.com", "password")
         self.assertEqual(self.signals_count, 1)

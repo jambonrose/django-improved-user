@@ -5,14 +5,9 @@ coverage==6.1.1
 docutils==0.18
 factory_boy==3.2.1
 Faker==9.7.1
-flake8-commas==2.1.0
-flake8-quotes==3.3.1
-flake8==4.0.1
 Pygments==2.10.0
-pylint-django==2.4.4
 pylint==2.11.1
+pylint-django==2.4.4
 python-dateutil==2.8.2
-setuptools==58.3.0
 tox==3.24.4
 twine==3.4.2
-wheel==0.37.0

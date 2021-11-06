@@ -6,7 +6,7 @@ sites.
 """
 from re import search as re_search
 
-from django import VERSION as DjangoVersion
+from django import VERSION as DJANGO_VERSION
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core import mail
@@ -17,13 +17,12 @@ from improved_user.forms import UserCreationForm
 # TODO: remove the conditional import when Dj 1.10 dropped
 # pylint: disable=ungrouped-imports
 try:
-    from django.contrib.auth.views import (
-        INTERNAL_RESET_URL_TOKEN,
-    )
+    from django.contrib.auth.views import INTERNAL_RESET_URL_TOKEN
     from django.urls import reverse
 except ImportError:  # pragma: no cover
     from django.core.urlresolvers import reverse
-    INTERNAL_RESET_URL_TOKEN = 'set-password'
+
+    INTERNAL_RESET_URL_TOKEN = "set-password"
 # pylint: enable=ungrouped-imports
 
 
@@ -34,7 +33,8 @@ class TestDataMigration(TestCase):
         """Check UserManager properly created user"""
         User = get_user_model()  # pylint: disable=invalid-name
         self.assertTrue(
-            User.objects.filter(email='migrated@jambonsw.com').exists())
+            User.objects.filter(email="migrated@jambonsw.com").exists()
+        )
 
 
 class TestViews(TestCase):
@@ -42,15 +42,15 @@ class TestViews(TestCase):
 
     def test_home(self):
         """Test that homeview returns basic template"""
-        get_response = self.client.get(reverse('home'))
+        get_response = self.client.get(reverse("home"))
         self.assertEqual(200, get_response.status_code)
-        self.assertTemplateUsed(get_response, 'home.html')
-        self.assertTemplateUsed(get_response, 'base.html')
+        self.assertTemplateUsed(get_response, "home.html")
+        self.assertTemplateUsed(get_response, "base.html")
 
     def test_tester(self):
         """Ensure that tests behave as expected"""
-        email = 'hello@jambonsw.com'
-        password = 's4f3passw0rd!'
+        email = "hello@jambonsw.com"
+        password = "s4f3passw0rd!"
         User = get_user_model()  # pylint: disable=invalid-name
         User.objects.create_user(email, password)
         self.assertTrue(self.client.login(username=email, password=password))
@@ -58,26 +58,25 @@ class TestViews(TestCase):
     def test_account_registration(self):
         """Test that users can register Improved User accounts"""
         User = get_user_model()  # pylint: disable=invalid-name
-        email = 'hello@jambonsw.com'
-        password = 's4f3passw0rd!'
+        email = "hello@jambonsw.com"
+        password = "s4f3passw0rd!"
 
-        get_response = self.client.get(reverse('registration_register'))
+        get_response = self.client.get(reverse("registration_register"))
         self.assertEqual(200, get_response.status_code)
-        self.assertIsInstance(get_response.context['form'], UserCreationForm)
-        self.assertTemplateUsed('registration/registration_form.html')
-        self.assertTemplateUsed('base.html')
+        self.assertIsInstance(get_response.context["form"], UserCreationForm)
+        self.assertTemplateUsed("registration/registration_form.html")
+        self.assertTemplateUsed("base.html")
 
         post_response = self.client.post(
-            reverse('registration_register'),
+            reverse("registration_register"),
             data={
-                'email': email,
-                'password1': password,
-                'password2': password,
+                "email": email,
+                "password1": password,
+                "password2": password,
             },
         )
-        self.assertRedirects(post_response, reverse('registration_complete'))
-        self.assertTrue(
-            User.objects.filter(email=email).exists())
+        self.assertRedirects(post_response, reverse("registration_complete"))
+        self.assertTrue(User.objects.filter(email=email).exists())
         user = User.objects.get(email=email)
         self.assertTrue(user.check_password(password))
         self.assertFalse(user.is_active)
@@ -86,20 +85,25 @@ class TestViews(TestCase):
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].to, [email])
         self.assertEqual(
-            mail.outbox[0].subject, 'Account activation on testserver')
+            mail.outbox[0].subject, "Account activation on testserver"
+        )
         urlmatch = re_search(
-            r'https?://[^/]*(/.*activate/\S*)',
-            mail.outbox[0].body)
-        self.assertIsNotNone(urlmatch, 'No URL found in sent email')
+            r"https?://[^/]*(/.*activate/\S*)", mail.outbox[0].body
+        )
+        self.assertIsNotNone(urlmatch, "No URL found in sent email")
         url_path = urlmatch.groups()[0]
         self.assertEqual(
-            reverse('registration_activate',
-                    kwargs={'activation_key': url_path.split('/')[3]}),
-            url_path)
+            reverse(
+                "registration_activate",
+                kwargs={"activation_key": url_path.split("/")[3]},
+            ),
+            url_path,
+        )
         activation_get_response = self.client.get(url_path)
         self.assertRedirects(
             activation_get_response,
-            reverse('registration_activation_complete'))
+            reverse("registration_activation_complete"),
+        )
         # reload user from DB
         user = User.objects.get(email=email)
         self.assertTrue(user.is_active)
@@ -107,129 +111,144 @@ class TestViews(TestCase):
 
     def test_user_login_logout(self):
         """Simulate a user logging in and then out"""
-        email = 'hello@jambonsw.com'
-        password = 's4f3passw0rd!'
+        email = "hello@jambonsw.com"
+        password = "s4f3passw0rd!"
         User = get_user_model()  # pylint: disable=invalid-name
         User.objects.create_user(email, password)
         self.assertTrue(User.objects.filter(email=email).exists())
 
         # get login
-        get_response = self.client.get(reverse('login'))
+        get_response = self.client.get(reverse("login"))
         self.assertEqual(200, get_response.status_code)
-        self.assertTemplateUsed(get_response, 'registration/login.html')
-        self.assertTemplateUsed(get_response, 'base.html')
+        self.assertTemplateUsed(get_response, "registration/login.html")
+        self.assertTemplateUsed(get_response, "base.html")
 
         # post login
         form_data = {
-            'username': email,
-            'password': password,
+            "username": email,
+            "password": password,
         }
-        post_response = self.client.post(reverse('login'), data=form_data)
-        self.assertRedirects(post_response, reverse('home'))
+        post_response = self.client.post(reverse("login"), data=form_data)
+        self.assertRedirects(post_response, reverse("home"))
 
         # logout
-        get_logout_response = self.client.get(reverse('logout'))
+        get_logout_response = self.client.get(reverse("logout"))
         # TODO: remove condition when Dj 1.8 dropped
-        if DjangoVersion >= (1, 10):
-            self.assertRedirects(get_logout_response, reverse('login'))
+        if DJANGO_VERSION >= (1, 10):
+            self.assertRedirects(get_logout_response, reverse("login"))
 
     def test_password_change(self):
         """Simulate a user changing their password"""
-        email = 'hello@jambonsw.com'
-        password = 's4f3passw0rd!'
-        newpassword = 'neo.h1m1tsu!'
+        email = "hello@jambonsw.com"
+        password = "s4f3passw0rd!"
+        newpassword = "neo.h1m1tsu!"
         User = get_user_model()  # pylint: disable=invalid-name
         User.objects.create_user(email, password)
 
-        response = self.client.get(reverse('password_change'))
+        response = self.client.get(reverse("password_change"))
         self.assertRedirects(
             response,
-            '{}?next={}'.format(
-                reverse(settings.LOGIN_URL), reverse('password_change')))
+            "{}?next={}".format(
+                reverse(settings.LOGIN_URL), reverse("password_change")
+            ),
+        )
         self.client.login(username=email, password=password)
-        response = self.client.get(reverse('password_change'))
+        response = self.client.get(reverse("password_change"))
         # WARNING:
         # this uses Django's admin template
         # to change this behavior, place user_integration app before
         # the admin app in the INSTALLED_APPS settings
         self.assertTemplateUsed(
-            response, 'registration/password_change_form.html')
+            response, "registration/password_change_form.html"
+        )
 
         data = {
-            'old_password': password,
-            'new_password1': newpassword,
-            'new_password2': newpassword,
+            "old_password": password,
+            "new_password1": newpassword,
+            "new_password2": newpassword,
         }
         response = self.client.post(
-            reverse('password_change'), data=data, follow=True)
-        self.assertRedirects(response, reverse('password_change_done'))
+            reverse("password_change"), data=data, follow=True
+        )
+        self.assertRedirects(response, reverse("password_change_done"))
         self.assertEqual(response.status_code, 200)
         # WARNING:
         # this uses Django's admin template
         # to change this behavior, place user_integration app before
         # the admin app in the INSTALLED_APPS settings
         self.assertTemplateUsed(
-            response, 'registration/password_change_done.html')
+            response, "registration/password_change_done.html"
+        )
 
         self.client.logout()
         self.assertTrue(
-            self.client.login(username=email, password=newpassword))
+            self.client.login(username=email, password=newpassword)
+        )
 
     def test_password_reset(self):
         """Simulate a user resetting their password"""
-        email = 'hello@jambonsw.com'
-        password = 's4f3passw0rd!'
-        newpassword = 'neo.h1m1tsu!'
+        email = "hello@jambonsw.com"
+        password = "s4f3passw0rd!"
+        newpassword = "neo.h1m1tsu!"
         User = get_user_model()  # pylint: disable=invalid-name
         User.objects.create_user(email, password)
 
-        response = self.client.get(reverse('password_reset'))
+        response = self.client.get(reverse("password_reset"))
         self.assertEqual(response.status_code, 200)
         # WARNING:
         # this uses Django's admin template
         # to change this behavior, place user_integration app before
         # the admin app in the INSTALLED_APPS settings
         self.assertTemplateUsed(
-            response, 'registration/password_reset_form.html')
+            response, "registration/password_reset_form.html"
+        )
 
         post_response = self.client.post(
-            reverse('password_reset'),
-            data={'email': email},
-            follow=True)
-        self.assertRedirects(
-            post_response, reverse('password_reset_done'))
+            reverse("password_reset"), data={"email": email}, follow=True
+        )
+        self.assertRedirects(post_response, reverse("password_reset_done"))
         # WARNING:
         # this uses Django's admin template
         # to change this behavior, place user_integration app before
         # the admin app in the INSTALLED_APPS settings
         self.assertTemplateUsed(
-            post_response, 'registration/password_reset_done.html')
+            post_response, "registration/password_reset_done.html"
+        )
 
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].to, [email])
         self.assertEqual(
-            mail.outbox[0].subject, 'Password reset on testserver')
-        urlmatch = re_search(r'https?://[^/]*(/.*reset/\S*)',
-                             mail.outbox[0].body)
-        self.assertIsNotNone(urlmatch, 'No URL found in sent email')
+            mail.outbox[0].subject, "Password reset on testserver"
+        )
+        urlmatch = re_search(
+            r"https?://[^/]*(/.*reset/\S*)", mail.outbox[0].body
+        )
+        self.assertIsNotNone(urlmatch, "No URL found in sent email")
 
         url_path = urlmatch.groups()[0]
-        *_, uidb64, token = filter(None, url_path.split('/'))
+        *_, uidb64, token = filter(None, url_path.split("/"))
         self.assertEqual(
-            reverse('password_reset_confirm',
-                    kwargs={'uidb64': uidb64, 'token': token}),
-            url_path)
+            reverse(
+                "password_reset_confirm",
+                kwargs={"uidb64": uidb64, "token": token},
+            ),
+            url_path,
+        )
         # TODO: remove condition when Django 1.10 dropped
-        if DjangoVersion >= (1, 11):
+        if DJANGO_VERSION >= (1, 11):
             # Django class-based auth views redirects to a URL without a
             # token to prevent leaking the token to third-parties
             reset_get_response = self.client.get(url_path)
             self.assertRedirects(
                 reset_get_response,
-                reverse('password_reset_confirm',
-                        kwargs={
-                            'uidb64': uidb64,
-                            'token': INTERNAL_RESET_URL_TOKEN}))
+                reverse(
+                    "password_reset_confirm",
+                    kwargs={
+                        "uidb64": uidb64,
+                        "token": INTERNAL_RESET_URL_TOKEN,
+                    },
+                ),
+            )
             url_path = reset_get_response.url
         reset_get_response = self.client.get(url_path)
         self.assertEqual(reset_get_response.status_code, 200)
@@ -238,18 +257,21 @@ class TestViews(TestCase):
         # to change this behavior, place user_integration app before
         # the admin app in the INSTALLED_APPS settings
         self.assertTemplateUsed(
-            reset_get_response, 'registration/password_reset_confirm.html')
+            reset_get_response, "registration/password_reset_confirm.html"
+        )
 
         reset_post_response = self.client.post(
             url_path,
             data={
-                'new_password1': newpassword,
-                'new_password2': newpassword,
+                "new_password1": newpassword,
+                "new_password2": newpassword,
             },
             follow=True,
         )
         self.assertRedirects(
-            reset_post_response, reverse('password_reset_complete'))
+            reset_post_response, reverse("password_reset_complete")
+        )
 
         self.assertTrue(
-            self.client.login(username=email, password=newpassword))
+            self.client.login(username=email, password=newpassword)
+        )

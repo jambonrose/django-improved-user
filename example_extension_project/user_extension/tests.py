@@ -2,7 +2,7 @@
 from unittest import skipUnless
 from unittest.mock import patch
 
-from django import VERSION as DjangoVersion
+from django import VERSION as DJANGO_VERSION
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
@@ -18,12 +18,12 @@ class ExtensionTestCase(TestCase):
 
     def test_user_creation(self):
         """Users can be created and can set/modify their password"""
-        email_lowercase = 'test@example.com'
-        password = 'password1!'
+        email_lowercase = "test@example.com"
+        password = "password1!"
         user = User.objects.create_user(email_lowercase, password)
         self.assertEqual(user.email, email_lowercase)
         self.assertTrue(user.has_usable_password())
-        self.assertFalse(user.check_password('wrong'))
+        self.assertFalse(user.check_password("wrong"))
         self.assertTrue(user.check_password(password))
 
         # Check we can manually set an unusable password
@@ -37,16 +37,16 @@ class ExtensionTestCase(TestCase):
         self.assertFalse(user.has_usable_password())
 
         # can add short and full name
-        user.full_name = 'John Smith'
-        user.short_name = 'John'
+        user.full_name = "John Smith"
+        user.short_name = "John"
         user.save()
-        self.assertEqual(user.get_full_name(), 'John Smith')
-        self.assertEqual(user.get_short_name(), 'John')
+        self.assertEqual(user.get_full_name(), "John Smith")
+        self.assertEqual(user.get_short_name(), "John")
 
     def test_extra_boolean_field(self):
         """Verify that the current User has an extra boolean field"""
-        email_lowercase = 'test@example.com'
-        password = 'password1!'
+        email_lowercase = "test@example.com"
+        password = "password1!"
         user = User.objects.create_user(email_lowercase, password)
         self.assertFalse(user.verified)
         self.assertFalse(user.is_verified())
@@ -78,17 +78,18 @@ class ExtensionTestCase(TestCase):
         self.assertFalse(user.verified)
 
     @skipUnless(
-        DjangoVersion >= (1, 9),
-        'Password strength checks not available on Django 1.8')
-    @patch('django.contrib.auth.password_validation.password_changed')
+        DJANGO_VERSION >= (1, 9),
+        "Password strength checks not available on Django 1.8",
+    )
+    @patch("django.contrib.auth.password_validation.password_changed")
     def test_create_form_success(self, password_changed):
         """Successful submission of form data"""
         data = {
-            'email': 'jsmith@example.com',
-            'full_name': 'John Smith',  # optional field
-            'short_name': 'John',  # optional field
-            'password1': 'k4b3c14gl9077954',
-            'password2': 'k4b3c14gl9077954',
+            "email": "jsmith@example.com",
+            "full_name": "John Smith",  # optional field
+            "short_name": "John",  # optional field
+            "password1": "k4b3c14gl9077954",
+            "password2": "k4b3c14gl9077954",
         }
         form = UserCreationForm(data)
         self.assertTrue(form.is_valid())
@@ -96,40 +97,41 @@ class ExtensionTestCase(TestCase):
         self.assertEqual(password_changed.call_count, 0)
         user = form.save()
         self.assertEqual(password_changed.call_count, 1)
-        self.assertEqual(repr(user), '<User: jsmith@example.com>')
-        self.assertEqual(user.get_short_name(), 'John')
-        self.assertEqual(user.get_full_name(), 'John Smith')
-        self.assertTrue(user.check_password('k4b3c14gl9077954'))
+        self.assertEqual(repr(user), "<User: jsmith@example.com>")
+        self.assertEqual(user.get_short_name(), "John")
+        self.assertEqual(user.get_full_name(), "John Smith")
+        self.assertTrue(user.check_password("k4b3c14gl9077954"))
         self.assertFalse(user.verified)
 
     # TODO: Remove this test in favor of above after Dj1.8 dropped
     @skipUnless(
-        DjangoVersion < (1, 9),
-        'Password strength checks not available on Django 1.8')
+        DJANGO_VERSION < (1, 9),
+        "Password strength checks not available on Django 1.8",
+    )
     def test_create_form_success_pre_19(self):
         """Successful submission of form data"""
         data = {
-            'email': 'jsmith@example.com',
-            'full_name': 'John Smith',  # optional field
-            'short_name': 'John',  # optional field
-            'password1': 'test123',
-            'password2': 'test123',
+            "email": "jsmith@example.com",
+            "full_name": "John Smith",  # optional field
+            "short_name": "John",  # optional field
+            "password1": "test123",
+            "password2": "test123",
         }
         form = UserCreationForm(data)
         self.assertTrue(form.is_valid())
         user = form.save()
-        self.assertEqual(repr(user), '<User: jsmith@example.com>')
-        self.assertEqual(user.get_short_name(), 'John')
-        self.assertEqual(user.get_full_name(), 'John Smith')
-        self.assertTrue(user.check_password('test123'))
+        self.assertEqual(repr(user), "<User: jsmith@example.com>")
+        self.assertEqual(user.get_short_name(), "John")
+        self.assertEqual(user.get_full_name(), "John Smith")
+        self.assertTrue(user.check_password("test123"))
         self.assertFalse(user.verified)
 
     def test_update_form_success(self):
         """Test successful submission of update form"""
         user = UserFactory()
         data = {
-            'email': user.email,
-            'date_joined': user.date_joined,
+            "email": user.email,
+            "date_joined": user.date_joined,
         }
         form = UserChangeForm(data, instance=user)
         self.assertTrue(form.is_valid())
