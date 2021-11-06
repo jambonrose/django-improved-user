@@ -33,7 +33,6 @@ repos:
       rev: 5.9.3
       hooks:
           - id: isort
-            name: isort (python)
     - repo: https://github.com/ambv/black
       rev: 21.9b0
       hooks:
