@@ -61,8 +61,7 @@ class UserModelTestCase(TestCase):
             subject="Subject here",
             message="This is a message",
             from_email="from@domain.com",
-            # TODO: when Py3.4 removed, add comma, remove C815 exception
-            **kwargs,  # noqa: C815
+            **kwargs,
         )
         self.assertEqual(len(mail.outbox), 1)
         message = mail.outbox[0]

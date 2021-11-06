@@ -154,12 +154,10 @@ class UserCreationFormTest(TestDataMixin, TestCase):
     @override_settings(
         AUTH_PASSWORD_VALIDATORS=[
             {
-                "NAME": "django.contrib.auth.password_validation."
-                "CommonPasswordValidator"
+                "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"
             },
             {
-                "NAME": "django.contrib.auth.password_validation."
-                "MinimumLengthValidator",
+                "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
                 "OPTIONS": {"min_length": 12},
             },
         ]
@@ -188,8 +186,7 @@ class UserCreationFormTest(TestDataMixin, TestCase):
     @override_settings(
         AUTH_PASSWORD_VALIDATORS=[
             {
-                "NAME": "django.contrib.auth.password_validation."
-                "UserAttributeSimilarityValidator"
+                "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
             }
         ]
     )
@@ -214,8 +211,7 @@ class UserCreationFormTest(TestDataMixin, TestCase):
     @override_settings(
         AUTH_PASSWORD_VALIDATORS=[
             {
-                "NAME": "django.contrib.auth.password_validation."
-                "UserAttributeSimilarityValidator",
+                "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
                 "OPTIONS": {
                     "user_attributes": ("email", "full_name", "short_name")
                 },
@@ -224,7 +220,6 @@ class UserCreationFormTest(TestDataMixin, TestCase):
     )
     def test_password_help_text(self):
         """Ensure UserAttributeSimilarityValidator help text is shown"""
-        self.maxDiff = None
         form = UserCreationForm()
         if DJANGO_VERSION >= (3, 0):
             self.assertEqual(
@@ -246,8 +241,7 @@ class UserCreationFormTest(TestDataMixin, TestCase):
     @override_settings(
         AUTH_PASSWORD_VALIDATORS=[
             {
-                "NAME": "django.contrib.auth.password_validation."
-                "UserAttributeSimilarityValidator",
+                "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
                 "OPTIONS": {
                     "user_attributes": ("email", "full_name", "short_name")
                 },
