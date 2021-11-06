@@ -2,7 +2,7 @@
 from unittest import skipUnless
 from unittest.mock import patch
 
-from django import VERSION as DjangoVersion
+from django import VERSION as DJANGO_VERSION
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
@@ -78,7 +78,7 @@ class ExtensionTestCase(TestCase):
         self.assertFalse(user.verified)
 
     @skipUnless(
-        DjangoVersion >= (1, 9),
+        DJANGO_VERSION >= (1, 9),
         "Password strength checks not available on Django 1.8",
     )
     @patch("django.contrib.auth.password_validation.password_changed")
@@ -105,7 +105,7 @@ class ExtensionTestCase(TestCase):
 
     # TODO: Remove this test in favor of above after Dj1.8 dropped
     @skipUnless(
-        DjangoVersion < (1, 9),
+        DJANGO_VERSION < (1, 9),
         "Password strength checks not available on Django 1.8",
     )
     def test_create_form_success_pre_19(self):

@@ -2,7 +2,7 @@
 # pylint: disable=protected-access
 from unittest.mock import patch
 
-from django import VERSION as DjangoVersion
+from django import VERSION as DJANGO_VERSION
 from django.contrib.auth import authenticate
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.hashers import MD5PasswordHasher
@@ -197,7 +197,7 @@ class ImprovedUserModelBackendTest(TestCase):
         # Django 2.0 avoids cache permission problems
         # https://code.djangoproject.com/ticket/28713
         # https://github.com/django/django/pull/9242
-        if DjangoVersion >= (2, 0):
+        if DJANGO_VERSION >= (2, 0):
             self.assertEqual(
                 backend.get_user_permissions(user), {"auth.test_user"}
             )
@@ -211,7 +211,7 @@ class ImprovedUserModelBackendTest(TestCase):
         )
 
         # In Django 1.10, is_anonymous became a property.
-        if DjangoVersion >= (1, 10):
+        if DJANGO_VERSION >= (1, 10):
             is_anon_mock = True
         else:
             is_anon_mock = lambda s: True  # noqa: E731
@@ -251,7 +251,7 @@ class ImprovedUserModelBackendTest(TestCase):
         # Django 2.0 avoids cache permission problems
         # https://code.djangoproject.com/ticket/28713
         # https://github.com/django/django/pull/9242
-        if DjangoVersion >= (2, 0):
+        if DJANGO_VERSION >= (2, 0):
             self.assertEqual(
                 backend.get_user_permissions(user), {"auth.test_user"}
             )

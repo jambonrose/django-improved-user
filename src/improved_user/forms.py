@@ -1,5 +1,5 @@
 """Forms for Creating and Updating Improved Users"""
-from django import VERSION as DjangoVersion, forms
+from django import VERSION as DJANGO_VERSION, forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
@@ -48,7 +48,7 @@ class AbstractUserCreationForm(forms.ModelForm):
     }
 
     # TODO: move this to field when Django 1.8 support dropped
-    password_kwargs = {"strip": False} if DjangoVersion >= (1, 9) else {}
+    password_kwargs = {"strip": False} if DJANGO_VERSION >= (1, 9) else {}
 
     password1 = forms.CharField(
         label=_("Password"),
@@ -207,7 +207,7 @@ class AbstractUserChangeForm(forms.ModelForm):
             and self.rel_password_url is not None
         ):
             return self.rel_password_url
-        if DjangoVersion < (1, 9):
+        if DJANGO_VERSION < (1, 9):
             return "./password/"
         return "../password/"
 

@@ -4,7 +4,7 @@ from types import MethodType
 from unittest import skipUnless
 from unittest.mock import patch
 
-from django import VERSION as DjangoVersion
+from django import VERSION as DJANGO_VERSION
 from django.contrib.auth.hashers import get_hasher
 from django.core import mail
 from django.test import TestCase
@@ -96,7 +96,7 @@ class UserModelTestCase(TestCase):
         self.assertEqual(user.email, "foo@bar.com")
 
     @skipUnless(
-        DjangoVersion >= (1, 9),
+        DJANGO_VERSION >= (1, 9),
         "Password strength checks not available on Django 1.8",
     )
     def test_user_double_save(self):
@@ -116,7 +116,7 @@ class UserModelTestCase(TestCase):
             self.assertEqual(pw_changed.call_count, 1)
 
     @skipUnless(
-        DjangoVersion >= (1, 9),
+        DJANGO_VERSION >= (1, 9),
         "Password strength checks not available on Django 1.8",
     )
     def test_check_password_upgrade(self):

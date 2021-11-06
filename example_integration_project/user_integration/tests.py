@@ -6,7 +6,7 @@ sites.
 """
 from re import search as re_search
 
-from django import VERSION as DjangoVersion
+from django import VERSION as DJANGO_VERSION
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core import mail
@@ -134,7 +134,7 @@ class TestViews(TestCase):
         # logout
         get_logout_response = self.client.get(reverse("logout"))
         # TODO: remove condition when Dj 1.8 dropped
-        if DjangoVersion >= (1, 10):
+        if DJANGO_VERSION >= (1, 10):
             self.assertRedirects(get_logout_response, reverse("login"))
 
     def test_password_change(self):
@@ -235,7 +235,7 @@ class TestViews(TestCase):
             url_path,
         )
         # TODO: remove condition when Django 1.10 dropped
-        if DjangoVersion >= (1, 11):
+        if DJANGO_VERSION >= (1, 11):
             # Django class-based auth views redirects to a URL without a
             # token to prevent leaking the token to third-parties
             reset_get_response = self.client.get(url_path)
