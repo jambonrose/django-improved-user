@@ -179,7 +179,11 @@ class UserAdminTests(TestCase):
             response, reverse("auth_test_admin:improved_user_user_changelist")
         )
         row = LogEntry.objects.latest("id")
-        if DJANGO_VERSION >= (1, 9):
+        if DJANGO_VERSION >= (3, 0):
+            self.assertEqual(
+                row.get_change_message(), "Changed Email address."
+            )
+        elif DJANGO_VERSION >= (1, 9):
             self.assertEqual(row.get_change_message(), "Changed email.")
         else:
             self.assertEqual(row.change_message, "Changed email.")
