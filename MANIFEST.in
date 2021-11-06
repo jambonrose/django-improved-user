@@ -19,6 +19,7 @@ prune .editorconfig
 prune .flake8
 prune .github
 prune .pre-commit-config.yaml
+prune .prettierignore
 prune .prettierrc.toml
 prune docs
 prune example_extension_project
