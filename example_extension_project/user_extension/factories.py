@@ -11,4 +11,5 @@ from improved_user.factories import UserFactory as BaseUserFactory
 # pylint: disable=too-few-public-methods
 class UserFactory(BaseUserFactory):
     """A subclass of Improved Users' UserFactory"""
-    verified = Faker('pybool')  # not strictly necessary due to False default
+
+    verified = Faker("pybool")  # not strictly necessary due to False default

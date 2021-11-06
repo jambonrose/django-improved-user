@@ -1,0 +1,68 @@
+name: Example Project Tests
+
+on:
+    push:
+        branches: [development]
+    pull_request:
+        branches: [development]
+
+env:
+    PYTHONDONTWRITEBYTECODE: 1
+    PYTHONWARNINGS: once
+
+jobs:
+    build:
+        runs-on: ${{ matrix.os }}
+        strategy:
+            matrix:
+                os: [ubuntu-latest, windows-latest]
+                # Django LTS versions & latest version only
+                django-version: ["2.2", "3.2"]
+                project: ["extension", "integration", "replacement"]
+                exclude:
+                    # Django Registration 2 does not support Django 3.2
+                    - django-version: "3.2"
+                      project: "integration"
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Set up Python
+              uses: actions/setup-python@v2
+              with:
+                  python-version: "3.9"
+
+            - name: Upgrade pip
+              run: python3 -m pip install -U distlib pip setuptools wheel
+
+            - name: Get pip cache dir
+              id: pip-cache
+              run: echo "::set-output name=dir::$(pip cache dir)"
+
+            - name: Cache dependencies
+              uses: actions/cache@v2
+              with:
+                  path: ${{ steps.pip-cache.outputs.dir }}
+                  key:
+                      ${{ runner.os }}-pip-${{ matrix.django-version }}-${{
+                      hashFiles('**/requirements.txt') }}
+                  restore-keys: |
+                      ${{ runner.os }}-pip-
+
+            - name: Install dependencies
+              run: |
+                  python3 -m pip install -r ./requirements.txt
+                  python3 setup.py develop
+                  python3 -m pip install -r ./example_${{ matrix.project }}_project/requirements.txt
+
+            - name: Install Django
+              run: python3 -m pip install "Django~=${{ matrix.django-version }}"
+
+            - name: Python and Django versions
+              run: |
+                  python3 --version
+                  echo "Django ${{ matrix.django-version }}: $(django-admin --version)"
+
+            - name: Run tests
+              working-directory: ./example_${{ matrix.project }}_project
+              run: python3 manage.py test

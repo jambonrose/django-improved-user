@@ -18,34 +18,38 @@ class UserManager(BaseUserManager):
     """
 
     def _create_user(
-            self, email, password, is_staff, is_superuser, **extra_fields):
-        """Helper method to save a User with improved user fields"""
+        self, email, password, is_staff, is_superuser, **extra_fields
+    ):
+        """Save a User with improved user fields; helper method"""
         if not email:
-            raise ValueError('An email address must be provided.')
-        if 'username' in extra_fields:
+            raise ValueError("An email address must be provided.")
+        if "username" in extra_fields:
             raise ValueError(
-                'The Improved User model does not have a username; '
-                'it uses only email')
+                "The Improved User model does not have a username; "
+                "it uses only email"
+            )
         user = self.model(
             email=self.normalize_email(email),
-            is_staff=is_staff, is_superuser=is_superuser,
-            **extra_fields)
+            is_staff=is_staff,
+            is_superuser=is_superuser,
+            **extra_fields,
+        )
         user.set_password(password)
         user.save(using=self._db)
         return user
 
     def create_user(self, email=None, password=None, **extra_fields):
         """Save new User with email and password"""
-        extra_fields.setdefault('is_staff', False)
-        extra_fields.setdefault('is_superuser', False)
+        extra_fields.setdefault("is_staff", False)
+        extra_fields.setdefault("is_superuser", False)
         return self._create_user(email, password, **extra_fields)
 
     def create_superuser(self, email, password, **extra_fields):
         """Save new User with is_staff and is_superuser set to True"""
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
-        if extra_fields.get('is_staff') is not True:
-            raise ValueError('Superuser must have is_staff=True.')
-        if extra_fields.get('is_superuser') is not True:
-            raise ValueError('Superuser must have is_superuser=True.')
+        extra_fields.setdefault("is_staff", True)
+        extra_fields.setdefault("is_superuser", True)
+        if extra_fields.get("is_staff") is not True:
+            raise ValueError("Superuser must have is_staff=True.")
+        if extra_fields.get("is_superuser") is not True:
+            raise ValueError("Superuser must have is_superuser=True.")
         return self._create_user(email, password, **extra_fields)

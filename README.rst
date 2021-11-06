@@ -4,7 +4,7 @@ Documentation: |DevelopmentDocs|
 
 Compatibility: |Implementation| |Python| |Django| |License|
 
-Tests: |Travis| |AppVeyor| |Coverage| |PyUp|
+Tests: |Pre-commit| |Coverage|
 
 .. |Version| image:: http://img.shields.io/pypi/v/django-improved-user.svg
         :target: https://pypi.org/project/django-improved-user/
@@ -38,21 +38,13 @@ Tests: |Travis| |AppVeyor| |Coverage| |PyUp|
         :target: http://opensource.org/licenses/BSD-2-Clause
         :alt: License
 
-.. |Travis| image:: https://travis-ci.org/jambonsw/django-improved-user.svg?branch=development
-        :target: https://travis-ci.org/jambonsw/django-improved-user
-        :alt: Travis Build Status
-
-.. |AppVeyor| image:: https://ci.appveyor.com/api/projects/status/mfbtcx2didsjpwo7/branch/development?svg=true
-        :target: https://ci.appveyor.com/project/jambonrose/django-improved-user/branch/development
-        :alt: AppVeyor Build Status
+.. |Pre-commit| image:: https://results.pre-commit.ci/badge/github/jambonsw/django-improved-user/development.svg
+        :target: https://results.pre-commit.ci/latest/github/jambonsw/django-improved-user/development
+        :alt: pre-commit.ci status
 
 .. |Coverage| image:: https://codecov.io/gh/jambonsw/django-improved-user/branch/development/graph/badge.svg
         :target: https://codecov.io/gh/jambonsw/django-improved-user
         :alt: Coverage Status
-
-.. |PyUp| image:: https://pyup.io/repos/github/jambonsw/django-improved-user/shield.svg
-        :target: https://pyup.io/repos/github/jambonsw/django-improved-user/
-        :alt: Updates
 
 .. end-badges
 

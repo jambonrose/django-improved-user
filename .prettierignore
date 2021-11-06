@@ -1,0 +1,7 @@
+# Ignore all Django Template files:
+*.html
+
+# Security & Validation files need not be formatted
+# See Django Registration documentation for more details
+example_integration_project/categories.json
+example_integration_project/confusables.json

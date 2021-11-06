@@ -1,0 +1,54 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+default_language_version:
+    python: "python3.9"
+repos:
+    #    - repo: meta
+    #      hooks:
+    #          - id: check-hooks-apply
+    #          - id: check-useless-excludes
+    - repo: https://github.com/pre-commit/pre-commit-hooks
+      rev: v4.0.1
+      hooks:
+          - id: check-added-large-files
+            args: [--maxkb=500]
+          - id: check-case-conflict
+          - id: check-json
+          - id: check-merge-conflict
+          - id: check-symlinks
+          - id: check-yaml
+          - id: debug-statements
+          - id: detect-private-key
+          - id: end-of-file-fixer
+          - id: fix-byte-order-marker
+          - id: mixed-line-ending
+            args: [--fix=lf]
+          - id: requirements-txt-fixer
+          - id: trailing-whitespace
+    - repo: https://github.com/pre-commit/mirrors-prettier
+      rev: v2.4.1
+      hooks:
+          - id: prettier
+    - repo: https://github.com/pycqa/isort
+      rev: 5.9.3
+      hooks:
+          - id: isort
+    - repo: https://github.com/ambv/black
+      rev: 21.9b0
+      hooks:
+          - id: black
+    - repo: https://gitlab.com/PyCQA/flake8
+      rev: 3.9.2
+      hooks:
+          - id: flake8
+            args: ["--config=.flake8"]
+            additional_dependencies:
+                [
+                    flake8-blind-except,
+                    flake8-bugbear,
+                    flake8-builtins,
+                    flake8-docstrings,
+                    flake8-logging-format,
+                    flake8-rst-docstrings,
+                    pep8-naming,
+                ]

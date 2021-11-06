@@ -1,11 +1,10 @@
-{% extends parent_template|default:'base.html' %}
+{% extends parent_template|default:"base.html" %}
 {% load i18n %}
 
 {% block content %}
-<form method="post" action="{% url 'registration_register' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-
-  <button type="submit">{% trans 'Register' %}</button>
-</form>
+	<form method="post" action="{% url 'registration_register' %}">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button type="submit">{% trans "Register" %}</button>
+	</form>
 {% endblock %}

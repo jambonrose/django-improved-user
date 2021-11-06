@@ -1,8 +1,8 @@
-{% extends parent_template|default:'base.html' %}
+{% extends parent_template|default:"base.html" %}
 {% load i18n %}
 {# Used only in Django 1.8, as LOGOUT_REDIRECT_URL setting added in 1.10 #}
 {# TODO: delete this when Django 1.8 support dropped #}
 
 {% block content %}
-<p>{% trans 'Logged out' %}</p>
+	<p>{% trans "Logged out" %}</p>
 {% endblock %}

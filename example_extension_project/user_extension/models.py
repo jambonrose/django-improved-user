@@ -8,11 +8,12 @@ from improved_user.model_mixins import AbstractUser
 # pylint: disable=too-many-ancestors
 class User(AbstractUser):
     """A User model that extends the Improved User"""
+
     verified = models.BooleanField(
-        _('email verified'),
+        _("email verified"),
         default=False,
-        help_text=_(
-            'Designates whether the user has verified their email.'))
+        help_text=_("Designates whether the user has verified their email."),
+    )
 
     def is_verified(self):
         """Is the user properly verified?"""

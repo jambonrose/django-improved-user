@@ -9,10 +9,10 @@ from improved_user.admin import UserAdmin
 from improved_user.models import User
 
 # Create a silo'd admin site for just the user/group admins.
-SITE = admin.AdminSite(name='auth_test_admin')
+SITE = admin.AdminSite(name="auth_test_admin")
 SITE.register(User, UserAdmin)
 SITE.register(Group, GroupAdmin)
 
 urlpatterns += [
-    url(r'^admin/', SITE.urls),
+    url(r"^admin/", SITE.urls),
 ]
