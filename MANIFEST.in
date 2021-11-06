@@ -7,9 +7,7 @@ include .coveragerc
 include .isort.cfg
 include .pylintrc
 include .pyup.yml
-include .travis.yml
 include LICENSE
-include appveyor.yml
 include doc-requirements.txt
 include requirements.txt
 include runtests.py
