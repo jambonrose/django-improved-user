@@ -1,6 +1,6 @@
 """A User model created by django-improved-user mixins"""
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from improved_user.managers import UserManager
 from improved_user.model_mixins import DjangoIntegrationMixin, EmailAuthMixin

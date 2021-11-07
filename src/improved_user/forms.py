@@ -3,7 +3,7 @@ from django import VERSION as DJANGO_VERSION, forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 try:
     from django.contrib.auth import password_validation
