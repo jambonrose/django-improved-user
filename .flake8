@@ -1,0 +1,9 @@
+[flake8]
+# https://flake8.readthedocs.org/en/latest/
+select = B, B9, C, D, E, F, N, W
+ignore = B950, D104, D105, D106, D202, D400, E203, E266, E501, N803, N806, N815, W503
+exclude=
+    src/*/migrations/*,
+    example_*_project/*/migrations/*,
+max-complexity = 10
+max-line-length = 79

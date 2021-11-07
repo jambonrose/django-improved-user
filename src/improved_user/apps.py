@@ -10,14 +10,14 @@ class ImprovedUserConfig(AppConfig):
 
     name = "improved_user"
     verbose_name = _("Improved User")
+    default_auto_field = "django.db.models.AutoField"
 
     def ready(self):
-        """AppConfig ready method
+        """Register Admin for User model
 
-        Registers Admin for User model: Ensures UserAdmin is only used when
-        application is added to Installed Apps, and that UserAdmin can be
-        imported if necessary (please note: not recommended. Please see the
-        docs).
+        Ensure UserAdmin is only used when application is added to
+        Installed Apps, and that UserAdmin can be imported if necessary
+        (please note: not recommended. Please see the docs).
 
         https://django-improved-user.rtfd.io/en/latest/admin_usage.html
         """

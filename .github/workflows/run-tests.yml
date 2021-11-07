@@ -1,0 +1,62 @@
+name: Package Tests
+
+on:
+    push:
+        branches: [development]
+    pull_request:
+        branches: [development]
+
+env:
+    PYTHONDONTWRITEBYTECODE: 1
+    PYTHONWARNINGS: once
+
+jobs:
+    build:
+        runs-on: ${{ matrix.os }}
+        strategy:
+            matrix:
+                os: [ubuntu-latest, windows-latest]
+                python-version: ["3.6", "3.7", "3.8", "3.9"]
+                django-version: ["2.2", "3.0", "3.1", "3.2"]
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Set up Python ${{ matrix.python-version }}
+              uses: actions/setup-python@v2
+              with:
+                  python-version: ${{ matrix.python-version }}
+
+            - name: Upgrade pip
+              run: python3 -m pip install -U distlib pip setuptools wheel
+
+            - name: Get pip cache dir
+              id: pip-cache
+              run: echo "::set-output name=dir::$(pip cache dir)"
+
+            - name: Cache dependencies
+              uses: actions/cache@v2
+              with:
+                  path: ${{ steps.pip-cache.outputs.dir }}
+                  key:
+                      ${{ runner.os }}-pip-${{ matrix.django-version }}-${{
+                      hashFiles('./requirements.txt') }}
+                  restore-keys: |
+                      ${{ runner.os }}-pip-
+
+            - name: Install dependencies
+              run: |
+                  python3 -m pip install -r ./requirements.txt
+                  python3 setup.py develop
+
+            - name: Install Django
+              run: python3 -m pip install "Django~=${{ matrix.django-version }}"
+
+            - name: Python and Django versions
+              run: |
+                  echo "Python ${{ matrix.python-version }} & Django ${{ matrix.django-version }}"
+                  python3 --version
+                  echo "Django: $(django-admin --version)"
+
+            - name: Run tests
+              run: python3 ./runtests.py

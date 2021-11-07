@@ -17,23 +17,36 @@ from improved_user.forms import UserCreationForm
 
 urlpatterns = [
     # mimic HMAC-backend URL configuration from django-registration
-    url(r'^activate/complete/$',
+    url(
+        r"^activate/complete/$",
         TemplateView.as_view(
-            template_name='registration/activation_complete.html'),
-        name='registration_activation_complete'),
-    url(r'^activate/(?P<activation_key>[-:\w]+)/$',
+            template_name="registration/activation_complete.html"
+        ),
+        name="registration_activation_complete",
+    ),
+    url(
+        r"^activate/(?P<activation_key>[-:\w]+)/$",
         ActivationView.as_view(),
-        name='registration_activate'),
-    url(r'^register/$',
+        name="registration_activate",
+    ),
+    url(
+        r"^register/$",
         RegistrationView.as_view(form_class=UserCreationForm),
-        name='registration_register'),
-    url(r'^register/complete/$',
+        name="registration_register",
+    ),
+    url(
+        r"^register/complete/$",
         TemplateView.as_view(
-            template_name='registration/registration_complete.html'),
-        name='registration_complete'),
-    url(r'^register/closed/$',
+            template_name="registration/registration_complete.html"
+        ),
+        name="registration_complete",
+    ),
+    url(
+        r"^register/closed/$",
         TemplateView.as_view(
-            template_name='registration/registration_closed.html'),
-        name='registration_disallowed'),
-    url(r'^', include(django_auth_urls)),
+            template_name="registration/registration_closed.html"
+        ),
+        name="registration_disallowed",
+    ),
+    url(r"^", include(django_auth_urls)),
 ]

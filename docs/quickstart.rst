@@ -14,8 +14,8 @@ See :doc:`select_configuration_method` for an overview of options and tradeoffs.
 Installation
 ************
 
-In a Terminal, use :code:`pip` to install the package from `PyPI`_. 
-To use the :class:`~improved_user.factories.UserFactory` provided 
+In a Terminal, use :code:`pip` to install the package from `PyPI`_.
+To use the :class:`~improved_user.factories.UserFactory` provided
 by the package to allow for testing with |factory_boy|_, include it
 in the installation.
 
