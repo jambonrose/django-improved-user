@@ -46,6 +46,3 @@ jobs:
             - name: Check Package
               run: |
                   python3 setup.py check --strict --metadata --restructuredtext
-
-            - name: Check Manifest
-              run: check-manifest
