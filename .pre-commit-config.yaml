@@ -26,19 +26,19 @@ repos:
           - id: requirements-txt-fixer
           - id: trailing-whitespace
     - repo: https://github.com/pre-commit/mirrors-prettier
-      rev: v2.4.1
+      rev: v2.5.1
       hooks:
           - id: prettier
     - repo: https://github.com/pycqa/isort
-      rev: 5.9.3
+      rev: 5.10.1
       hooks:
           - id: isort
-    - repo: https://github.com/ambv/black
-      rev: 21.9b0
+    - repo: https://github.com/psf/black
+      rev: 21.12b0
       hooks:
           - id: black
-    - repo: https://gitlab.com/PyCQA/flake8
-      rev: 3.9.2
+    - repo: https://github.com/PyCQA/flake8
+      rev: 4.0.1
       hooks:
           - id: flake8
             args: ["--config=.flake8"]
