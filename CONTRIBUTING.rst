@@ -134,10 +134,10 @@ You can limit the tests or pass paramaters as if you had called Django's
 
     $ ./runtests.py tests.test_basic -v 3
 
-If you have Python 3.4, 3.5, and 3.6 installed on your system, you will
-be able to test the package under all required conditions. The project
-uses `tox` to make this easy. This will use all the linters and test the
-package with multiple Python and Django versions.
+If you have Python 3.7, 3.8, 3.9 and 3.10 installed on your system, you
+will be able to test the package under all required conditions. The
+project uses `tox` to make this easy. This will use all the linters and
+test the package with multiple Python and Django versions.
 
 .. code:: console
 

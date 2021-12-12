@@ -29,8 +29,8 @@ You can limit tests or pass paramaters as when using ``manage.py test``.
 
     $ ./runtests.py tests.test_basic -v 3
 
-If you have all of the supported Python versions installed (Python 3.4,
-3.5, 3.6, and 3.7), you may use ``tox`` to run all linters and test the
+If you have all of the supported Python versions installed (Python 3.7,
+3.8, 3.9, and 3.10), you may use ``tox`` to run all linters and test the
 package with multiple versions of Python and Django.
 
 .. code:: console

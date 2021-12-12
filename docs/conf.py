@@ -32,6 +32,7 @@ from django.utils.html import strip_tags
 
 sys.path.insert(0, abspath(join("..", "src")))
 django_settings.configure(
+    SECRET_KEY="documentation_secret",
     INSTALLED_APPS=[
         "django.contrib.admin",
         "django.contrib.auth",

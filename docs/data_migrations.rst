@@ -11,7 +11,7 @@ data migration.
 
 The ``django-improved-user`` package intentionally disallows use of
 :py:class:`~improved_user.managers.UserManager` in data migrations (we
-forgo the :django:ref:`use of model managers in migrations
+forgo the :ref:`use of model managers in migrations
 <django:using-managers-in-migrations>`). The
 :py:meth:`~improved_user.managers.UserManager.create_user` and
 :py:meth:`~improved_user.managers.UserManager.create_superuser` methods
