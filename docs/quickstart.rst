@@ -5,7 +5,8 @@ Quickstart: Using Improved User
 This document provides a quick tutorial for the recommended way to setup
 Improved User.
 
-See :doc:`select_configuration_method` for an overview of options and tradeoffs.
+See :doc:`select_configuration_method` for an overview of options and
+tradeoffs.
 
 .. contents::
    :local:
@@ -79,10 +80,10 @@ Configuration and Usage
     Remember to use :py:func:`~django.contrib.auth.get_user_model` to
     get your new model. Don't import it directly!
 
-6. In Django > 1.9, while still in settings, change
+6. While still in settings, change
    :class:`UserAttributeSimilarityValidator` to match correct
-   :py:class:`~improved_user.model_mixins.AbstractUser` fields,
-   as shown below.
+   :py:class:`~improved_user.model_mixins.AbstractUser` fields, as
+   shown below.
 
     .. code:: python
 
@@ -101,5 +102,6 @@ Configuration and Usage
    of your project.
 
 .. NOTE::
-    Improved user also comes with forms, test factories, and an admin panel.
-    Take a look at the :doc:`source/modules` for more information.
+    Improved user also comes with forms, test factories, and an admin
+    panel. Take a look at the :doc:`source/modules` for more
+    information.

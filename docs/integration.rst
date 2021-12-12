@@ -21,8 +21,8 @@ In a new Django project, perform the following steps in the
 
         AUTH_USER_MODEL='improved_user.User'
 
-3. In Django > 1.9, change :code:`UserAttributeSimilarityValidator` to
-   match correct :code:`User` fields, as shown below.
+3. Change :code:`UserAttributeSimilarityValidator` to match correct
+   :code:`User` fields, as shown below.
 
     .. code:: python
 
