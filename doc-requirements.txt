@@ -1,7 +1,7 @@
-Django>=2.1,<2.2
-factory_boy==2.11.1
-Faker==1.0.0
-Pygments==2.3.0
-python-dateutil==2.7.5
-Sphinx==1.8.2
-sphinx-rtd-theme==0.4.2
+Django>=3.2,<3.3
+factory_boy==3.2.1
+Faker==10.0.0
+Pygments==2.10.0
+python-dateutil==2.8.2
+Sphinx==4.3.1
+sphinx-rtd-theme==1.0.0
