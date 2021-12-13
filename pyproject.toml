@@ -1,3 +1,86 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "django-improved-user"
+dynamic = ["version", "description"]
+authors = [
+    { name = "Russell Keith-Magee" },
+    { name = "Andrew Pinkham" },
+]
+readme = "README.rst"
+requires-python = ">=3.6"
+dependencies = ["django>=2.2"]
+license = { file = "LICENSE"}
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3 :: Only",
+    "Framework :: Django",
+    "Framework :: Django :: 2.2",
+    "Framework :: Django :: 3.0",
+    "Framework :: Django :: 3.1",
+    "Framework :: Django :: 3.2",
+    "Framework :: Django :: 4.0",
+]
+
+[project.urls]
+Documentation = "https://django-improved-user.rtfd.io"
+Source = "https://github.com/jambonsw/django-improved-user/"
+Tracker = "https://github.com/jambonsw/django-improved-user/issues"
+
+[project.optional-dependencies]
+factory = [
+    "factory_boy>=2.9",
+    "Faker>=0.8",
+    "python-dateutil>=2.6",
+]
+
+[tool.flit.module]
+name = "improved_user"
+
+[tool.flit.sdist]
+include = [
+    "*.md",
+    "*.rst",
+    ".bumpversion.cfg",
+    ".coveragerc",
+    ".flake8",
+    ".isort.cfg",
+    ".pylintrc",
+    ".pyup.yml",
+    "doc-requirements.txt",
+    "LICENSE",
+    "MANIFEST.in",
+    "requirements.txt",
+    "runtests.py",
+    "setup.cfg",
+    "tests/",
+    "tox.ini",
+]
+exclude = [
+    ".editorconfig",
+    ".github/",
+    ".ignore",
+    ".pre-commit-config.yaml",
+    ".prettierignore",
+    ".prettierrc.toml",
+    "docs/",
+    "example_extension_project/",
+    "example_integration_project/",
+    "example_replacement_project/",
+    "Makefile",
+]
+
 [tool.black]
 line-length = 79
 target-version = ['py36', 'py37', 'py38', 'py39']
