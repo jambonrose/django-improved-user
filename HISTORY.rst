@@ -7,6 +7,25 @@ Next Release
 
 - Nothing Yet!
 
+2.0.0 (Forthcoming)
+-------------------
+
+
+- Support:
+    - Python 3.6, 3.7, 3.8, 3.9
+    - Django 2.2, 3.1, 3.2, 4.0
+- Drop support for:
+    - Python 3.4, 3.5
+    - Django 1.8, 1.11, 2.0, 2.1
+- Update: ugettext_lazy() → gettext_lazy() (`#118`_, `#117`_)
+- Upgrade development/maintenance experience
+    - Run tests via Github Actions (instead of TravisCI)
+    - Upgrade development & documentation dependencies
+    - Use flit to build/release sdist instead of setup.py
+
+.. _#117: https://github.com/jambonsw/django-improved-user/pull/117
+.. _#118: https://github.com/jambonsw/django-improved-user/issues/118
+
 1.0.1 (2020-02-16)
 ------------------
 

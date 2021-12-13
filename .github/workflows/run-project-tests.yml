@@ -52,7 +52,7 @@ jobs:
             - name: Install dependencies
               run: |
                   python3 -m pip install -r ./requirements.txt
-                  python3 setup.py develop
+                  python3 -m flit install --deps none
                   python3 -m pip install -r ./example_${{ matrix.project }}_project/requirements.txt
 
             - name: Install Django
