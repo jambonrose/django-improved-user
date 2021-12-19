@@ -17,3 +17,13 @@ updates:
       labels:
           - "Status: Ready for Review"
           - "Type: Dependency Upgrade"
+      ignore:
+          - dependency-name: "django"
+
+    - package-ecosystem: "github-actions"
+      directory: "/"
+      schedule:
+          # Check for updates to GitHub Actions every weekday
+          interval: "daily"
+          time: "06:50"
+          timezone: "America/New_York"
