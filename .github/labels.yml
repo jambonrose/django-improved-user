@@ -1,0 +1,36 @@
+- name: "Status: Author Working"
+  description: >
+      PR author is working. If others may review, label may be used with Ready
+      for Review.
+  color: FFBF00
+- name: "Status: Blocked"
+  description: >
+      PR may not be merged. Label should be the only Status label on PR.
+  color: FFA3A3
+- name: "Status: Ready for Review"
+  description: >
+      Reviewer(s) may review PR. May be used with other Status labels.
+  color: A3DA8B
+- name: "Status: Revision Required"
+  description: >
+      PR Author has received feedback. If others may review, label may be used
+      with Ready for Review.
+  color: F5AE70
+- name: "Type: Bug Fix"
+  description: "PR includes a bug fix."
+  color: FFA3A3
+- name: "Type: Dependency Upgrade"
+  description: "PR upgrades dependencies."
+  color: E5C4F8
+- name: "Type: Feature Enhancement"
+  description: "PR includes a feature enhancement."
+  color: BFD4F2
+- name: "Type: Maintenance"
+  description: "PR is maintenance on the code or repository."
+  color: FFBF00
+- name: "Type: New Feature"
+  description: "PR introduces a new feature."
+  color: CCE9FF
+- name: "wontfix"
+  description: "For issues that can/will not be fixed."
+  color: FFFFFF
