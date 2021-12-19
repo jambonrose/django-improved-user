@@ -4,7 +4,7 @@ check-manifest==0.47
 coverage==6.1.1
 docutils==0.18.1
 factory_boy==3.2.1
-Faker==9.8.0
+Faker==10.0.0
 flit==3.5.1
 Pygments==2.10.0
 pylint==2.11.1
