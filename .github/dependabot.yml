@@ -17,3 +17,5 @@ updates:
       labels:
           - "Status: Ready for Review"
           - "Type: Dependency Upgrade"
+      ignore:
+          - dependency-name: "django"
