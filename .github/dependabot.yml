@@ -1,0 +1,19 @@
+# https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+    - package-ecosystem: "pip"
+      directory: "/"
+      schedule:
+          interval: "daily"
+          time: "07:50"
+          timezone: "America/New_York"
+      reviewers:
+          - "jambonrose"
+      assignees:
+          - "jambonrose"
+      commit-message:
+          prefix: "⬆️ "
+      labels:
+          - "Status: Ready for Review"
+          - "Type: Dependency Upgrade"
