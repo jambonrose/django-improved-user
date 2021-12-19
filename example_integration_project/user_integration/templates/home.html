@@ -2,27 +2,5 @@
 {% load i18n %}
 
 {% block content %}
-	{% if user.is_authenticated %}
-		<p>
-			{% blocktrans with name=user.get_short_name %}
-				Hello {{name}}!
-			{% endblocktrans %}
-		</p>
-		<p>
-			<a href="{% url 'logout' %}?next={{ request.path }}">
-				{% trans 'Log Out' %}
-			</a>
-		</p>
-	{% else %}
-		<p>
-			<a href="{% url 'registration_register' %}">
-				{% trans 'Register' %}
-			</a>
-		</p>
-		<p>
-			<a href="{% url 'login' %}?next={{ request.path }}">
-				{% trans 'Log In' %}
-			</a>
-		</p>
-	{% endif %}
+    <p>Legacy template; to be removed soon.</p>
 {% endblock %}
