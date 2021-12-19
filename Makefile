@@ -42,10 +42,10 @@ clean:
 	rm -rf htmlcov
 	rm -rf src/*.egg-info
 	rm -rf src/*.eggs
-	find -X . \( -path '*/.tox/*' -o -path '*/.git/*' -o -path '*/.venv/*' \) -prune -o \( -name "*.py[co]" -type f -print0 \) | xargs -0 -I {} rm {}
-	find -X . \( -path '*/.tox/*' -o -path '*/.git/*' -o -path '*/.venv/*' \) -prune -o \( -name ".coverage" -type f -print0 \) | xargs -0 -I {} rm {}
-	find -X . \( -path '*/.tox/*' -o -path '*/.git/*' -o -path '*/.venv/*' \) -prune -o \( -name ".coverage.*" -type f -print0 \) | xargs -0 -I {} rm {}
-	find -X . \( -path '*/.tox/*' -o -path '*/.git/*' -o -path '*/.venv/*' \) -prune -o \( -name "__pycache__" -type d -print0 \) | xargs -0 -I {} rm -r {}
+	find -X . \( -path '*/.tox/*' -o -path '*/.git/*' -o -path '*/$(DIU_VENV)/*' \) -prune -o \( -name "*.py[co]" -type f -print0 \) | xargs -0 -I {} rm '{}'
+	find -X . \( -path '*/.tox/*' -o -path '*/.git/*' -o -path '*/$(DIU_VENV)/*' \) -prune -o \( -name ".coverage" -type f -print0 \) | xargs -0 -I {} rm '{}'
+	find -X . \( -path '*/.tox/*' -o -path '*/.git/*' -o -path '*/$(DIU_VENV)/*' \) -prune -o \( -name ".coverage.*" -type f -print0 \) | xargs -0 -I {} rm '{}'
+	find -X . \( -path '*/.tox/*' -o -path '*/.git/*' -o -path '*/$(DIU_VENV)/*' \) -prune -o \( -name "__pycache__" -type d -print0 \) | xargs -0 -I {} rm -r '{}'
 
 .PHONY: purge ## Clean + remove virtual environment
 purge: clean
