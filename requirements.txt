@@ -2,7 +2,7 @@ astroid==2.8.4
 bumpversion==0.6.0
 check-manifest==0.47
 coverage==6.1.1
-docutils==0.18
+docutils==0.18.1
 factory_boy==3.2.1
 Faker==9.8.0
 flit==3.5.1
