@@ -1,13 +1,13 @@
-astroid==2.8.4
+astroid==2.9.0
 bumpversion==0.6.0
 check-manifest==0.47
-coverage==6.1.1
+coverage==6.2
 docutils==0.18.1
 factory_boy==3.2.1
 Faker==10.0.0
 flit==3.5.1
 Pygments==2.10.0
-pylint==2.11.1
+pylint==2.12.2
 pylint-django==2.4.4
 python-dateutil==2.8.2
 tox==3.24.4
