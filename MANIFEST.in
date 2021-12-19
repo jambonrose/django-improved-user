@@ -9,7 +9,6 @@ include .coveragerc
 include .flake8
 include .isort.cfg
 include .pylintrc
-include .pyup.yml
 include *.md
 include *.rst
 include doc-requirements.txt

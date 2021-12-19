@@ -1,6 +1,0 @@
-update: all
-pin: True
-branch: development
-schedule: "every month"
-branch_prefix: update/
-pr_prefix: "❗️ "
