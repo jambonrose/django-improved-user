@@ -1,8 +1,8 @@
-name: define github labels
+name: Define Github labels
 on:
     push:
         branches:
-            - main
+            - development
 jobs:
     define:
         runs-on: ubuntu-latest
