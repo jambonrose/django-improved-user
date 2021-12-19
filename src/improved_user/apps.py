@@ -13,7 +13,7 @@ class ImprovedUserConfig(AppConfig):
     default_auto_field = "django.db.models.AutoField"
 
     def ready(self):
-        """Register Admin for User model
+        """Register User model for Admin
 
         Ensure UserAdmin is only used when application is added to
         Installed Apps, and that UserAdmin can be imported if necessary
