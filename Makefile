@@ -5,6 +5,7 @@
 DIU_VENV ?= venv
 ROOT_PYTHON ?= python3
 DIU_PYTHON ?= $(DIU_VENV)/bin/python3
+DIU_COV ?= $(DIU_VENV)/bin/coverage
 
 .DEFAULT_GOAL:=help
 
@@ -29,7 +30,10 @@ release: $(DIU_VENV)/bin/activate
 test: $(DIU_VENV)/bin/activate
 	$(DIU_PYTHON) -V
 	$(DIU_PYTHON) -m pip -V
-	$(DIU_PYTHON) runtests.py
+	$(DIU_COV) erase
+	$(DIU_COV) run runtests.py
+	$(DIU_COV) combine --append
+	$(DIU_COV) report
 
 .PHONY: tox ## Run test suite in different envs via tox
 tox: $(DIU_VENV)/bin/activate

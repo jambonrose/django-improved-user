@@ -3,6 +3,7 @@ exclude .ignore
 exclude .pre-commit-config.yaml
 exclude .prettierignore
 exclude .prettierrc.toml
+exclude codecov.yml
 exclude Makefile
 include .bumpversion.cfg
 include .coveragerc

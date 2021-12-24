@@ -59,4 +59,13 @@ jobs:
                   echo "Django: $(django-admin --version)"
 
             - name: Run tests
-              run: python3 ./runtests.py
+              run: |
+                  coverage run ./runtests.py
+                  coverage combine --append
+                  coverage report
+                  coverage xml
+
+            - uses: codecov/codecov-action@v2
+              with:
+                  fail_ci_if_error: true
+                  verbose: true
