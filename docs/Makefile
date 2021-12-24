@@ -8,6 +8,14 @@ SPHINXPROJ    = DjangoImprovedUser
 SOURCEDIR     = .
 BUILDDIR      = _build
 
+LINKCHECKDIR  = build/linkcheck
+
+.PHONY: checklinks
+checklinks:
+	$(SPHINXBUILD) -b linkcheck $(ALLSPHINXOPTS) $(LINKCHECKDIR)
+	@echo
+	@echo "Check finished. Report is in $(LINKCHECKDIR)."
+
 # Put it first so that "make" without argument is like "make help".
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
