@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """Documentation Build Configuration
 
 Django Improved User documentation build configuration file, created by
@@ -58,7 +57,7 @@ def annotate_field(lines, field, models):
         help_text = force_text(field.verbose_name).capitalize()
     # Add the model field to the end of the docstring as a param
     # using the verbose name as the description
-    lines.append(":param %s: %s" % (field.attname, help_text))
+    lines.append(f":param {field.attname}: {help_text}")
     # Add the field's type to the docstring
     if isinstance(field, models.ForeignKey):
         to = field.rel.to
@@ -67,7 +66,7 @@ def annotate_field(lines, field, models):
             % (field.attname, type(field).__name__, to.__module__, to.__name__)
         )
     else:
-        lines.append(":type %s: %s" % (field.attname, type(field).__name__))
+        lines.append(f":type {field.attname}: {type(field).__name__}")
     return lines
 
 
@@ -105,16 +104,14 @@ def process_docstring(app, what, name, obj, options, lines):
                 help_text = strip_tags(force_text(field.help_text))
             else:
                 help_text = force_text(field.label).capitalize()
-            lines.append(":param %s: %s" % (field_name, help_text))
+            lines.append(f":param {field_name}: {help_text}")
             if field.widget.is_hidden:
                 lines.append(
                     ":type %s: (Hidden) %s"
                     % (field_name, type(field).__name__)
                 )
             else:
-                lines.append(
-                    ":type %s: %s" % (field_name, type(field).__name__)
-                )
+                lines.append(f":type {field_name}: {type(field).__name__}")
 
     # Return the extended docstring
     return lines
