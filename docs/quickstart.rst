@@ -17,14 +17,14 @@ Installation
 
 In a Terminal, use :code:`pip` to install the package from `PyPI`_.
 To use the :class:`~improved_user.factories.UserFactory` provided
-by the package to allow for testing with |factory_boy|_, include it
+by the package to allow for testing with |factory-boy|_, include it
 in the installation.
 
 .. code:: console
 
     $ pip install django-improved-user[factory]
 
-If |factory_boy|_ is unnecessary, it can be omitted by installing normally.
+If |factory-boy|_ is unnecessary, it can be omitted by installing normally.
 
 .. code:: console
 
@@ -33,8 +33,8 @@ If |factory_boy|_ is unnecessary, it can be omitted by installing normally.
 
 
 .. _PyPI: https://pypi.org/project/django-improved-user/
-.. _factory_boy: https://github.com/FactoryBoy/factory_boy
-.. |factory_boy| replace:: :code:`factory_boy`
+.. _factory-boy: https://github.com/FactoryBoy/factory_boy
+.. |factory-boy| replace:: :code:`factory-boy`
 
 ***********************
 Configuration and Usage

@@ -6,8 +6,8 @@ try:
     from factory.django import DjangoModelFactory
 except ImportError:  # pragma: no cover
     raise Exception(
-        "Please install factory_boy to use Improved User's UserFactory.\n"
-        "pip install factory_boy==2.9.2"
+        "Please install factory-boy to use Improved User's UserFactory.\n"
+        "pip install factory-boy"
     ) from None
 
 User = get_user_model()  # pylint: disable=invalid-name
