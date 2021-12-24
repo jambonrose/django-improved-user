@@ -63,6 +63,7 @@ jobs:
                   coverage run ./runtests.py
                   coverage combine --append
                   coverage report
+                  coverage xml
 
             - uses: codecov/codecov-action@v2
               with:
