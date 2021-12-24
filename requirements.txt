@@ -3,7 +3,7 @@ bumpversion==0.6.0
 check-manifest==0.47
 coverage==6.2
 docutils==0.18.1
-factory_boy==3.2.1
+factory-boy==3.2.1
 Faker==10.0.0
 flit==3.5.1
 Pygments==2.10.0

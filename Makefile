@@ -11,7 +11,9 @@ DIU_PYTHON ?= $(DIU_VENV)/bin/python3
 $(DIU_VENV)/bin/activate:
 	mkdir -p $(DIU_VENV)
 	$(ROOT_PYTHON) -m venv $(DIU_VENV)
-	$(DIU_VENV)/bin/pip install -r requirements.txt
+	$(DIU_PYTHON) -m pip install --upgrade pip setuptools wheel
+	$(DIU_PYTHON) -m pip install -r requirements.txt
+	$(DIU_PYTHON) -m flit install --symlink
 
 .PHONY: build ## Build artifacts meant for distribution
 build: $(DIU_VENV)/bin/activate
@@ -40,10 +42,10 @@ clean:
 	rm -rf htmlcov
 	rm -rf src/*.egg-info
 	rm -rf src/*.eggs
-	find -X . \( -path '*/.tox/*' -o -path '*/.git/*' -o -path '*/.venv/*' \) -prune -o \( -name "*.py[co]" -type f -print0 \) | xargs -0 -I {} rm {}
-	find -X . \( -path '*/.tox/*' -o -path '*/.git/*' -o -path '*/.venv/*' \) -prune -o \( -name ".coverage" -type f -print0 \) | xargs -0 -I {} rm {}
-	find -X . \( -path '*/.tox/*' -o -path '*/.git/*' -o -path '*/.venv/*' \) -prune -o \( -name ".coverage.*" -type f -print0 \) | xargs -0 -I {} rm {}
-	find -X . \( -path '*/.tox/*' -o -path '*/.git/*' -o -path '*/.venv/*' \) -prune -o \( -name "__pycache__" -type d -print0 \) | xargs -0 -I {} rm -r {}
+	find -X . \( -path '*/.tox/*' -o -path '*/.git/*' -o -path '*/$(DIU_VENV)/*' \) -prune -o \( -name "*.py[co]" -type f -print0 \) | xargs -0 -I {} rm '{}'
+	find -X . \( -path '*/.tox/*' -o -path '*/.git/*' -o -path '*/$(DIU_VENV)/*' \) -prune -o \( -name ".coverage" -type f -print0 \) | xargs -0 -I {} rm '{}'
+	find -X . \( -path '*/.tox/*' -o -path '*/.git/*' -o -path '*/$(DIU_VENV)/*' \) -prune -o \( -name ".coverage.*" -type f -print0 \) | xargs -0 -I {} rm '{}'
+	find -X . \( -path '*/.tox/*' -o -path '*/.git/*' -o -path '*/$(DIU_VENV)/*' \) -prune -o \( -name "__pycache__" -type d -print0 \) | xargs -0 -I {} rm -r '{}'
 
 .PHONY: purge ## Clean + remove virtual environment
 purge: clean

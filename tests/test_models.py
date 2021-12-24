@@ -1,10 +1,8 @@
 """Test Improved User Model"""
 from datetime import datetime
 from types import MethodType
-from unittest import skipUnless
 from unittest.mock import patch
 
-from django import VERSION as DJANGO_VERSION
 from django.contrib.auth.hashers import get_hasher
 from django.core import mail
 from django.test import TestCase
@@ -94,10 +92,6 @@ class UserModelTestCase(TestCase):
         user.clean()
         self.assertEqual(user.email, "foo@bar.com")
 
-    @skipUnless(
-        DJANGO_VERSION >= (1, 9),
-        "Password strength checks not available on Django 1.8",
-    )
     def test_user_double_save(self):
         """Trigger password_changed() once if user.save() called twice"""
         user = User.objects.create_user(
@@ -112,10 +106,6 @@ class UserModelTestCase(TestCase):
             user.save()
             self.assertEqual(pw_changed.call_count, 1)
 
-    @skipUnless(
-        DJANGO_VERSION >= (1, 9),
-        "Password strength checks not available on Django 1.8",
-    )
     def test_check_password_upgrade(self):
         """Don't update password if adjusting hash iteration
 

@@ -1,7 +1,6 @@
 """Tests for the extended User model"""
 from types import MethodType
 
-from django import VERSION as DJANGO_VERSION
 from django.test import TestCase
 
 from .models import User
@@ -30,15 +29,8 @@ class ExtendedUserModelTests(TestCase):
         user.set_password(None)
         self.assertFalse(user.has_usable_password())
 
-        if DJANGO_VERSION >= (2, 0):
-            # no name methods on this one!
-            self.assertFalse(hasattr(user, "get_full_name"))
-            self.assertFalse(hasattr(user, "get_short_name"))
-        else:
-            with self.assertRaises(NotImplementedError):
-                user.get_full_name()
-            with self.assertRaises(NotImplementedError):
-                user.get_short_name()
+        self.assertFalse(hasattr(user, "get_full_name"))
+        self.assertFalse(hasattr(user, "get_short_name"))
 
     def test_fields_and_attributes(self):
         """Ensure the model has the fields and attributes we expect"""

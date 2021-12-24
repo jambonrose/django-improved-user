@@ -6,19 +6,12 @@ from django import VERSION as DJANGO_VERSION
 from django.contrib.admin.models import LogEntry
 from django.contrib.auth import SESSION_KEY
 from django.test import TestCase, override_settings
-from django.utils.encoding import force_text
+from django.urls import reverse
+from django.utils.encoding import force_str
 
 from improved_user.admin import UserAdmin
 from improved_user.forms import UserChangeForm, UserCreationForm
 from improved_user.models import User
-
-# TODO: remove conditional import when Dj 1.8 dropped
-# pylint: disable=ungrouped-imports
-try:
-    from django.urls import reverse
-except ImportError:
-    from django.core.urlresolvers import reverse
-# pylint: enable=ungrouped-imports
 
 
 # Redirect in test_user_change_password will fail if session auth hash
@@ -88,16 +81,16 @@ class UserAdminTests(TestCase):
     def test_display_fields(self):
         """Test that admin shows all user fields"""
         excluded_model_fields = ["id", "logentry"]
-        model_fields = set(
+        model_fields = {
             field.name
             for field in User._meta.get_fields()
             if field.name not in excluded_model_fields
-        )
-        admin_fieldset_fields = set(
+        }
+        admin_fieldset_fields = {
             fieldname
             for name, fieldset in UserAdmin.fieldsets
             for fieldname in fieldset["fields"]
-        )
+        }
         self.assertEqual(model_fields, admin_fieldset_fields)
 
     def test_add_has_required_fields(self):
@@ -183,10 +176,8 @@ class UserAdminTests(TestCase):
             self.assertEqual(
                 row.get_change_message(), "Changed Email address."
             )
-        elif DJANGO_VERSION >= (1, 9):
-            self.assertEqual(row.get_change_message(), "Changed email.")
         else:
-            self.assertEqual(row.change_message, "Changed email.")
+            self.assertEqual(row.get_change_message(), "Changed email.")
 
     def test_user_not_change(self):
         """Test that message is raised when form submitted unchanged"""
@@ -201,10 +192,7 @@ class UserAdminTests(TestCase):
             response, reverse("auth_test_admin:improved_user_user_changelist")
         )
         row = LogEntry.objects.latest("id")
-        if DJANGO_VERSION >= (1, 9):
-            self.assertEqual(row.get_change_message(), "No fields changed.")
-        else:
-            self.assertEqual(row.change_message, "No fields changed.")
+        self.assertEqual(row.get_change_message(), "No fields changed.")
 
     def test_user_change_password(self):
         """Test that URL to change password form is correct"""
@@ -220,7 +208,7 @@ class UserAdminTests(TestCase):
         rel_link = re.search(
             r"you can change the password using "
             r'<a href="([^"]*)">this form</a>',
-            force_text(response.content),
+            force_str(response.content),
         ).groups()[0]
         self.assertEqual(
             os.path.normpath(user_change_url + rel_link),
@@ -236,10 +224,7 @@ class UserAdminTests(TestCase):
         )
         self.assertRedirects(response, user_change_url)
         row = LogEntry.objects.latest("id")
-        if DJANGO_VERSION >= (1, 9):
-            self.assertEqual(row.get_change_message(), "Changed password.")
-        else:
-            self.assertEqual(row.change_message, "Changed password.")
+        self.assertEqual(row.get_change_message(), "Changed password.")
         self.logout()
         self.login(password="password1")
 
@@ -282,10 +267,7 @@ class UserAdminTests(TestCase):
         row = LogEntry.objects.latest("id")
         self.assertEqual(row.user_id, self.admin.pk)
         self.assertEqual(row.object_id, str(user.pk))
-        if DJANGO_VERSION >= (1, 9):
-            self.assertEqual(row.get_change_message(), "Changed password.")
-        else:
-            self.assertEqual(row.change_message, "Changed password.")
+        self.assertEqual(row.get_change_message(), "Changed password.")
 
     def test_changelist_disallows_password_lookups(self):
         """Users shouldn't be allowed to guess password

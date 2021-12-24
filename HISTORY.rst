@@ -116,7 +116,7 @@ Next Release
 with v0.3.0 due to PR `#23`_
 
 - Add ``UserFactory`` to make testing easier for developers using the
-  package; requires factory_boy (PR `#20`_)
+  package; requires factory-boy (PR `#20`_)
 - Split the ``ImprovedIdentityMixin`` class into atomic parts:
   ``DjangoIntegrationMixin``, ``FullNameMixin``, ``ShortNameMixin``,
   ``EmailAuthMixin``.  This allows developers to create their own custom
