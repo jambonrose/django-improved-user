@@ -80,6 +80,9 @@ exclude = [
     "Makefile",
 ]
 
+[tool.cibuildwheel]
+build-frontend = "build"
+
 [tool.black]
 line-length = 79
 target-version = ['py36', 'py37', 'py38', 'py39']
