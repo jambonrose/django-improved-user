@@ -59,7 +59,10 @@ jobs:
                   echo "Django: $(django-admin --version)"
 
             - name: Run tests
-              run: coverage run ./runtests.py
+              run: |
+                  coverage run ./runtests.py
+                  coverage combine --append
+                  coverage report
 
             - uses: codecov/codecov-action@v2
               with:
