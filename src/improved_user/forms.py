@@ -1,36 +1,9 @@
 """Forms for Creating and Updating Improved Users"""
-from django import VERSION as DJANGO_VERSION, forms
-from django.contrib.auth import get_user_model
+from django import forms
+from django.contrib.auth import get_user_model, password_validation
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
-
-try:
-    from django.contrib.auth import password_validation
-except ImportError:  # pragma: no cover
-
-    class EmptyValidator:
-        """Mimic of password validator API
-
-        Django 1.8 doesn't have password strength validation
-        We therefore introduce a mimic into the namespace
-        """
-
-        def validate_password(self, password, instance):
-            """Accept password and user model and do nothing"""
-
-        # pylint: disable=no-self-use
-        def password_validators_help_text_html(self):
-            """Mimic function
-
-            Used by password1 field;
-            implicitly return None, as all strings are valid passwords
-            """
-
-        # pylint: enable=no-self-use
-
-    password_validation = EmptyValidator()
-
 
 User = get_user_model()  # pylint: disable=invalid-name
 
@@ -45,20 +18,17 @@ class AbstractUserCreationForm(forms.ModelForm):
         "password_mismatch": _("The two password fields didn't match."),
     }
 
-    # TODO: move this to field when Django 1.8 support dropped
-    password_kwargs = {"strip": False} if DJANGO_VERSION >= (1, 9) else {}
-
     password1 = forms.CharField(
         label=_("Password"),
         widget=forms.PasswordInput,
         help_text=password_validation.password_validators_help_text_html(),
-        **password_kwargs,  # noqa: C815
+        strip=False,
     )
     password2 = forms.CharField(
         label=_("Password confirmation"),
         widget=forms.PasswordInput,
         help_text=_("Enter the same password as above, for verification."),
-        **password_kwargs,  # noqa: C815
+        strip=False,
     )
 
     def clean_password2(self):
@@ -110,7 +80,7 @@ class AbstractUserCreationForm(forms.ModelForm):
 
     def save(self, commit=True):
         """Save the user; use password hasher to set password"""
-        user = super(AbstractUserCreationForm, self).save(commit=False)
+        user = super().save(commit=False)
         user.set_password(self.cleaned_data["password1"])
         if commit:
             user.save()
@@ -124,18 +94,9 @@ class UserCreationForm(AbstractUserCreationForm):
     e-mail address as a user's identifier.
     """
 
-    # TODO: when Py3.4 dropped, replace comprehension below with:
-    # error_messages = {
-    #     **AbstractUserCreationForm.error_messages,
-    #     'duplicate_email': _('A user with that email already exists.'),
-    # }
     error_messages = {
-        k: v
-        for d in [
-            AbstractUserCreationForm.error_messages,
-            {"duplicate_email": _("A user with that email already exists.")},
-        ]
-        for k, v in d.items()
+        **AbstractUserCreationForm.error_messages,
+        "duplicate_email": _("A user with that email already exists."),
     }
 
     class Meta:
@@ -180,7 +141,7 @@ class AbstractUserChangeForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         """Initialize form; optimize user permission queryset"""
-        super(AbstractUserChangeForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.fields["password"].help_text = self.fields[
             "password"
         ].help_text.format(self.get_local_password_path())
@@ -205,8 +166,6 @@ class AbstractUserChangeForm(forms.ModelForm):
             and self.rel_password_url is not None
         ):
             return self.rel_password_url
-        if DJANGO_VERSION < (1, 9):
-            return "./password/"
         return "../password/"
 
     def clean_password(self):

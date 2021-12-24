@@ -1,7 +1,4 @@
 """Test basic functionality; test API used by a Django project developer"""
-from unittest import skipUnless
-
-from django import VERSION as DJANGO_VERSION
 from django.contrib.auth import get_user, get_user_model
 from django.http import HttpRequest
 from django.test import TestCase
@@ -76,12 +73,8 @@ class BasicTestCase(TestCase):
         """Test normal user's authentication permissions"""
         user = User.objects.create_user("test@example.com")
         # Check authentication/permissions
-        if DJANGO_VERSION >= (1, 10):
-            self.assertFalse(user.is_anonymous)
-            self.assertTrue(user.is_authenticated)
-        else:
-            self.assertFalse(user.is_anonymous())
-            self.assertTrue(user.is_authenticated())
+        self.assertFalse(user.is_anonymous)
+        self.assertTrue(user.is_authenticated)
         self.assertFalse(user.is_staff)
         self.assertTrue(user.is_active)
         self.assertFalse(user.is_superuser)
@@ -89,12 +82,8 @@ class BasicTestCase(TestCase):
     def test_superuser_permissions(self):
         """Test superuser's authentication permissions"""
         user = User.objects.create_superuser("test@example.com", "password1!")
-        if DJANGO_VERSION >= (1, 10):
-            self.assertFalse(user.is_anonymous)
-            self.assertTrue(user.is_authenticated)
-        else:
-            self.assertFalse(user.is_anonymous())
-            self.assertTrue(user.is_authenticated())
+        self.assertFalse(user.is_anonymous)
+        self.assertTrue(user.is_authenticated)
         self.assertTrue(user.is_superuser)
         self.assertTrue(user.is_active)
         self.assertTrue(user.is_staff)
@@ -104,9 +93,6 @@ class BasicTestCase(TestCase):
         user = User.objects.create_user("test@example.com")
         self.assertEqual(user.get_username(), "test@example.com")
 
-    @skipUnless(
-        DJANGO_VERSION >= (1, 11), "Method not implemented until Django 1.11"
-    )
     def test_default_email_method(self):
         """Test correct email field used in method"""
         user = User()

@@ -3,39 +3,33 @@
 import sys
 from os.path import dirname, join
 
-from django import VERSION as DJANGO_VERSION, setup
-from django.apps import apps
-from django.conf import settings
-from django.core.management import execute_from_command_line
+try:
+    from django import setup
+    from django.apps import apps
+    from django.conf import settings
+    from django.core.management import execute_from_command_line
+except ImportError:
+    print(
+        "Could not load Django.\n"
+        "Try running `flit install --symlink` before `./runtests.py`\n"
+        "or run `make test` (or `make tox`) for an all in one solution",
+    )
+    exit(-1)
+
 
 try:
     import improved_user  # noqa: F401 pylint: disable=unused-import
 except ImportError:
     print(
         "Could not load improved_user!\n"
-        "Try running `./setup.py develop` before `./runtests.py`\n"
-        "or run `./setup.py test` for an all in one solution",
+        "Try running `flit install --symlink` before `./runtests.py`\n"
+        "or run `make test` (or `make tox`) for an all in one solution",
     )
     exit(-1)
 
 
 def configure_django():
     """Configure Django before tests"""
-    middleware = [
-        "django.contrib.sessions.middleware.SessionMiddleware",
-        "django.contrib.auth.middleware.AuthenticationMiddleware",
-        "django.contrib.messages.middleware.MessageMiddleware",
-    ]
-
-    if DJANGO_VERSION >= (1, 10):
-        middleware_var_name = "MIDDLEWARE"
-    else:
-        middleware_var_name = "MIDDLEWARE_CLASSES"
-
-    middleware_kwargs = {
-        middleware_var_name: middleware,
-    }
-
     settings.configure(
         SECRET_KEY="m-4Umd2!_nQQX.Ux6dYaiffmgRFpFxri!hqmffqBAhuAu*-!9n",
         DATABASES={
@@ -70,8 +64,11 @@ def configure_django():
                 },
             }
         ],
-        # TODO: when Dj1.8 dropped, use MIDDLEWARE directly
-        **middleware_kwargs,  # noqa: C815
+        MIDDLEWARE=[
+            "django.contrib.sessions.middleware.SessionMiddleware",
+            "django.contrib.auth.middleware.AuthenticationMiddleware",
+            "django.contrib.messages.middleware.MessageMiddleware",
+        ],
     )
     setup()
 
@@ -86,17 +83,10 @@ def check_missing_migrations():
     """Check that user model and migration files are in sync"""
     from django.db.migrations.autodetector import MigrationAutodetector
     from django.db.migrations.loader import MigrationLoader
+    from django.db.migrations.questioner import (
+        NonInteractiveMigrationQuestioner as Questioner,
+    )
     from django.db.migrations.state import ProjectState
-
-    try:
-        from django.db.migrations.questioner import (
-            NonInteractiveMigrationQuestioner as Questioner,
-        )
-    except ImportError:
-        # TODO: remove this once Dj1.8 dropped
-        from django.db.migrations.questioner import (
-            InteractiveMigrationQuestioner as Questioner,
-        )
 
     loader = MigrationLoader(None, ignore_no_migrations=True)
     conflicts = loader.detect_conflicts()

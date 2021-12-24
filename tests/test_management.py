@@ -2,7 +2,6 @@
 import builtins
 from io import StringIO
 
-from django import VERSION as DJANGO_VERSION
 from django.contrib.auth.management.commands import createsuperuser
 from django.core.management import call_command
 from django.core.management.base import CommandError
@@ -169,13 +168,10 @@ class CreatesuperuserManagementCommandTestCase(TestCase):
                 stdin=MockTTY(),
                 stdout=new_io,
             )
-            if DJANGO_VERSION >= (1, 9):
-                expected_out = (
-                    "This password is entirely numeric.\n"
-                    "Superuser created successfully."
-                )
-            else:
-                expected_out = "Superuser created successfully."
+            expected_out = (
+                "This password is entirely numeric.\n"
+                "Superuser created successfully."
+            )
             self.assertEqual(new_io.getvalue().strip(), expected_out)
 
         test(self)

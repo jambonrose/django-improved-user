@@ -1,8 +1,6 @@
 """Tests to ensure proper subclassing of models, forms, and factories"""
-from unittest import skipUnless
 from unittest.mock import patch
 
-from django import VERSION as DJANGO_VERSION
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
@@ -77,10 +75,6 @@ class ExtensionTestCase(TestCase):
         user = UserFactory(verified=False)
         self.assertFalse(user.verified)
 
-    @skipUnless(
-        DJANGO_VERSION >= (1, 9),
-        "Password strength checks not available on Django 1.8",
-    )
     @patch("django.contrib.auth.password_validation.password_changed")
     def test_create_form_success(self, password_changed):
         """Successful submission of form data"""
@@ -101,29 +95,6 @@ class ExtensionTestCase(TestCase):
         self.assertEqual(user.get_short_name(), "John")
         self.assertEqual(user.get_full_name(), "John Smith")
         self.assertTrue(user.check_password("k4b3c14gl9077954"))
-        self.assertFalse(user.verified)
-
-    # TODO: Remove this test in favor of above after Dj1.8 dropped
-    @skipUnless(
-        DJANGO_VERSION < (1, 9),
-        "Password strength checks not available on Django 1.8",
-    )
-    def test_create_form_success_pre_19(self):
-        """Successful submission of form data"""
-        data = {
-            "email": "jsmith@example.com",
-            "full_name": "John Smith",  # optional field
-            "short_name": "John",  # optional field
-            "password1": "test123",
-            "password2": "test123",
-        }
-        form = UserCreationForm(data)
-        self.assertTrue(form.is_valid())
-        user = form.save()
-        self.assertEqual(repr(user), "<User: jsmith@example.com>")
-        self.assertEqual(user.get_short_name(), "John")
-        self.assertEqual(user.get_full_name(), "John Smith")
-        self.assertTrue(user.check_password("test123"))
         self.assertFalse(user.verified)
 
     def test_update_form_success(self):

@@ -1,5 +1,4 @@
 """Test UserCreationForm and UserChangeForm"""
-from unittest import skipUnless
 from unittest.mock import patch
 
 from django import VERSION as DJANGO_VERSION
@@ -100,10 +99,6 @@ class UserCreationFormTest(TestDataMixin, TestCase):
         self.assertEqual(form["password1"].errors, required_error)
         self.assertEqual(form["password2"].errors, [])
 
-    @skipUnless(
-        DJANGO_VERSION >= (1, 9),
-        "Password strength checks not available on Django 1.8",
-    )
     @patch("django.contrib.auth.password_validation.password_changed")
     def test_success(self, password_changed):
         """Successful submission of form data"""
@@ -125,32 +120,6 @@ class UserCreationFormTest(TestDataMixin, TestCase):
         self.assertEqual(user.get_full_name(), "John Smith")
         self.assertTrue(user.check_password("test123"))
 
-    # TODO: Remove this test in favor of above after Dj1.8 dropped
-    @skipUnless(
-        DJANGO_VERSION < (1, 9),
-        "Password strength checks not available on Django 1.8",
-    )
-    def test_success_pre_19(self):
-        """Successful submission of form data"""
-        data = {
-            "email": "jsmith@example.com",
-            "full_name": "John Smith",  # optional field
-            "short_name": "John",  # optional field
-            "password1": "test123",
-            "password2": "test123",
-        }
-        form = UserCreationForm(data)
-        self.assertTrue(form.is_valid())
-        user = form.save()
-        self.assertEqual(repr(user), "<User: jsmith@example.com>")
-        self.assertEqual(user.get_short_name(), "John")
-        self.assertEqual(user.get_full_name(), "John Smith")
-        self.assertTrue(user.check_password("test123"))
-
-    @skipUnless(
-        DJANGO_VERSION >= (1, 9),
-        "Password strength checks not available on Django 1.8",
-    )
     @override_settings(
         AUTH_PASSWORD_VALIDATORS=[
             {
@@ -179,10 +148,6 @@ class UserCreationFormTest(TestDataMixin, TestCase):
             form["password1"].errors,
         )
 
-    @skipUnless(
-        DJANGO_VERSION >= (1, 9),
-        "Password strength checks not available on Django 1.8",
-    )
     @override_settings(
         AUTH_PASSWORD_VALIDATORS=[
             {
@@ -204,10 +169,6 @@ class UserCreationFormTest(TestDataMixin, TestCase):
             form["password1"].errors,
         )
 
-    @skipUnless(
-        DJANGO_VERSION >= (1, 9),
-        "Password strength checks not available on Django 1.8",
-    )
     @override_settings(
         AUTH_PASSWORD_VALIDATORS=[
             {
@@ -234,10 +195,6 @@ class UserCreationFormTest(TestDataMixin, TestCase):
                 " your other personal information.</li></ul>",
             )
 
-    @skipUnless(
-        DJANGO_VERSION >= (1, 9),
-        "Password strength checks not available on Django 1.8",
-    )
     @override_settings(
         AUTH_PASSWORD_VALIDATORS=[
             {
@@ -311,7 +268,7 @@ class UserChangeFormTest(TestDataMixin, TestCase):
             """Custom Subclass to check lack of user_permissions field"""
 
             def __init__(self, *args, **kwargs):
-                super(MyUserForm, self).__init__(*args, **kwargs)
+                super().__init__(*args, **kwargs)
                 self.fields[
                     "groups"
                 ].help_text = "These groups give users different permissions"
