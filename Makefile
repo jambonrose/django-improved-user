@@ -11,7 +11,9 @@ DIU_PYTHON ?= $(DIU_VENV)/bin/python3
 $(DIU_VENV)/bin/activate:
 	mkdir -p $(DIU_VENV)
 	$(ROOT_PYTHON) -m venv $(DIU_VENV)
-	$(DIU_VENV)/bin/pip install -r requirements.txt
+	$(DIU_PYTHON) -m pip install --upgrade pip setuptools wheel
+	$(DIU_PYTHON) -m pip install -r requirements.txt
+	$(DIU_PYTHON) -m flit install --symlink
 
 .PHONY: build ## Build artifacts meant for distribution
 build: $(DIU_VENV)/bin/activate
