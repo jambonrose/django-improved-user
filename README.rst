@@ -1,50 +1,49 @@
 Latest Release: |Version| |Tag|
 
-Documentation: |DevelopmentDocs|
+Documentation: |StableDocs|
 
-Compatibility: |Implementation| |Python| |Django| |License|
+Compatibility: |Implementation| |Python| |Django| |License| |Black|
 
 Tests: |Pre-commit| |Coverage|
 
 .. |Version| image:: http://img.shields.io/pypi/v/django-improved-user.svg
-        :target: https://pypi.org/project/django-improved-user/
-        :alt: PyPI Version
+		:target: https://pypi.org/project/django-improved-user/
+		:alt: PyPI Version
 
 .. |Tag| image:: https://img.shields.io/github/tag/jambonsw/django-improved-user.svg
-        :target: https://github.com/jambonsw/django-improved-user/releases
-        :alt: Github Tag
+		:target: https://github.com/jambonsw/django-improved-user/releases
+		:alt: Github Tag
 
-.. .. |StableDocs| image:: https://readthedocs.org/projects/django-improved-user/badge/?version=stable
-..         :target: http://django-improved-user.readthedocs.io/en/stable/?badge=stable
-..         :alt: Stable Documentation Status
-
-.. |DevelopmentDocs| image:: https://readthedocs.org/projects/django-improved-user/badge/?version=latest
-        :target: http://django-improved-user.readthedocs.io/en/latest/?badge=latest
-        :alt: Development Documentation Status
+.. |StableDocs| image:: https://readthedocs.org/projects/django-improved-user/badge/?version=stable
+		:target: https://django-improved-user.readthedocs.io/en/stable/?badge=stable
+		:alt: Stable Documentation Status
 
 .. |Implementation| image:: https://img.shields.io/pypi/implementation/django-improved-user.svg
-        :target: https://pypi.org/project/django-improved-user/
-        :alt: Python Implementation Support
+		:target: https://pypi.org/project/django-improved-user/
+		:alt: Python Implementation Support
 
 .. |Python| image:: https://img.shields.io/pypi/pyversions/django-improved-user.svg
-        :target: https://pypi.org/project/django-improved-user/
-        :alt: Python Support
+		:target: https://pypi.org/project/django-improved-user/
+		:alt: Python Support
 
 .. |Django| image:: https://img.shields.io/badge/Django-1.8%2C%201.11%2C%202.0%2C%202.1-blue.svg
-        :target: https://pypi.org/project/django-improved-user/
-        :alt: Django Support
+		:target: https://pypi.org/project/django-improved-user/
+		:alt: Django Support
 
 .. |License| image:: http://img.shields.io/pypi/l/django-improved-user.svg
-        :target: http://opensource.org/licenses/BSD-2-Clause
-        :alt: License
+		:target: http://opensource.org/licenses/BSD-2-Clause
+		:alt: License
 
 .. |Pre-commit| image:: https://results.pre-commit.ci/badge/github/jambonsw/django-improved-user/development.svg
-        :target: https://results.pre-commit.ci/latest/github/jambonsw/django-improved-user/development
-        :alt: pre-commit.ci status
+		:target: https://results.pre-commit.ci/latest/github/jambonsw/django-improved-user/development
+		:alt: pre-commit.ci status
 
 .. |Coverage| image:: https://codecov.io/gh/jambonsw/django-improved-user/branch/development/graph/badge.svg
-        :target: https://codecov.io/gh/jambonsw/django-improved-user
-        :alt: Coverage Status
+		:target: https://codecov.io/gh/jambonsw/django-improved-user
+		:alt: Coverage Status
+
+.. |Black| image:: https://img.shields.io/badge/code%20style-black-000000.svg
+		:target: https://github.com/psf/black
 
 .. end-badges
 
