@@ -6,7 +6,7 @@ docutils==0.18.1
 factory-boy==3.2.1
 Faker==10.0.0
 flit==3.6.0
-Pygments==2.10.0
+Pygments==2.11.2
 pylint==2.12.2
 pylint-django==2.5.0
 python-dateutil==2.8.2
