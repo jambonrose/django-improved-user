@@ -1,0 +1,34 @@
+name: Publish package to PyPI
+
+on:
+    push:
+        tags:
+            - "v2.*"
+
+jobs:
+    build:
+        name: Build package
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Build sdist
+              run: pipx run build --sdist --wheel
+
+            - uses: actions/upload-artifact@v2
+              with:
+                  path: dist/*
+
+    upload_pypi:
+        needs: [build]
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/download-artifact@v2
+              with:
+                  name: artifact
+                  path: dist
+
+            - uses: pypa/gh-action-pypi-publish@v1.4.2
+              with:
+                  user: __token__
+                  password: ${{ secrets.pypi_password }}
