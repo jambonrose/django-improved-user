@@ -8,6 +8,6 @@ Faker==11.3.0
 flit==3.6.0
 Pygments==2.11.2
 pylint==2.12.2
-pylint-django==2.5.0
+pylint-django==2.5.3
 python-dateutil==2.8.2
 tox==3.24.5
