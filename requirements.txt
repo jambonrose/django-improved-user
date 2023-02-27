@@ -1,7 +1,7 @@
 astroid==2.9.2
 bumpversion==0.6.0
 check-manifest==0.47
-coverage==6.2
+coverage==7.2.1
 docutils==0.18.1
 factory-boy==3.2.1
 Faker==11.3.0
