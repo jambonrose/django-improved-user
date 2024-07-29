@@ -1,4 +1,5 @@
 """App Configuration for Improved User"""
+
 from django.apps import AppConfig
 from django.contrib import admin
 from django.contrib.auth import get_user_model

@@ -1,4 +1,5 @@
 """Compose new Django User models that follow best-practices for international names and authenticate via email instead of username."""
+
 # This file:
 #     1. define directory as module
 #     2. set default app config

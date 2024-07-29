@@ -1,4 +1,5 @@
 """Application Definition File"""
+
 from django.apps import AppConfig
 
 
