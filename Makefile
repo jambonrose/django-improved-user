@@ -2,7 +2,7 @@
 
 # DIU => Django Improved User
 # DIU_VENV is the name of directory to store the virtual environment
-DIU_VENV ?= venv
+DIU_VENV ?= .venv
 ROOT_PYTHON ?= python3
 DIU_PYTHON ?= $(DIU_VENV)/bin/python3
 DIU_COV ?= $(DIU_VENV)/bin/coverage
@@ -14,6 +14,7 @@ $(DIU_VENV)/bin/activate:
 	$(ROOT_PYTHON) -m venv $(DIU_VENV)
 	$(DIU_PYTHON) -m pip install --upgrade pip setuptools wheel
 	$(DIU_PYTHON) -m pip install -r requirements.txt
+	$(DIU_PYTHON) -m pip install -r doc-requirements.txt
 	$(DIU_PYTHON) -m flit install --symlink
 
 .PHONY: build ## Build artifacts meant for distribution
@@ -23,8 +24,7 @@ build: $(DIU_VENV)/bin/activate
 .PHONY: release ## Upload build artifacts to PyPI
 release: $(DIU_VENV)/bin/activate
 	git tag v`$(DIU_PYTHON) -m bumpversion --dry-run --list --new-version 0.0.0 patch | grep current | cut -d'=' -f 2`
-	$(DIU_PYTHON) -m flit publish
-	git push --tags
+	@echo "Verify new tag has been created. If the tag looks correct, push to git with: git push --tags ."
 
 .PHONY: test ## Run test suite for current environment
 test: $(DIU_VENV)/bin/activate
@@ -53,6 +53,7 @@ clean:
 
 .PHONY: purge ## Clean + remove virtual environment
 purge: clean
+	rm -rf .tox
 	rm -rf $(DIU_VENV)
 
 .PHONY: help ## List make targets with description
