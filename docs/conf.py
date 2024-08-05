@@ -163,7 +163,7 @@ master_doc = "index"
 
 # General information about the project.
 project = "Django Improved User"
-copyright = "2016-2021 JamBon Software"
+copyright = "2016-2024 Andrew Pinkham"
 author = "Russell Keith-Magee, Andrew Pinkham"
 
 # The version info for the project you're documenting, acts as replacement for

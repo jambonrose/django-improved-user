@@ -25,7 +25,7 @@ are expected to uphold this code.
 
 Please be respectful to other developers.
 
-.. _Code of Conduct: https://github.com/jambonsw/django-improved-user/blob/development/CODE_OF_CONDUCT.md
+.. _Code of Conduct: https://github.com/jambonrose/django-improved-user/blob/development/CODE_OF_CONDUCT.md
 
 Types of Contributions
 ----------------------
@@ -237,8 +237,8 @@ review your code.
 
 Congratulations on opening a pull request! 🎉
 
-.. _Github issue tracker: https://github.com/jambonsw/django-improved-user/issues
-.. _Github: https://github.com/jambonsw/django-improved-user
+.. _Github issue tracker: https://github.com/jambonrose/django-improved-user/issues
+.. _Github: https://github.com/jambonrose/django-improved-user
 .. _primer on rst: http://www.sphinx-doc.org/en/stable/rest.html#rst-primer
 .. _reStructuredText: http://docutils.sourceforge.net/rst.html
 .. _Sphinx: http://www.sphinx-doc.org/
