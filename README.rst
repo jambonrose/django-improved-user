@@ -10,8 +10,8 @@ Tests: |Pre-commit| |Coverage|
 		:target: https://pypi.org/project/django-improved-user/
 		:alt: PyPI Version
 
-.. |Tag| image:: https://img.shields.io/github/tag/jambonsw/django-improved-user.svg
-		:target: https://github.com/jambonsw/django-improved-user/releases
+.. |Tag| image:: https://img.shields.io/github/tag/jambonrose/django-improved-user.svg
+		:target: https://github.com/jambonrose/django-improved-user/releases
 		:alt: Github Tag
 
 .. |StableDocs| image:: https://readthedocs.org/projects/django-improved-user/badge/?version=stable
@@ -26,7 +26,7 @@ Tests: |Pre-commit| |Coverage|
 		:target: https://pypi.org/project/django-improved-user/
 		:alt: Python Support
 
-.. |Django| image:: https://img.shields.io/badge/Django-1.8%2C%201.11%2C%202.0%2C%202.1-blue.svg
+.. |Django| image:: https://img.shields.io/badge/Django-2.2%2C%203.0%2C%203.1%2C%203.2-blue.svg
 		:target: https://pypi.org/project/django-improved-user/
 		:alt: Django Support
 
@@ -34,12 +34,12 @@ Tests: |Pre-commit| |Coverage|
 		:target: http://opensource.org/licenses/BSD-2-Clause
 		:alt: License
 
-.. |Pre-commit| image:: https://results.pre-commit.ci/badge/github/jambonsw/django-improved-user/development.svg
-		:target: https://results.pre-commit.ci/latest/github/jambonsw/django-improved-user/development
+.. |Pre-commit| image:: https://results.pre-commit.ci/badge/github/jambonrose/django-improved-user/development.svg
+		:target: https://results.pre-commit.ci/latest/github/jambonrose/django-improved-user/development
 		:alt: pre-commit.ci status
 
-.. |Coverage| image:: https://codecov.io/gh/jambonsw/django-improved-user/branch/development/graph/badge.svg
-		:target: https://codecov.io/gh/jambonsw/django-improved-user
+.. |Coverage| image:: https://codecov.io/gh/jambonrose/django-improved-user/branch/development/graph/badge.svg
+		:target: https://codecov.io/gh/jambonrose/django-improved-user
 		:alt: Coverage Status
 
 .. |Black| image:: https://img.shields.io/badge/code%20style-black-000000.svg

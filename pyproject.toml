@@ -35,8 +35,8 @@ classifiers = [
 
 [project.urls]
 Documentation = "https://django-improved-user.rtfd.io"
-Source = "https://github.com/jambonsw/django-improved-user/"
-Tracker = "https://github.com/jambonsw/django-improved-user/issues"
+Source = "https://github.com/jambonrose/django-improved-user/"
+Tracker = "https://github.com/jambonrose/django-improved-user/issues"
 
 [project.optional-dependencies]
 factory = [

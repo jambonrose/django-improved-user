@@ -30,7 +30,7 @@ see the reference documentation for these items below.
 Finally, the actual code on `Github`_ has three example projects that may
 be helpful if this documentation was not.
 
-.. _Github: https://github.com/jambonsw/django-improved-user
+.. _Github: https://github.com/jambonrose/django-improved-user
 
 *******************
 Reference Documents

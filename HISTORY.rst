@@ -23,8 +23,8 @@ Next Release
     - Upgrade development & documentation dependencies
     - Use flit to build/release sdist instead of setup.py
 
-.. _#117: https://github.com/jambonsw/django-improved-user/pull/117
-.. _#118: https://github.com/jambonsw/django-improved-user/issues/118
+.. _#117: https://github.com/jambonrose/django-improved-user/pull/117
+.. _#118: https://github.com/jambonrose/django-improved-user/issues/118
 
 1.0.1 (2020-02-16)
 ------------------
@@ -49,13 +49,13 @@ Next Release
   the project). Add documentation/tutorial on subject. (`#46`_)
 - Django 2.0, 2.1 compatibility. (`#43`_, `#93`_)
 
-.. _#36: https://github.com/jambonsw/django-improved-user/issues/36
-.. _#43: https://github.com/jambonsw/django-improved-user/pull/43
-.. _#46: https://github.com/jambonsw/django-improved-user/pull/46
-.. _#49: https://github.com/jambonsw/django-improved-user/issues/49
-.. _#50: https://github.com/jambonsw/django-improved-user/pull/50
-.. _#93: https://github.com/jambonsw/django-improved-user/pull/93
-.. _#96: https://github.com/jambonsw/django-improved-user/pull/96
+.. _#36: https://github.com/jambonrose/django-improved-user/issues/36
+.. _#43: https://github.com/jambonrose/django-improved-user/pull/43
+.. _#46: https://github.com/jambonrose/django-improved-user/pull/46
+.. _#49: https://github.com/jambonrose/django-improved-user/issues/49
+.. _#50: https://github.com/jambonrose/django-improved-user/pull/50
+.. _#93: https://github.com/jambonrose/django-improved-user/pull/93
+.. _#96: https://github.com/jambonrose/django-improved-user/pull/96
 
 
 0.5.3 (2017-08-29)
@@ -65,7 +65,7 @@ Next Release
 - Write documentation about why and how the project was built. (`#34`_)
 - Add section about contributing documentation. (`#34`_)
 
-.. _#34: https://github.com/jambonsw/django-improved-user/pull/34
+.. _#34: https://github.com/jambonrose/django-improved-user/pull/34
 
 0.5.2 (2017-08-27)
 ------------------
@@ -85,8 +85,8 @@ Next Release
   are unable to build that version until v1.0.0 release. See
   `rtfd/readthedocs.org#2032`_ for more information. (`#31`_)
 
-.. _rtfd/readthedocs.org#2032: https://github.com/rtfd/readthedocs.org/issues/2032
-.. _#31: https://github.com/jambonsw/django-improved-user/pull/31
+.. _rtfd/readthedocs.org#2032: https://github.com/readthedocs/readthedocs.org/issues/2032
+.. _#31: https://github.com/jambonrose/django-improved-user/pull/31
 
 0.5.0 (2017-08-26)
 ------------------
@@ -103,11 +103,11 @@ Next Release
   of new users at creation time. Reported in `#25`_, fixed in `#27`_
   (``last_login`` is ``None`` until the user actually logs in).
 
-.. _#25: https://github.com/jambonsw/django-improved-user/issues/25
-.. _#26: https://github.com/jambonsw/django-improved-user/pull/26
-.. _#27: https://github.com/jambonsw/django-improved-user/pull/27
-.. _#28: https://github.com/jambonsw/django-improved-user/pull/28
-.. _#29: https://github.com/jambonsw/django-improved-user/pull/29
+.. _#25: https://github.com/jambonrose/django-improved-user/issues/25
+.. _#26: https://github.com/jambonrose/django-improved-user/pull/26
+.. _#27: https://github.com/jambonrose/django-improved-user/pull/27
+.. _#28: https://github.com/jambonrose/django-improved-user/pull/28
+.. _#29: https://github.com/jambonrose/django-improved-user/pull/29
 
 0.4.0 (2017-08-14)
 ------------------
@@ -124,9 +124,9 @@ with v0.3.0 due to PR `#23`_
 - Change ``blank`` to ``True`` on ``short_name`` field of User model.
   (**Breaking change!** PR `#23`_).
 
-.. _#20: https://github.com/jambonsw/django-improved-user/pull/20
-.. _#22: https://github.com/jambonsw/django-improved-user/pull/22
-.. _#23: https://github.com/jambonsw/django-improved-user/pull/23
+.. _#20: https://github.com/jambonrose/django-improved-user/pull/20
+.. _#22: https://github.com/jambonrose/django-improved-user/pull/22
+.. _#23: https://github.com/jambonrose/django-improved-user/pull/23
 
 0.3.0 (2017-08-10)
 ------------------
@@ -151,8 +151,8 @@ with v0.3.0 due to PR `#23`_
   in all versions of Django (was not working in Django 1.9+) (PR `#18`_)
 - Bugfix: Runtests correctly handles test specification (PR `#18`_)
 
-.. _#16: https://github.com/jambonsw/django-improved-user/pull/16
-.. _#18: https://github.com/jambonsw/django-improved-user/pull/18
+.. _#16: https://github.com/jambonrose/django-improved-user/pull/16
+.. _#18: https://github.com/jambonrose/django-improved-user/pull/18
 
 0.2.0 (2017-07-30)
 ------------------
@@ -165,26 +165,26 @@ with v0.3.0 due to PR `#23`_
   Use flake8-commas and flake8-quotes to enhance flake8.
   Override default distutils check command to check package metadata.
   Use check-manifest to check contents of MANIFEST.in (PR `#11`_)
-- Integrate https://pyup.io/ into project (PR `#12`_)
+- Integrate pyup.io into project (PR `#12`_)
 - Upgrade flake8 to version 3.4.1 (PR `#13`_)
 - Make release and distribution less painful with
   bumpversion package and a Makefile (PR `#15`_)
 - Add HISTORY.rst file to provide change log (PR `#15`_)
 
-.. _#9: https://github.com/jambonsw/django-improved-user/pull/9
-.. _#10: https://github.com/jambonsw/django-improved-user/pull/10
-.. _#11: https://github.com/jambonsw/django-improved-user/pull/11
-.. _#12: https://github.com/jambonsw/django-improved-user/pull/12
-.. _#13: https://github.com/jambonsw/django-improved-user/pull/13
-.. _#15: https://github.com/jambonsw/django-improved-user/pull/15
+.. _#9: https://github.com/jambonrose/django-improved-user/pull/9
+.. _#10: https://github.com/jambonrose/django-improved-user/pull/10
+.. _#11: https://github.com/jambonrose/django-improved-user/pull/11
+.. _#12: https://github.com/jambonrose/django-improved-user/pull/12
+.. _#13: https://github.com/jambonrose/django-improved-user/pull/13
+.. _#15: https://github.com/jambonrose/django-improved-user/pull/15
 
 0.1.1 (2017-06-28)
 ------------------
 
 - Fix metadata in setup.py for warehouse
-  (see https://github.com/pypa/warehouse/issues/2155 and PR `#8`_)
+  (see https://github.com/pypi/warehouse/issues/2155 and PR `#8`_)
 
-.. _#8: https://github.com/jambonsw/django-improved-user/pull/8
+.. _#8: https://github.com/jambonrose/django-improved-user/pull/8
 
 0.1.0 (2017-06-28)
 ------------------
@@ -198,9 +198,9 @@ with v0.3.0 due to PR `#23`_
 - Initial public release (PR `#7`_)
 - Use Simplified BSD License instead of Revised BSD License (`#7`_)
 
-.. _#5: https://github.com/jambonsw/django-improved-user/pull/5
-.. _#6: https://github.com/jambonsw/django-improved-user/pull/6
-.. _#7: https://github.com/jambonsw/django-improved-user/pull/7
+.. _#5: https://github.com/jambonrose/django-improved-user/pull/5
+.. _#6: https://github.com/jambonrose/django-improved-user/pull/6
+.. _#7: https://github.com/jambonrose/django-improved-user/pull/7
 
 0.0.1 (2016-10-26)
 ------------------
@@ -212,6 +212,6 @@ with v0.3.0 due to PR `#23`_
     - Python 3.4, 3.5, 3.6
     - Django 1.8 through 1.10 (PR `#3`_ and `#4`_)
 
-.. _#1: https://github.com/jambonsw/django-improved-user/pull/1
-.. _#3: https://github.com/jambonsw/django-improved-user/pull/3
-.. _#4: https://github.com/jambonsw/django-improved-user/pull/4
+.. _#1: https://github.com/jambonrose/django-improved-user/pull/1
+.. _#3: https://github.com/jambonrose/django-improved-user/pull/3
+.. _#4: https://github.com/jambonrose/django-improved-user/pull/4

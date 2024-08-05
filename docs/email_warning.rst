@@ -30,5 +30,5 @@ can make this quite fast). These decisions and code are outside the
 scope of this project and we therefore do not provide any work on this
 front.
 
-.. _`RFC 5321`: https://tools.ietf.org/rfc/rfc5321.txt
+.. _`RFC 5321`: https://www.rfc-editor.org/rfc/rfc5321.txt
 .. _`cause obscure security issues`: https://www.schneier.com/blog/archives/2018/04/obscure_e-mail_.html

@@ -19,6 +19,7 @@ documentation root, use os.path.abspath to make it absolute, like shown here.
 """
 
 import inspect
+import re
 import sys
 from operator import attrgetter
 from os.path import abspath, join
@@ -163,7 +164,7 @@ master_doc = "index"
 
 # General information about the project.
 project = "Django Improved User"
-copyright = "2016-2021 JamBon Software"
+copyright = "2016-2024 Andrew Pinkham"
 author = "Russell Keith-Magee, Andrew Pinkham"
 
 # The version info for the project you're documenting, acts as replacement for
@@ -298,3 +299,7 @@ texinfo_documents = [
         "Miscellaneous",
     ),
 ]
+
+# -- Linkcheck configuration -----------------------------------------------
+
+linkcheck_ignore = [re.compile(r'https://djangopackages\.org/.*')]
