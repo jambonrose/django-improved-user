@@ -5,6 +5,13 @@ on:
         branches: [development]
     pull_request:
         branches: [development]
+        paths:
+          - .github/**
+          - src/**
+          - tests/**
+          - example_extension_project/**
+          - example_integration_project/**
+          - example_replacement_project/**
 
 env:
     PYTHONDONTWRITEBYTECODE: 1
