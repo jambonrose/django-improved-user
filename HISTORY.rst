@@ -7,7 +7,7 @@ Next Release
 
 - Nothing Yet!
 
-2.0.0 (Forthcoming)
+2.0.0 (2024-08-05)
 -------------------
 
 
