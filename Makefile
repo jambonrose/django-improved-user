@@ -2,7 +2,7 @@
 
 # DIU => Django Improved User
 # DIU_VENV is the name of directory to store the virtual environment
-DIU_VENV ?= venv
+DIU_VENV ?= .venv
 ROOT_PYTHON ?= python3
 DIU_PYTHON ?= $(DIU_VENV)/bin/python3
 DIU_COV ?= $(DIU_VENV)/bin/coverage
