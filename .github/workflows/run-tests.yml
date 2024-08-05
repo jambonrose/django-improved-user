@@ -5,6 +5,8 @@ on:
         branches: [development]
     pull_request:
         branches: [development]
+        paths: [".github/**", "src/**", "tests/**"]
+
 
 env:
     PYTHONDONTWRITEBYTECODE: 1

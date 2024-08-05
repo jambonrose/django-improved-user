@@ -1,8 +1,11 @@
 name: Define Github labels
 on:
     push:
-        branches:
-            - development
+        branches: ["development"]
+        paths:
+            - .github/workflows/define-labels.yml
+            - .github/labels.yml
+
 jobs:
     define:
         runs-on: ubuntu-22.04
