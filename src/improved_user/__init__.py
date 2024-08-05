@@ -4,7 +4,7 @@
 #     2. set default app config
 
 # pylint: disable=invalid-name
-__version__ = "2.0a2"
+__version__ = "2.0.0"
 # https://docs.djangoproject.com/en/stable/ref/applications/#configuring-applications
 default_app_config = "improved_user.apps.ImprovedUserConfig"
 # pylint: enable=invalid-name
