@@ -19,6 +19,7 @@ documentation root, use os.path.abspath to make it absolute, like shown here.
 """
 
 import inspect
+import re
 import sys
 from operator import attrgetter
 from os.path import abspath, join
@@ -298,3 +299,7 @@ texinfo_documents = [
         "Miscellaneous",
     ),
 ]
+
+# -- Linkcheck configuration -----------------------------------------------
+
+linkcheck_ignore = [re.compile(r'https://djangopackages\.org/.*')]

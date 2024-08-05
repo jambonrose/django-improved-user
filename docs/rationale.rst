@@ -42,7 +42,7 @@ allow for creation of new User models (notably, the
 
 We hope you find our work useful!
 
-.. _Andrew Pinkham: http://andrewsforge.com
+.. _Andrew Pinkham: https://andrewsforge.com
 .. _consulting experience: https://www.jambonsw.com
 .. _Django Unleashed: https://django-unleashed.com
 .. _his book, Django Unleashed: `Django Unleashed`_

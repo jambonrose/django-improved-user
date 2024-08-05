@@ -85,7 +85,7 @@ Next Release
   are unable to build that version until v1.0.0 release. See
   `rtfd/readthedocs.org#2032`_ for more information. (`#31`_)
 
-.. _rtfd/readthedocs.org#2032: https://github.com/rtfd/readthedocs.org/issues/2032
+.. _rtfd/readthedocs.org#2032: https://github.com/readthedocs/readthedocs.org/issues/2032
 .. _#31: https://github.com/jambonrose/django-improved-user/pull/31
 
 0.5.0 (2017-08-26)
@@ -165,7 +165,7 @@ with v0.3.0 due to PR `#23`_
   Use flake8-commas and flake8-quotes to enhance flake8.
   Override default distutils check command to check package metadata.
   Use check-manifest to check contents of MANIFEST.in (PR `#11`_)
-- Integrate https://pyup.io/ into project (PR `#12`_)
+- Integrate pyup.io into project (PR `#12`_)
 - Upgrade flake8 to version 3.4.1 (PR `#13`_)
 - Make release and distribution less painful with
   bumpversion package and a Makefile (PR `#15`_)
@@ -182,7 +182,7 @@ with v0.3.0 due to PR `#23`_
 ------------------
 
 - Fix metadata in setup.py for warehouse
-  (see https://github.com/pypa/warehouse/issues/2155 and PR `#8`_)
+  (see https://github.com/pypi/warehouse/issues/2155 and PR `#8`_)
 
 .. _#8: https://github.com/jambonrose/django-improved-user/pull/8
 
