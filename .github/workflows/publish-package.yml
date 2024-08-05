@@ -3,32 +3,38 @@ name: Publish package to PyPI
 on:
     push:
         tags:
-            - "v2.*"
+            - "v*"
 
 jobs:
     build:
         name: Build package
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-22.04
+        environment: publish
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v4
 
             - name: Build sdist
               run: pipx run build --sdist --wheel
 
-            - uses: actions/upload-artifact@v2
+            - uses: actions/upload-artifact@v4
               with:
                   path: dist/*
 
-    upload_pypi:
+    publish:
+        name: Upload release to PyPI
         needs: [build]
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-22.04
+        environment:
+            name: publish
+            url: https://pypi.org/p/django-improved-user/
+        permissions:
+            id-token: write
         steps:
-            - uses: actions/download-artifact@v2
+            - name: Download artifact from build step
+              uses: actions/download-artifact@v4
               with:
                   name: artifact
                   path: dist
 
-            - uses: pypa/gh-action-pypi-publish@v1.4.2
-              with:
-                  user: __token__
-                  password: ${{ secrets.pypi_password }}
+            - name: Publish to PyPI
+              uses: pypa/gh-action-pypi-publish@release/v1
