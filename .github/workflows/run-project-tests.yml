@@ -24,11 +24,13 @@ jobs:
             matrix:
                 os: [ubuntu-20.04, windows-2022]
                 # Django LTS versions & latest version only
-                django-version: ["2.2", "3.2"]
+                django-version: ["2.2", "3.2", "4.2"]
                 project: ["extension", "integration", "replacement"]
                 exclude:
-                    # Django Registration 2 does not support Django 3.2
+                    # Django Registration 2 does not support Django above 2.2
                     - django-version: "3.2"
+                      project: "integration"
+                    - django-version: "4.2"
                       project: "integration"
 
         steps:
