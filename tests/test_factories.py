@@ -1,4 +1,5 @@
 """Test model factories provided by Improved User"""
+
 from django.test import TestCase
 
 from improved_user.factories import UserFactory

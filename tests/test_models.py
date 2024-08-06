@@ -1,4 +1,5 @@
 """Test Improved User Model"""
+
 from datetime import datetime
 from types import MethodType
 from unittest.mock import patch

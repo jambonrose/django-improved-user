@@ -1,4 +1,5 @@
 """Test User model management commands"""
+
 import builtins
 from io import StringIO
 
