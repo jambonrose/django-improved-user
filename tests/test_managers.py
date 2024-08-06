@@ -1,4 +1,5 @@
 """Test User model manager"""
+
 from datetime import datetime
 
 from django.test import TestCase

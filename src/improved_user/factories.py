@@ -1,4 +1,5 @@
 """Factories to make testing with Improved User easier"""
+
 from django.contrib.auth import get_user_model
 
 try:

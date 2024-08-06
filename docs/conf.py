@@ -302,4 +302,4 @@ texinfo_documents = [
 
 # -- Linkcheck configuration -----------------------------------------------
 
-linkcheck_ignore = [re.compile(r'https://djangopackages\.org/.*')]
+linkcheck_ignore = [re.compile(r"https://djangopackages\.org/.*")]

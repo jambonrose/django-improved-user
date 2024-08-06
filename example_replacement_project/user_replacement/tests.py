@@ -1,4 +1,5 @@
 """Tests for the extended User model"""
+
 from types import MethodType
 
 from django.test import TestCase

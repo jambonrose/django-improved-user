@@ -1,4 +1,5 @@
 """User Manager used by Improved User; may be extended"""
+
 from django.contrib.auth.models import BaseUserManager
 
 

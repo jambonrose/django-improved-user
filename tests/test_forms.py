@@ -1,4 +1,5 @@
 """Test UserCreationForm and UserChangeForm"""
+
 from unittest.mock import patch
 
 from django import VERSION as DJANGO_VERSION
@@ -269,9 +270,9 @@ class UserChangeFormTest(TestDataMixin, TestCase):
 
             def __init__(self, *args, **kwargs):
                 super().__init__(*args, **kwargs)
-                self.fields[
-                    "groups"
-                ].help_text = "These groups give users different permissions"
+                self.fields["groups"].help_text = (
+                    "These groups give users different permissions"
+                )
 
             class Meta(UserChangeForm.Meta):
                 fields = ("groups",)

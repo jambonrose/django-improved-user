@@ -1,4 +1,5 @@
 """Test Improved User against Django's default backend"""
+
 # pylint: disable=protected-access
 from unittest.mock import patch
 
