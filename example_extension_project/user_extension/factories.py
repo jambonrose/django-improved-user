@@ -3,6 +3,7 @@
 Demonstrated here to ensure that Improved User Factory can be subclassed.
 
 """
+
 from factory import Faker
 
 from improved_user.factories import UserFactory as BaseUserFactory
