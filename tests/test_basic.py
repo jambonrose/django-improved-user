@@ -1,4 +1,5 @@
 """Test basic functionality; test API used by a Django project developer"""
+
 from django.contrib.auth import get_user, get_user_model
 from django.http import HttpRequest
 from django.test import TestCase
@@ -138,9 +139,10 @@ class BasicTestCase(TestCase):
     def test_get_user_model(self):
         """The improved user model can be retrieved"""
         self.assertEqual(get_user_model(), User)
-        with self.assertRaises(AttributeError):
-            from django.contrib.auth.models import User as DjangoUser
 
+        from django.contrib.auth.models import User as DjangoUser
+
+        with self.assertRaises(AttributeError):
             DjangoUser.objects.all()
 
     def test_user_verbose_names_translatable(self):
