@@ -9,6 +9,9 @@ If you're in a rush, head over to :doc:`quickstart`.
 If you're new and want to see what your options are, please read
 :doc:`select_configuration_method`.
 
+The documentation you are viewing covers Django Improved User 2.1,
+compatible with Django 2.2, 3.0, 3.1, 3.2, 4.0, 4.1, 4.2.
+
 .. toctree::
    :caption: Contents:
    :glob:

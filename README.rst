@@ -2,15 +2,15 @@ Latest Release: |Version| |Tag|
 
 Documentation: |StableDocs|
 
-Compatibility: |Implementation| |Python| |Django| |License| |Black|
+Compatibility: |Python| |Django| |License| |Black|
 
 Tests: |Pre-commit| |Coverage|
 
-.. |Version| image:: http://img.shields.io/pypi/v/django-improved-user.svg
+.. |Version| image:: https://img.shields.io/pypi/v/django-improved-user
 		:target: https://pypi.org/project/django-improved-user/
 		:alt: PyPI Version
 
-.. |Tag| image:: https://img.shields.io/github/tag/jambonrose/django-improved-user.svg
+.. |Tag| image:: https://img.shields.io/github/v/tag/jambonrose/django-improved-user
 		:target: https://github.com/jambonrose/django-improved-user/releases
 		:alt: Github Tag
 
@@ -18,19 +18,15 @@ Tests: |Pre-commit| |Coverage|
 		:target: https://django-improved-user.readthedocs.io/en/stable/?badge=stable
 		:alt: Stable Documentation Status
 
-.. |Implementation| image:: https://img.shields.io/pypi/implementation/django-improved-user.svg
-		:target: https://pypi.org/project/django-improved-user/
-		:alt: Python Implementation Support
-
-.. |Python| image:: https://img.shields.io/pypi/pyversions/django-improved-user.svg
+.. |Python| image:: https://img.shields.io/pypi/pyversions/django-improved-user
 		:target: https://pypi.org/project/django-improved-user/
 		:alt: Python Support
 
-.. |Django| image:: https://img.shields.io/badge/Django-2.2%2C%203.0%2C%203.1%2C%203.2-blue.svg
+.. |Django| image:: https://img.shields.io/pypi/frameworkversions/django/django-improved-user
 		:target: https://pypi.org/project/django-improved-user/
 		:alt: Django Support
 
-.. |License| image:: http://img.shields.io/pypi/l/django-improved-user.svg
+.. |License| image:: https://img.shields.io/pypi/l/django-improved-user
 		:target: http://opensource.org/licenses/BSD-2-Clause
 		:alt: License
 
@@ -42,7 +38,7 @@ Tests: |Pre-commit| |Coverage|
 		:target: https://codecov.io/gh/jambonrose/django-improved-user
 		:alt: Coverage Status
 
-.. |Black| image:: https://img.shields.io/badge/code%20style-black-000000.svg
+.. |Black| image:: https://img.shields.io/badge/code%20style-black-000000
 		:target: https://github.com/psf/black
 
 .. end-badges
