@@ -7,5 +7,4 @@
 # pylint: disable=invalid-name
 __version__ = "2.1.0"
 # https://docs.djangoproject.com/en/stable/ref/applications/#configuring-applications
-default_app_config = "improved_user.apps.ImprovedUserConfig"
 # pylint: enable=invalid-name
