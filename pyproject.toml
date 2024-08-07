@@ -1,5 +1,5 @@
 [build-system]
-requires = ["flit_core >=3.2,<4"]
+requires = ["flit_core >=3.4,<4"]
 build-backend = "flit_core.buildapi"
 
 [project]
@@ -10,8 +10,8 @@ authors = [
     { name = "Andrew Pinkham" },
 ]
 readme = "README.rst"
-requires-python = ">=3.6"
-dependencies = ["django>=2.2"]
+requires-python = ">=3.8"
+dependencies = ["django>=4.2"]
 license = { file = "LICENSE"}
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -20,8 +20,6 @@ classifiers = [
     "Operating System :: OS Independent",
     "Topic :: Software Development :: Libraries",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.6",
-    "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
@@ -29,12 +27,6 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3 :: Only",
     "Framework :: Django",
-    "Framework :: Django :: 2.2",
-    "Framework :: Django :: 3.0",
-    "Framework :: Django :: 3.1",
-    "Framework :: Django :: 3.2",
-    "Framework :: Django :: 4.0",
-    "Framework :: Django :: 4.1",
     "Framework :: Django :: 4.2",
 ]
 
@@ -87,5 +79,5 @@ exclude = [
 
 [tool.black]
 line-length = 79
-target-version = ['py36', 'py37', 'py38', 'py39']
+target-version = ['py38']
 include = '\.pyi?$'
