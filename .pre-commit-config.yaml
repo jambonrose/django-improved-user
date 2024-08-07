@@ -52,7 +52,7 @@ repos:
       rev: v3.17.0
       hooks:
           - id: pyupgrade
-            args: [--py36-plus]
+            args: [--py38-plus]
     - repo: https://github.com/mgedmin/check-manifest
       rev: "0.49"
       hooks:
