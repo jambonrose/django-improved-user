@@ -27,7 +27,7 @@ from os.path import abspath, join
 import sphinx_rtd_theme  # noqa: F401
 from django import setup as django_setup
 from django.conf import settings as django_settings
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.html import strip_tags
 
 sys.path.insert(0, abspath(join("..", "src")))
@@ -53,9 +53,9 @@ def annotate_field(lines, field, models):
 
     if field.help_text:
         # Decode and strip any html out of the field's help text
-        help_text = strip_tags(force_text(field.help_text))
+        help_text = strip_tags(force_str(field.help_text))
     else:
-        help_text = force_text(field.verbose_name).capitalize()
+        help_text = force_str(field.verbose_name).capitalize()
     # Add the model field to the end of the docstring as a param
     # using the verbose name as the description
     lines.append(f":param {field.attname}: {help_text}")
@@ -102,9 +102,9 @@ def process_docstring(app, what, name, obj, options, lines):
             field = form.base_fields[field_name]
             if field.help_text:
                 # Decode and strip any html out of the field's help text
-                help_text = strip_tags(force_text(field.help_text))
+                help_text = strip_tags(force_str(field.help_text))
             else:
-                help_text = force_text(field.label).capitalize()
+                help_text = force_str(field.label).capitalize()
             lines.append(f":param {field_name}: {help_text}")
             if field.widget.is_hidden:
                 lines.append(

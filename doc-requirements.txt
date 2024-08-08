@@ -1,4 +1,4 @@
-Django>=3.2,<3.3
+Django>=4.2,<4.3
 factory-boy==3.3.0
 Faker==26.1.0
 Pygments==2.18.0
