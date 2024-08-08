@@ -1,2 +1,2 @@
-django-coverage-plugin==2.0.2
+django-coverage-plugin==3.1.0
 django-extensions==3.1.5
