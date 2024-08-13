@@ -1,6 +1,6 @@
 Django>=4.2,<4.3
 factory-boy==3.3.0
-Faker==26.1.0
+Faker==27.0.0
 Pygments==2.18.0
 python-dateutil==2.9.0.post0
 Sphinx==7.4.7
