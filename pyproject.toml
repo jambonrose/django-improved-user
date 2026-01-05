@@ -10,7 +10,7 @@ authors = [
     { name = "Andrew Pinkham" },
 ]
 readme = "README.rst"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 dependencies = ["django>=4.2"]
 license = { file = "LICENSE"}
 classifiers = [
@@ -20,11 +20,11 @@ classifiers = [
     "Operating System :: OS Independent",
     "Topic :: Software Development :: Libraries",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: 3 :: Only",
     "Framework :: Django",
     "Framework :: Django :: 4.2",
@@ -79,5 +79,5 @@ exclude = [
 
 [tool.black]
 line-length = 79
-target-version = ['py38']
+target-version = ['py310']
 include = '\.pyi?$'
