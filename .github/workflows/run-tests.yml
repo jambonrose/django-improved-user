@@ -18,8 +18,13 @@ jobs:
         strategy:
             matrix:
                 os: [ubuntu-22.04, windows-2022]
+<<<<<<< HEAD
                 python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
                 django-version: ["4.2"]
+=======
+                python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
+                django-version: ["5.2"]
+>>>>>>> 1eec7d2 (fixup! ci: Test on Django 5.2 and Python 3.14)
 
         steps:
             - uses: actions/checkout@v4
