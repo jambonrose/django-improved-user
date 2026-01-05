@@ -1,6 +1,7 @@
 """User Manager used by Improved User; may be extended"""
 
 from django.contrib.auth.models import BaseUserManager
+from django.utils.crypto import get_random_string
 
 
 class UserManager(BaseUserManager):
@@ -54,3 +55,15 @@ class UserManager(BaseUserManager):
         if extra_fields.get("is_superuser") is not True:
             raise ValueError("Superuser must have is_superuser=True.")
         return self._create_user(email, password, **extra_fields)
+
+    def make_random_password(
+        self,
+        length=10,
+        allowed_chars="abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789",
+    ):
+        """Generate a random password with the given length and allowed_chars.
+
+        The default value of allowed_chars does not have "I" or "O" or letters
+        and digits that look similar -- just to avoid confusion.
+        """
+        return get_random_string(length, allowed_chars)
