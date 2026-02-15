@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Utility script to setup Django and run tests against package"""
+
 import sys
 from os.path import dirname, join
 

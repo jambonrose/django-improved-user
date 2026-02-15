@@ -22,26 +22,35 @@ jobs:
         strategy:
             matrix:
                 os: [ubuntu-22.04, windows-2022]
-                django-version: ["4.2"]
+                python-version: ["3.12", "3.14"]
+                django-version: ["4.2", "5.2"]
                 project: ["extension", "replacement"]
+                exclude:
+                    # Django 4.2 only supports Python up to 3.12
+                    - python-version: "3.14"
+                      django-version: "4.2"
+                    # Test Django 5.2 with latest Python only
+                    - python-version: "3.12"
+                      django-version: "5.2"
 
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
 
-            - name: Set up Python
-              uses: actions/setup-python@v5
+            - name: Set up Python ${{ matrix.python-version }}
+              uses: actions/setup-python@v6
               with:
-                  python-version: "3.12"
+                  python-version: ${{ matrix.python-version }}
 
             - name: Upgrade pip
               run: python3 -m pip install -U distlib pip setuptools wheel
 
             - name: Get pip cache dir
               id: pip-cache
-              run: echo "::set-output name=dir::$(pip cache dir)"
+              shell: bash
+              run: echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
 
             - name: Cache dependencies
-              uses: actions/cache@v4
+              uses: actions/cache@v5
               with:
                   path: ${{ steps.pip-cache.outputs.dir }}
                   key:
@@ -61,8 +70,9 @@ jobs:
 
             - name: Python and Django versions
               run: |
+                  echo "Python ${{ matrix.python-version }} & Django ${{ matrix.django-version }}"
                   python3 --version
-                  echo "Django ${{ matrix.django-version }}: $(django-admin --version)"
+                  echo "Django: $(django-admin --version)"
 
             - name: Run tests
               working-directory: ./example_${{ matrix.project }}_project

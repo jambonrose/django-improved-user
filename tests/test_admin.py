@@ -55,7 +55,7 @@ class UserAdminTests(TestCase):
 
     def logout(self):
         """Logout the user; helper function"""
-        response = self.client.get("/admin/logout/")
+        response = self.client.post("/admin/logout/")
         self.assertEqual(response.status_code, 200)
         self.assertNotIn(SESSION_KEY, self.client.session)
 

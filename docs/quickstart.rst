@@ -56,7 +56,7 @@ Configuration and Usage
    :py:class:`~improved_user.model_mixins.AbstractUser`.
 
     .. literalinclude:: ../example_extension_project/user_extension/models.py
-        :lines: 5
+        :lines: 6
 
 4. Create a new :code:`User` model. If you omit comments, you may need
    to add :code:`pass` to the line below the class.
