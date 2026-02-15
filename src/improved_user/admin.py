@@ -40,3 +40,4 @@ class UserAdmin(BaseUserAdmin):
     list_display = ("email", "full_name", "short_name", "is_staff")
     search_fields = ("email", "full_name", "short_name")
     ordering = ("email",)
+    readonly_fields = ("last_login", "date_joined")
