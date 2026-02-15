@@ -63,7 +63,8 @@ class UserManager(BaseUserManager):
     ):
         """Generate a random password with the given length and allowed_chars.
 
-        The default value of allowed_chars does not have "I" or "O" or letters
-        and digits that look similar -- just to avoid confusion.
+        The default value of allowed_chars excludes visually ambiguous
+        characters: lowercase 'i', 'l', 'o'; uppercase 'I', 'O'; and
+        digits '0', '1'.
         """
         return get_random_string(length, allowed_chars)
