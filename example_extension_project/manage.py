@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 """Script that allows developers to run Django commands"""
+
 import os
 import sys
 
