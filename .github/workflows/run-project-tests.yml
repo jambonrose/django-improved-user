@@ -11,6 +11,8 @@ on:
           - tests/**
           - example_extension_project/**
           - example_replacement_project/**
+          - pyproject.toml
+          - requirements.txt
 
 env:
     PYTHONDONTWRITEBYTECODE: 1

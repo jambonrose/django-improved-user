@@ -30,20 +30,20 @@ You can limit tests or pass paramaters as when using ``manage.py test``.
     $ ./runtests.py tests.test_basic -v 3
 
 If you have all of the supported Python versions installed,
-you may use ``tox`` to run all linters and test the
+you may use ``nox`` to run all linters and test the
 package with multiple versions of Python and Django.
 
 .. code:: console
 
-    $ tox
+    $ nox
 
-You may also limit tests to specific environments or test suites with
-tox. For instance:
+You may also limit tests to specific sessions or test suites with
+nox. For instance:
 
 .. code:: console
 
-    $ tox -e py311-django42-unit tests.test_basic
-    $ tox -e py311-django42-integration user_integration.tests.TestViews.test_home
+    $ nox -s "unit(python='3.11', django='4.2')" -- tests.test_basic
+    $ nox -s "extension(python='3.12', django='4.2')"
 
 Any change to the code should first be discussed in an issue.
 

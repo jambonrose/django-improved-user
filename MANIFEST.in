@@ -18,7 +18,7 @@ include LICENSE
 include requirements.txt
 include runtests.py
 include setup.cfg
-include tox.ini
+include noxfile.py
 prune .github
 prune docs
 prune example_extension_project

@@ -5,7 +5,12 @@ on:
         branches: [development]
     pull_request:
         branches: [development]
-        paths: [".github/**", "src/**", "tests/**"]
+        paths:
+          - .github/**
+          - src/**
+          - tests/**
+          - pyproject.toml
+          - requirements.txt
 
 
 env:
