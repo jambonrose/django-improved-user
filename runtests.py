@@ -13,7 +13,7 @@ except ImportError:
     print(
         "Could not load Django.\n"
         "Try running `flit install --symlink` before `./runtests.py`\n"
-        "or run `make test` (or `make tox`) for an all in one solution",
+        "or run `make test` (or `make nox`) for an all in one solution",
     )
     exit(-1)
 
@@ -24,7 +24,7 @@ except ImportError:
     print(
         "Could not load improved_user!\n"
         "Try running `flit install --symlink` before `./runtests.py`\n"
-        "or run `make test` (or `make tox`) for an all in one solution",
+        "or run `make test` (or `make nox`) for an all in one solution",
     )
     exit(-1)
 

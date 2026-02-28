@@ -62,7 +62,7 @@ include = [
     "runtests.py",
     "setup.cfg",
     "tests/",
-    "tox.ini",
+    "noxfile.py",
 ]
 exclude = [
     ".editorconfig",

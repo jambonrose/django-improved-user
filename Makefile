@@ -35,9 +35,9 @@ test: $(DIU_VENV)/bin/activate
 	$(DIU_COV) combine --append
 	$(DIU_COV) report
 
-.PHONY: tox ## Run test suite in different envs via tox
-tox: $(DIU_VENV)/bin/activate
-	$(DIU_VENV)/bin/tox
+.PHONY: nox ## Run test suite in different envs via nox
+nox: $(DIU_VENV)/bin/activate
+	$(DIU_VENV)/bin/nox
 
 .PHONY: clean ## Remove build, deploy, and test artifacts
 clean:
@@ -46,14 +46,14 @@ clean:
 	rm -rf htmlcov
 	rm -rf src/*.egg-info
 	rm -rf src/*.eggs
-	find -X . \( -path '*/.tox/*' -o -path '*/.git/*' -o -path '*/$(DIU_VENV)/*' \) -prune -o \( -name "*.py[co]" -type f -print0 \) | xargs -0 -I {} rm '{}'
-	find -X . \( -path '*/.tox/*' -o -path '*/.git/*' -o -path '*/$(DIU_VENV)/*' \) -prune -o \( -name ".coverage" -type f -print0 \) | xargs -0 -I {} rm '{}'
-	find -X . \( -path '*/.tox/*' -o -path '*/.git/*' -o -path '*/$(DIU_VENV)/*' \) -prune -o \( -name ".coverage.*" -type f -print0 \) | xargs -0 -I {} rm '{}'
-	find -X . \( -path '*/.tox/*' -o -path '*/.git/*' -o -path '*/$(DIU_VENV)/*' \) -prune -o \( -name "__pycache__" -type d -print0 \) | xargs -0 -I {} rm -r '{}'
+	find -X . \( -path '*/.nox/*' -o -path '*/.git/*' -o -path '*/$(DIU_VENV)/*' \) -prune -o \( -name "*.py[co]" -type f -print0 \) | xargs -0 -I {} rm '{}'
+	find -X . \( -path '*/.nox/*' -o -path '*/.git/*' -o -path '*/$(DIU_VENV)/*' \) -prune -o \( -name ".coverage" -type f -print0 \) | xargs -0 -I {} rm '{}'
+	find -X . \( -path '*/.nox/*' -o -path '*/.git/*' -o -path '*/$(DIU_VENV)/*' \) -prune -o \( -name ".coverage.*" -type f -print0 \) | xargs -0 -I {} rm '{}'
+	find -X . \( -path '*/.nox/*' -o -path '*/.git/*' -o -path '*/$(DIU_VENV)/*' \) -prune -o \( -name "__pycache__" -type d -print0 \) | xargs -0 -I {} rm -r '{}'
 
 .PHONY: purge ## Clean + remove virtual environment
 purge: clean
-	rm -rf .tox
+	rm -rf .nox
 	rm -rf $(DIU_VENV)
 
 .PHONY: help ## List make targets with description
