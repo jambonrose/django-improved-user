@@ -134,19 +134,18 @@ You can limit the tests or pass paramaters as if you had called Django's
 
     $ ./runtests.py tests.test_basic -v 3
 
-If you have Python 3.7, 3.8, 3.9 and 3.10 installed on your system, you
+If you have multiple Python versions installed on your system, you
 will be able to test the package under all required conditions. The
-project uses `tox` to make this easy. This will use all the linters and
+project uses `nox` to make this easy. This will use all the linters and
 test the package with multiple Python and Django versions.
 
 .. code:: console
 
-    $ tox
+    $ nox
 
 Note that any change made to this project must meet the linting rules
-and tests run by tox. These rules are double-checked by TravisCI and
-AppVeyor. Furthermore, changes in code must maintain or increase
-code-coverage unless this is unreasonable.
+and tests run by nox. Furthermore, changes in code must maintain or
+increase code-coverage unless this is unreasonable.
 
 If your tests all pass, you are ready to make changes! If not, please
 open an issue in Github detailing the test failure you are seeing.
@@ -205,14 +204,6 @@ You may use the ``Makefile`` in the ``docs`` directory to run Sphinx.
 If you browse to ``_build/html`` (within the ``docs`` directory), you'll
 find a local build of all the documentation! Open any of the HTML files
 in a browser to read the documentation.
-
-Alternatively, you can use ``tox`` to build the documentation (requires
-that Python 3.6 be installed). This is more of a check, as navigating to
-the built files is less easy.
-
-.. code:: console
-
-    $ tox -e docs
 
 The documentation automatically builds reference documentation for the
 project. To update these reference documents, you will need to change
