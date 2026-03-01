@@ -6,35 +6,30 @@ on:
             - "v*"
 
 jobs:
-    build:
-        name: Build package
-        runs-on: ubuntu-22.04
-        environment: publish
-        steps:
-            - uses: actions/checkout@v6
-
-            - name: Build sdist
-              run: pipx run build --sdist --wheel
-
-            - uses: actions/upload-artifact@v6
-              with:
-                  path: dist/*
-
     publish:
-        name: Upload release to PyPI
-        needs: [build]
-        runs-on: ubuntu-22.04
+        name: Build and publish to PyPI
+        runs-on: ubuntu-latest
         environment:
             name: publish
             url: https://pypi.org/p/django-improved-user/
         permissions:
             id-token: write
         steps:
-            - name: Download artifact from build step
-              uses: actions/download-artifact@v7
+            - name: Checkout repository
+              uses: actions/checkout@v6
+
+            - name: Set up Python
+              uses: actions/setup-python@v6
               with:
-                  name: artifact
-                  path: dist
+                  python-version-file: "pyproject.toml"
+
+            - name: Set up uv
+              uses: astral-sh/setup-uv@v7
+              with:
+                  enable-cache: true
+
+            - name: Build sdist and wheel
+              run: uv build
 
             - name: Publish to PyPI
-              uses: pypa/gh-action-pypi-publish@release/v1
+              run: uv publish
