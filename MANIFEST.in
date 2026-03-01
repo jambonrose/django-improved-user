@@ -15,10 +15,11 @@ include *.md
 include *.rst
 include doc-requirements.txt
 include LICENSE
+include noxfile.py
 include requirements.txt
 include runtests.py
 include setup.cfg
-include noxfile.py
+include uv.lock
 prune .github
 prune docs
 prune example_extension_project

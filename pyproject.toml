@@ -83,10 +83,11 @@ include = [
     ".pylintrc",
     "LICENSE",
     "MANIFEST.in",
+    "noxfile.py",
     "runtests.py",
     "setup.cfg",
     "tests/",
-    "noxfile.py",
+    "uv.lock",
 ]
 exclude = [
     ".editorconfig",
