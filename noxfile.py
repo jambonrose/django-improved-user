@@ -1,6 +1,11 @@
 """Nox configuration for django-improved-user."""
 
 import nox
+from nox import Session, options
+from nox_uv import session
+
+# Use uv as the default venv backend
+options.default_venv_backend = "uv"
 
 # Python versions supported by each Django version
 DJANGO_PYTHON_VERSIONS = {
@@ -27,17 +32,15 @@ EXAMPLE_PROJECT_MATRIX = [
 ]
 
 
-@nox.session(python="3.12")
-def pkgcheck(session: nox.Session) -> None:
+@session(python="3.12", uv_groups=["dev"])
+def pkgcheck(session: Session) -> None:
     """Run check-manifest to verify package contents."""
-    session.install("-r", "requirements.txt")
     session.run("check-manifest", ".")
 
 
-@nox.session(python="3.12")
-def docs(session: nox.Session) -> None:
+@session(python="3.12", uv_groups=["docs"], uv_extras=["factory"])
+def docs(session: Session) -> None:
     """Build documentation and check links."""
-    session.install("-r", "doc-requirements.txt")
     with session.chdir("docs"):
         session.run(
             "sphinx-build",
@@ -59,47 +62,42 @@ def docs(session: nox.Session) -> None:
         )
 
 
-@nox.session
+@session(uv_groups=["dev"], uv_extras=["factory"])
 @nox.parametrize("python,django", UNIT_TEST_MATRIX)
-def unit(session: nox.Session, django: str) -> None:
+def unit(session: Session, django: str) -> None:
     """Run unit tests with coverage."""
     session.env["PYTHONDONTWRITEBYTECODE"] = "1"
     session.env["PYTHONWARNINGS"] = "once"
-    session.install("-r", "requirements.txt")
     session.install(DJANGO_CONSTRAINTS[django])
-    session.install("-e", ".[factory]")
     session.run("coverage", "erase")
     session.run("coverage", "run", "runtests.py", *session.posargs)
     session.run("coverage", "combine", "--append")
     session.run("coverage", "report")
 
 
-@nox.session
+@session(uv_groups=["dev", "examples"], uv_extras=["factory"])
 @nox.parametrize("python,django", EXAMPLE_PROJECT_MATRIX)
-def extension(session: nox.Session, django: str) -> None:
+def extension(session: Session, django: str) -> None:
     """Run extension example project tests with coverage."""
     _run_example_project(session, "example_extension_project", django)
 
 
-@nox.session
+@session(uv_groups=["dev", "examples"], uv_extras=["factory"])
 @nox.parametrize("python,django", EXAMPLE_PROJECT_MATRIX)
-def replacement(session: nox.Session, django: str) -> None:
+def replacement(session: Session, django: str) -> None:
     """Run replacement example project tests with coverage."""
     _run_example_project(session, "example_replacement_project", django)
 
 
 def _run_example_project(
-    session: nox.Session,
+    session: Session,
     project: str,
     django: str,
 ) -> None:
     """Run example project tests with coverage."""
     session.env["PYTHONDONTWRITEBYTECODE"] = "1"
     session.env["PYTHONWARNINGS"] = "once"
-    session.install("-r", "requirements.txt")
-    session.install("-r", f"{project}/requirements.txt")
     session.install(DJANGO_CONSTRAINTS[django])
-    session.install("-e", ".[factory]")
     with session.chdir(project):
         session.run("coverage", "erase")
         session.run("coverage", "run", "manage.py", "test", *session.posargs)
