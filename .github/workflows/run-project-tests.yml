@@ -56,9 +56,9 @@ jobs:
             - name: Python and Django versions
               run: |
                   echo "Python ${{ matrix.python-version }} & Django ${{ matrix.django-version }}"
-                  uv run python --version
-                  echo "Django: $(uv run django-admin --version)"
+                  uv run --no-sync python --version
+                  echo "Django: $(uv run --no-sync django-admin --version)"
 
             - name: Run tests
               working-directory: ./example_${{ matrix.project }}_project
-              run: uv run python manage.py test
+              run: uv run --no-sync python manage.py test

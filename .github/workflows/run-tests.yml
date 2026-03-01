@@ -53,15 +53,15 @@ jobs:
             - name: Python and Django versions
               run: |
                   echo "Python ${{ matrix.python-version }} & Django ${{ matrix.django-version }}"
-                  uv run python --version
-                  echo "Django: $(uv run django-admin --version)"
+                  uv run --no-sync python --version
+                  echo "Django: $(uv run --no-sync django-admin --version)"
 
             - name: Run tests
               run: |
-                  uv run coverage run ./runtests.py
-                  uv run coverage combine --append
-                  uv run coverage report
-                  uv run coverage xml
+                  uv run --no-sync coverage run ./runtests.py
+                  uv run --no-sync coverage combine --append
+                  uv run --no-sync coverage report
+                  uv run --no-sync coverage xml
 
             - name: Upload coverage reports to Codecov
               uses: codecov/codecov-action@v5
