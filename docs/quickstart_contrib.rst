@@ -12,22 +12,20 @@ To test the package, start by installing it locally.
 
 .. code:: console
 
-    $ pip install -r requirements.txt
-    $ python setup.py develop
+    $ uv sync
 
-To run the test suite on a single version of Django (assuming you have a
-version of Django installed), run the ``runtests.py`` script from the
-root of the project.
+To run the test suite on a single version of Django, run the
+``runtests.py`` script from the root of the project.
 
 .. code:: console
 
-    $ python runtests.py
+    $ uv run python runtests.py
 
 You can limit tests or pass paramaters as when using ``manage.py test``.
 
 .. code:: console
 
-    $ ./runtests.py tests.test_basic -v 3
+    $ uv run ./runtests.py tests.test_basic -v 3
 
 If you have all of the supported Python versions installed,
 you may use ``nox`` to run all linters and test the
@@ -35,15 +33,15 @@ package with multiple versions of Python and Django.
 
 .. code:: console
 
-    $ nox
+    $ uv run nox
 
 You may also limit tests to specific sessions or test suites with
 nox. For instance:
 
 .. code:: console
 
-    $ nox -s "unit(python='3.11', django='4.2')" -- tests.test_basic
-    $ nox -s "extension(python='3.12', django='4.2')"
+    $ uv run nox -s "unit(python='3.11', django='4.2')" -- tests.test_basic
+    $ uv run nox -s "extension(python='3.12', django='4.2')"
 
 Any change to the code should first be discussed in an issue.
 

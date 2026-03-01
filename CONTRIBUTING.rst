@@ -78,8 +78,10 @@ Your First Contribution
 Ready to contribute? Let's get django-improved-user working on your
 local machine.
 
-This package relies on Python, pip, and Django. Please make sure you
-have the first two installed.
+This package relies on Python and uv_. Please make sure you have both
+installed.
+
+.. _uv: https://docs.astral.sh/uv/
 
 To get started, fork the git repository to your own account using the
 fork button on the top right of the Github interface. You now have your
@@ -90,20 +92,14 @@ command below, but with your own username.
 
     $ git clone git@github.com:YOUR_USERNAME/django-improved-user.git
 
-We recommend the use of virtual environments when developing
-(generally). If you are not familiar with virtual environments, take a
-look at `Python's venv documentation`_. `Virtualenvwrapper`_ is also a
-favorite.
-
-.. _Python's venv documentation: https://docs.python.org/3/library/venv.html#module-venv
-.. _Virtualenvwrapper: https://virtualenvwrapper.readthedocs.io/en/latest/
-
 You can now install all of the dependencies required to develop the
-project.  Use pip to install all dependencies, as demonstrated below.
+project. Use uv to sync all dependencies, as demonstrated below. This
+will automatically create a virtual environment and install all
+dependencies.
 
 .. code:: console
 
-    $ pip install -r requirements.txt
+    $ uv sync
 
 If you are modifying code, keep reading. If you are changing
 documentation, skip to the next section.
@@ -111,28 +107,20 @@ documentation, skip to the next section.
 Your First Code Contribution
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Before making any changes, let's first make sure all the tests pass.  To
-run the test suite on a single version of Django, you will need to
-install Django and the package (in development mode). Use the command
-below to do both.
-
-.. code:: console
-
-    $ python setup.py develop
-
+Before making any changes, let's first make sure all the tests pass.
 Run the `runtests.py` script from the root of the project to test the
 django-improved-user project.
 
 .. code:: console
 
-    $ python runtests.py
+    $ uv run python runtests.py
 
 You can limit the tests or pass paramaters as if you had called Django's
 `manage.py test`.
 
 .. code:: console
 
-    $ ./runtests.py tests.test_basic -v 3
+    $ uv run ./runtests.py tests.test_basic -v 3
 
 If you have multiple Python versions installed on your system, you
 will be able to test the package under all required conditions. The
@@ -141,7 +129,7 @@ test the package with multiple Python and Django versions.
 
 .. code:: console
 
-    $ nox
+    $ uv run nox
 
 Note that any change made to this project must meet the linting rules
 and tests run by nox. Furthermore, changes in code must maintain or
