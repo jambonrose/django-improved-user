@@ -47,7 +47,7 @@ jobs:
 
             - name: Install dependencies
               run: |
-                  uv sync --group dev
+                  uv sync --frozen --group dev --no-install-package django
                   uv pip install "Django~=${{ matrix.django-version }}"
 
             - name: Python and Django versions
