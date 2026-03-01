@@ -1,10 +1,11 @@
 [build-system]
-requires = ["flit_core >=3.4,<4"]
-build-backend = "flit_core.buildapi"
+requires = ["uv_build>=0.10.7"]
+build-backend = "uv_build"
 
 [project]
 name = "django-improved-user"
-dynamic = ["version", "description"]
+version = "2.1.0"
+description = "Compose new Django User models that follow best-practices for international names and authenticate via email instead of username."
 authors = [
     { name = "Russell Keith-Magee" },
     { name = "Andrew Pinkham" },
@@ -45,12 +46,10 @@ factory = [
 
 [dependency-groups]
 dev = [
-    "bumpversion>=0.6.0",
     "check-sdist>=0.1.0",
     "coverage>=6.2",
     "factory-boy>=3.2.1",
     "Faker>=11.3.0",
-    "flit>=3.6.0",
     "nox>=2024.4.15",
     "nox-uv>=0.7.1",
     "pylint>=2.12.2",
@@ -69,14 +68,12 @@ examples = [
     "factory-boy>=3.2.1",
 ]
 
-[tool.flit.module]
-name = "improved_user"
-
-[tool.flit.sdist]
-include = [
+[tool.uv.build-backend]
+module-root = "src"
+module-name = "improved_user"
+source-include = [
     "*.md",
     "*.rst",
-    ".bumpversion.cfg",
     ".coveragerc",
     ".flake8",
     ".isort.cfg",
@@ -85,21 +82,8 @@ include = [
     "noxfile.py",
     "runtests.py",
     "setup.cfg",
-    "tests/",
+    "tests/**",
     "uv.lock",
-]
-exclude = [
-    ".editorconfig",
-    ".github/",
-    ".ignore",
-    ".pre-commit-config.yaml",
-    ".prettierignore",
-    ".prettierrc.toml",
-    "docs/",
-    "example_extension_project/",
-    "example_integration_project/",
-    "example_replacement_project/",
-    "Makefile",
 ]
 
 [tool.black]
