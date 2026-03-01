@@ -27,6 +27,11 @@ tag:
 test:
 	uv run nox
 
+.PHONY: docs ## Build documentation
+docs:
+	uv sync --group docs
+	uv run --directory docs make html
+
 .PHONY: clean ## Remove build, deploy, and test artifacts
 clean:
 	rm -rf dist
