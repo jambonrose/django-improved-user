@@ -46,7 +46,7 @@ factory = [
 [dependency-groups]
 dev = [
     "bumpversion>=0.6.0",
-    "check-manifest>=0.47",
+    "check-sdist>=0.1.0",
     "coverage>=6.2",
     "factory-boy>=3.2.1",
     "Faker>=11.3.0",
@@ -82,7 +82,6 @@ include = [
     ".isort.cfg",
     ".pylintrc",
     "LICENSE",
-    "MANIFEST.in",
     "noxfile.py",
     "runtests.py",
     "setup.cfg",
@@ -107,3 +106,19 @@ exclude = [
 line-length = 79
 target-version = ['py310']
 include = '\.pyi?$'
+
+[tool.check-sdist]
+default-ignore = true
+git-only = [
+    ".editorconfig",
+    ".gitignore",
+    ".ignore",
+    ".prettierignore",
+    ".prettierrc.toml",
+    ".readthedocs.yaml",
+    "docs/**",
+    "example_extension_project/**",
+    "example_integration_project/**",
+    "example_replacement_project/**",
+    "Makefile",
+]

@@ -58,9 +58,8 @@ repos:
       hooks:
           - id: django-upgrade
             args: [--target-version, "4.2"]
-    - repo: https://github.com/mgedmin/check-manifest
-      rev: "0.51"
+    - repo: https://github.com/henryiii/check-sdist
+      rev: v1.3.2
       hooks:
-          - id: check-manifest
-            args: [--no-build-isolation]
-            additional_dependencies: [flit]
+          - id: check-sdist
+            args: [--inject-junk]

@@ -34,8 +34,8 @@ EXAMPLE_PROJECT_MATRIX = [
 
 @session(python="3.12", uv_groups=["dev"])
 def pkgcheck(session: Session) -> None:
-    """Run check-manifest to verify package contents."""
-    session.run("check-manifest", ".")
+    """Run check-sdist to verify package contents."""
+    session.run("check-sdist")
 
 
 @session(python="3.12", uv_groups=["docs"], uv_extras=["factory"])
