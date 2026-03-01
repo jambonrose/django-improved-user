@@ -43,6 +43,32 @@ factory = [
     "python-dateutil>=2.6",
 ]
 
+[dependency-groups]
+dev = [
+    "bumpversion>=0.6.0",
+    "check-manifest>=0.47",
+    "coverage>=6.2",
+    "factory-boy>=3.2.1",
+    "Faker>=11.3.0",
+    "flit>=3.6.0",
+    "nox>=2024.4.15",
+    "nox-uv>=0.7.1",
+    "pylint>=2.12.2",
+    "pylint-django>=2.5.0",
+    "python-dateutil>=2.8.2",
+]
+docs = [
+    "Django>=4.2,<4.3",
+    "factory-boy>=3.2.1",
+    "Sphinx>=7.4.7",
+    "sphinx-rtd-theme>=2.0.0",
+]
+examples = [
+    "django-coverage-plugin>=2.0.2",
+    "django-extensions>=3.1.5",
+    "factory-boy>=3.2.1",
+]
+
 [tool.flit.module]
 name = "improved_user"
 
@@ -55,10 +81,8 @@ include = [
     ".flake8",
     ".isort.cfg",
     ".pylintrc",
-    "doc-requirements.txt",
     "LICENSE",
     "MANIFEST.in",
-    "requirements.txt",
     "runtests.py",
     "setup.cfg",
     "tests/",
