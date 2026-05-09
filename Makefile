@@ -3,41 +3,34 @@
 # DIU => Django Improved User
 # DIU_VENV is the name of directory to store the virtual environment
 DIU_VENV ?= .venv
-ROOT_PYTHON ?= python3
-DIU_PYTHON ?= $(DIU_VENV)/bin/python3
-DIU_COV ?= $(DIU_VENV)/bin/coverage
 
 .DEFAULT_GOAL:=help
 
-$(DIU_VENV)/bin/activate:
-	mkdir -p $(DIU_VENV)
-	$(ROOT_PYTHON) -m venv $(DIU_VENV)
-	$(DIU_PYTHON) -m pip install --upgrade pip setuptools wheel
-	$(DIU_PYTHON) -m pip install -r requirements.txt
-	$(DIU_PYTHON) -m pip install -r doc-requirements.txt
-	$(DIU_PYTHON) -m flit install --symlink
+.PHONY: bump-patch ## Bump patch version (e.g., 2.1.0 → 2.1.1)
+bump-patch:
+	uv version --bump patch
 
-.PHONY: build ## Build artifacts meant for distribution
-build: $(DIU_VENV)/bin/activate
-	$(DIU_PYTHON) -m flit build
+.PHONY: bump-minor ## Bump minor version (e.g., 2.1.0 → 2.2.0)
+bump-minor:
+	uv version --bump minor
 
-.PHONY: release ## Upload build artifacts to PyPI
-release: $(DIU_VENV)/bin/activate
-	git tag v`$(DIU_PYTHON) -m bumpversion --dry-run --list --new-version 0.0.0 patch | grep current | cut -d'=' -f 2`
-	@echo "Verify new tag has been created. If the tag looks correct, push to git with: git push --tags ."
+.PHONY: bump-major ## Bump major version (e.g., 2.1.0 → 3.0.0)
+bump-major:
+	uv version --bump major
 
-.PHONY: test ## Run test suite for current environment
-test: $(DIU_VENV)/bin/activate
-	$(DIU_PYTHON) -V
-	$(DIU_PYTHON) -m pip -V
-	$(DIU_COV) erase
-	$(DIU_COV) run runtests.py
-	$(DIU_COV) combine --append
-	$(DIU_COV) report
+.PHONY: tag ## Create git tag from current version
+tag:
+	git tag v$$(uv version)
+	@echo "Tag created. Push with: git push --tags"
 
-.PHONY: nox ## Run test suite in different envs via nox
-nox: $(DIU_VENV)/bin/activate
-	$(DIU_VENV)/bin/nox
+.PHONY: test ## Run test suites
+test:
+	uv run nox
+
+.PHONY: docs ## Build documentation
+docs:
+	uv sync --group docs
+	uv run --directory docs make html
 
 .PHONY: clean ## Remove build, deploy, and test artifacts
 clean:
@@ -54,9 +47,10 @@ clean:
 .PHONY: purge ## Clean + remove virtual environment
 purge: clean
 	rm -rf .nox
+	rm -rf docs/.nox
 	rm -rf $(DIU_VENV)
 
 .PHONY: help ## List make targets with description
 help:
 	@printf "\nUsage: make <target>\nExample: make serve\n\nTargets:\n"
-	@grep '^.PHONY: .* #' Makefile | sed 's/\.PHONY: \(.*\) ## \(.*\)/  \1	\2/' | expand -t12
+	@grep '^.PHONY: .* #' Makefile | sed 's/\.PHONY: \(.*\) ## \(.*\)/  \1	\2/' | expand -t16

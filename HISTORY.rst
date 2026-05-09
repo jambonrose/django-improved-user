@@ -5,7 +5,7 @@ History
 Next Release
 ------------
 
-- Nothing Yet!
+- Migrate build and development tooling from flit/pip to uv
 
 2.0.0 (2024-08-05)
 -------------------

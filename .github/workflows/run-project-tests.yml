@@ -12,7 +12,7 @@ on:
           - example_extension_project/**
           - example_replacement_project/**
           - pyproject.toml
-          - requirements.txt
+          - uv.lock
 
 env:
     PYTHONDONTWRITEBYTECODE: 1
@@ -43,39 +43,22 @@ jobs:
               with:
                   python-version: ${{ matrix.python-version }}
 
-            - name: Upgrade pip
-              run: python3 -m pip install -U distlib pip setuptools wheel
-
-            - name: Get pip cache dir
-              id: pip-cache
-              shell: bash
-              run: echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
-
-            - name: Cache dependencies
-              uses: actions/cache@v5
+            - name: Install uv
+              uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
               with:
-                  path: ${{ steps.pip-cache.outputs.dir }}
-                  key:
-                      ${{ runner.os }}-pip-${{ matrix.django-version }}-${{
-                      hashFiles('**/requirements.txt') }}
-                  restore-keys: |
-                      ${{ runner.os }}-pip-
+                  enable-cache: true
 
             - name: Install dependencies
               run: |
-                  python3 -m pip install -r ./requirements.txt
-                  python3 -m flit install --deps none
-                  python3 -m pip install -r ./example_${{ matrix.project }}_project/requirements.txt
-
-            - name: Install Django
-              run: python3 -m pip install "Django~=${{ matrix.django-version }}"
+                  uv sync --frozen --group dev --group examples --no-install-package django
+                  uv pip install "Django~=${{ matrix.django-version }}"
 
             - name: Python and Django versions
               run: |
                   echo "Python ${{ matrix.python-version }} & Django ${{ matrix.django-version }}"
-                  python3 --version
-                  echo "Django: $(django-admin --version)"
+                  uv run --no-sync python --version
+                  echo "Django: $(uv run --no-sync django-admin --version)"
 
             - name: Run tests
               working-directory: ./example_${{ matrix.project }}_project
-              run: python3 manage.py test
+              run: uv run --no-sync python manage.py test
