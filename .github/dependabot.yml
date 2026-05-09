@@ -2,12 +2,14 @@
 
 version: 2
 updates:
-    - package-ecosystem: "pip"
+    - package-ecosystem: "uv"
       directory: "/"
       schedule:
           interval: "daily"
           time: "07:50"
           timezone: "America/New_York"
+      cooldown:
+          default-days: 14
       reviewers:
           - "jambonrose"
       assignees:
@@ -27,3 +29,5 @@ updates:
           interval: "daily"
           time: "06:50"
           timezone: "America/New_York"
+      cooldown:
+          default-days: 14
