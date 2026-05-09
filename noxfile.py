@@ -11,11 +11,13 @@ options.default_venv_backend = "uv"
 DJANGO_PYTHON_VERSIONS = {
     "4.2": ["3.10", "3.11", "3.12"],
     "5.2": ["3.10", "3.11", "3.12", "3.13", "3.14"],
+    "6.0": ["3.12", "3.13", "3.14"],
 }
 
 DJANGO_CONSTRAINTS = {
     "4.2": "Django>=4.2,<4.3",
     "5.2": "Django>=5.2,<6.0",
+    "6.0": "Django>=6.0,<6.1",
 }
 
 # Build the full unit test matrix
@@ -29,6 +31,7 @@ UNIT_TEST_MATRIX = [
 EXAMPLE_PROJECT_MATRIX = [
     ("3.12", "4.2"),
     ("3.14", "5.2"),
+    ("3.14", "6.0"),
 ]
 
 
