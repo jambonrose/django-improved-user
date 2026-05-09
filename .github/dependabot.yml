@@ -31,3 +31,12 @@ updates:
           timezone: "America/New_York"
       cooldown:
           default-days: 14
+      reviewers:
+          - "jambonrose"
+      assignees:
+          - "jambonrose"
+      commit-message:
+          prefix: "⬆️ "
+      labels:
+          - "Status: Ready for Review"
+          - "Type: Dependency Upgrade"
