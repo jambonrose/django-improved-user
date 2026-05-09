@@ -62,4 +62,4 @@ repos:
       hooks:
           - id: check-sdist
             args: [--inject-junk]
-            additional_dependencies: [uv, "uv-build>=0.10.7,<0.11"]
+            additional_dependencies: [uv, "uv-build>=0.11.12,<0.12"]
