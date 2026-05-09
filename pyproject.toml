@@ -4,7 +4,7 @@ build-backend = "uv_build"
 
 [project]
 name = "django-improved-user"
-version = "3.0.0rc1"
+version = "3.0.0"
 description = "Compose new Django User models that follow best-practices for international names and authenticate via email instead of username."
 authors = [
     { name = "Russell Keith-Magee" },
