@@ -25,7 +25,7 @@ jobs:
             matrix:
                 os: [ubuntu-22.04, windows-2022]
                 python-version: ["3.12", "3.14"]
-                django-version: ["4.2", "5.2"]
+                django-version: ["4.2", "5.2", "6.0"]
                 project: ["extension", "replacement"]
                 exclude:
                     # Django 4.2 only supports Python up to 3.12
@@ -34,6 +34,9 @@ jobs:
                     # Test Django 5.2 with latest Python only
                     - python-version: "3.12"
                       django-version: "5.2"
+                    # Test Django 6.0 with latest Python only
+                    - python-version: "3.12"
+                      django-version: "6.0"
 
         steps:
             - uses: actions/checkout@v6
