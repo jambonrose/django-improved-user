@@ -44,7 +44,6 @@ repos:
                     flake8-bugbear,
                     flake8-builtins,
                     flake8-docstrings,
-                    flake8-logging-format,
                     flake8-rst-docstrings,
                     pep8-naming,
                 ]
