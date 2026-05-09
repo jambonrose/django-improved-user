@@ -5,7 +5,52 @@ History
 Next Release
 ------------
 
-- Migrate build and development tooling from flit/pip to uv
+Nothing yet!
+
+3.0.0 (2026-05-09)
+------------------
+
+- Support:
+    - Python 3.10, 3.11, 3.12, 3.13, 3.14
+    - Django 4.2, 5.2, 6.0
+- Drop support for:
+    - Python 3.6, 3.7, 3.8, 3.9
+    - Django 2.2, 3.0, 3.1, 3.2, 4.0, 4.1 (`#303`_)
+- Add Django 5.2 compatibility (`#325`_):
+    - Mark ``last_login`` and ``date_joined`` as readonly in ``UserAdmin``
+- Add Django 6.0 compatibility (`#338`_)
+- Cleanup of deprecated Django APIs (`#303`_):
+    - Replace ``force_text`` with ``force_str``
+    - Remove ``default_app_config``
+    - Remove ``USE_L10N``
+- Fix missing import display in quickstart docs (`#323`_, `#324`_)
+- Development/maintenance:
+    - Migrate test runner from tox to nox (`#327`_)
+    - Migrate build and dev tooling from flit/pip to uv (`#328`_)
+
+.. _#303: https://github.com/jambonrose/django-improved-user/pull/303
+.. _#323: https://github.com/jambonrose/django-improved-user/issues/323
+.. _#324: https://github.com/jambonrose/django-improved-user/pull/324
+.. _#325: https://github.com/jambonrose/django-improved-user/pull/325
+.. _#327: https://github.com/jambonrose/django-improved-user/pull/327
+.. _#328: https://github.com/jambonrose/django-improved-user/pull/328
+.. _#338: https://github.com/jambonrose/django-improved-user/pull/338
+
+2.1.0 (2024-08-06)
+------------------
+
+- Add support for:
+    - Python 3.10, 3.11, 3.12
+    - Django 4.1, 4.2
+- Fix documentation build on Read the Docs (`#298`_)
+- Make test dependency installation more flexible; expand
+  Python and Django test matrices; update README badges,
+  compatibility docs, and PyPI classifiers (`#300`_)
+- Autoformat code with pre-commit hooks (`#297`_)
+
+.. _#297: https://github.com/jambonrose/django-improved-user/pull/297
+.. _#298: https://github.com/jambonrose/django-improved-user/pull/298
+.. _#300: https://github.com/jambonrose/django-improved-user/pull/300
 
 2.0.0 (2024-08-05)
 -------------------
