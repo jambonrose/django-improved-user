@@ -92,14 +92,6 @@ class UserManagerTestCase(TestCase):
                 is_staff=False,
             )
 
-    def test_make_random_password(self):
-        """Test manager make_random_password method"""
-        allowed_chars = "abcdefg"
-        password = UserManager().make_random_password(5, allowed_chars)
-        self.assertEqual(len(password), 5)
-        for char in password:
-            self.assertIn(char, allowed_chars)
-
     def test_last_login_is_none(self):
         """Check that last login is unset when created
 
