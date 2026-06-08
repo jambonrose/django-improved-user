@@ -69,7 +69,7 @@ jobs:
                   uv run --no-sync coverage xml
 
             - name: Upload coverage reports to Codecov
-              uses: codecov/codecov-action@v6
+              uses: codecov/codecov-action@v6.0.1
               with:
                   fail_ci_if_error: true
                   verbose: true
